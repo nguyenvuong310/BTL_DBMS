@@ -1,8 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import {
-  MulterModuleOptions,
-  MulterOptionsFactory,
-} from '@nestjs/platform-express';
+import { MulterModuleOptions, MulterOptionsFactory } from '@nestjs/platform-express';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 import fs from 'fs';
 import { diskStorage } from 'multer';
@@ -39,25 +36,11 @@ export class MulterConfigService implements MulterOptionsFactory {
   createMulterOptions(): MulterModuleOptions {
     return {
       fileFilter: (req, file, cb) => {
-        const allowedFileTypes = [
-          'jpg',
-          'jpeg',
-          'png',
-          'gif',
-          'pdf',
-          'doc',
-          'docx',
-        ];
+        const allowedFileTypes = ['jpg', 'jpeg', 'png', 'gif', 'pdf', 'doc', 'docx'];
         const fileExtension = file.originalname.split('.').pop().toLowerCase();
         const isValidFileType = allowedFileTypes.includes(fileExtension);
         if (!isValidFileType) {
-          cb(
-            new HttpException(
-              'Invalid file type',
-              HttpStatus.UNPROCESSABLE_ENTITY,
-            ),
-            null,
-          );
+          cb(new HttpException('Invalid file type', HttpStatus.UNPROCESSABLE_ENTITY), null);
         } else cb(null, true);
       },
       limits: {

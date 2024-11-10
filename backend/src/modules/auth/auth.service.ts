@@ -76,6 +76,12 @@ export class AuthService {
     return refreshToken;
   };
 
+  /*
+  parse token to get role user
+  add role to payload to create new access token
+  update refresh token in database based user role
+  
+  */
   async provideNewAccessToken(refreshToken: string, response: Response) {
     try {
       this.jwtService.verify(refreshToken, {
@@ -113,6 +119,7 @@ export class AuthService {
     }
   }
 
+  /* Base on role user to update table*/
   async logout(response: Response, user: InfoUserDto) {
     await this.usersService.updateRefreshToken(user.id, '');
     response.clearCookie('refreshToken');

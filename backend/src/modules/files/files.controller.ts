@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  UploadedFile,
-  UseInterceptors,
-  ParseFilePipeBuilder,
-  HttpStatus,
-  Res,
-} from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseInterceptors, ParseFilePipeBuilder, HttpStatus, Res } from '@nestjs/common';
 import { FilesService } from './files.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Public } from 'src/decorator/public.decorator';
@@ -26,8 +18,7 @@ export class FilesController {
     @UploadedFile(
       new ParseFilePipeBuilder()
         .addFileTypeValidator({
-          fileType:
-            /^(jpg|jpeg|image\/jpeg|image\/png|gif|application\/pdf|pdf|doc|docx|xls|xlsx|ppt|pptx)$/i,
+          fileType: /^(jpg|jpeg|image\/jpeg|image\/png|gif|application\/pdf|pdf|doc|docx|xls|xlsx|ppt|pptx)$/i,
         })
         .addMaxSizeValidator({ maxSize: 1024 * 1024 * 2 })
         .build({
