@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - '8081:8080' # Adminer will be accessible on http://localhost:8080
+    depends_on:
+      - mysql
+    environment:
+      - ADMINER_DEFAULT_SERVER=mysql
+
+volumes:
+  mysql:
