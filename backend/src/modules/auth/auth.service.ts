@@ -9,7 +9,6 @@ import ms from 'ms';
 import { UserProfileDto } from './dto/user-profile';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { InfoUserDto } from '../users/dto/info-user.dto';
-import { first, last } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -24,33 +23,31 @@ export class AuthService {
 
   async validateUser(username: string, pass: string) {
     const user = await this.usersService.findByEmail(username);
-    if (user && this.usersService.isValidPassword(pass, user.password)) {
-      console.log(user);
+    if (user && this.usersService.isValidPassword(pass, user.user.password)) {
+      // console.log(user);
       return {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
+        id: user.user.id,
+        name: user.user.name,
+        email: user.user.email,
+        role: user.role,
       };
     }
     return null;
   }
 
   async login(user: any, response: Response): Promise<UserProfileDto> {
-    const { username, id, email, firstName, lastName } = user;
+    const { id, email, name, role } = user;
     const payload = {
       sub: 'token login',
       iss: 'from server',
       id,
-      username,
       email,
-      firstName,
-      lastName,
+      name,
+      role,
     };
     const refreshToken = this.createRefreshToken(payload);
 
-    await this.usersService.updateRefreshToken(user.id, refreshToken);
+    await this.usersService.updateRefreshToken(user.id, refreshToken, role);
 
     response.cookie('refreshToken', refreshToken, {
       httpOnly: true,
@@ -60,13 +57,13 @@ export class AuthService {
     return new UserProfileDto(this.jwtService.sign(payload), user);
   }
 
-  async register(user: CreateUserDto) {
-    try {
-      return await this.usersService.create(user);
-    } catch (error) {
-      throw new Error(error);
-    }
-  }
+  // async register(user: CreateUserDto) {
+  //   try {
+  //     return await this.usersService.create(user);
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
 
   createRefreshToken = (payload) => {
     const refreshToken = this.jwtService.sign(payload, {
@@ -91,29 +88,33 @@ export class AuthService {
       if (!user) {
         throw new BadRequestException('Invalid refresh token');
       }
-      const { username, id, email, firstName, lastName } = user;
+      const { id, email, name } = user.user;
+      const role = user.role;
 
       const payload = {
         sub: 'token refresh',
         iss: 'from server',
         id,
-        username,
+        name,
         email,
-        firstName,
-        lastName,
+        role,
       };
       const newRefreshToken = this.createRefreshToken(payload);
 
-      await this.usersService.updateRefreshToken(user.id, newRefreshToken);
+      await this.usersService.updateRefreshToken(id, newRefreshToken, role);
 
-      const newUser = await this.usersService.findOne(user.id);
       response.clearCookie('refreshToken');
       response.cookie('refreshToken', refreshToken, {
         httpOnly: true,
         maxAge: ms(this.configService.get<string>('JWT_REFRESH_TOKEN_EXPIRE')),
       });
 
-      return new UserProfileDto(this.jwtService.sign(payload), newUser);
+      return new UserProfileDto(this.jwtService.sign(payload), {
+        id,
+        email,
+        name,
+        role,
+      });
     } catch (error) {
       throw new BadRequestException('Invalid refresh token');
     }
@@ -121,7 +122,7 @@ export class AuthService {
 
   /* Base on role user to update table*/
   async logout(response: Response, user: InfoUserDto) {
-    await this.usersService.updateRefreshToken(user.id, '');
+    await this.usersService.updateRefreshToken(user.user.id, '', user.role);
     response.clearCookie('refreshToken');
     return 'Logout successfully';
   }

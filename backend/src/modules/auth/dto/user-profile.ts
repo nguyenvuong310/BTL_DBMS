@@ -1,12 +1,14 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { InfoUserDto } from 'src/modules/users/dto/info-user.dto';
-
 export class UserProfileDto {
   accessToken: string;
 
-  user: InfoUserDto;
+  user: {
+    id: number;
+    email: string;
+    name: string;
+    role: string;
+  };
 
-  constructor(accessToken: string, user: InfoUserDto) {
+  constructor(accessToken: string, user: any) {
     this.accessToken = accessToken;
     this.user = user;
   }

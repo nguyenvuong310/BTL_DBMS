@@ -29,12 +29,12 @@ export class AuthController {
     return user;
   }
 
-  @Post('register')
-  @Public()
-  @ResponseMessage('Register a new user')
-  async register(@Body() user: CreateUserDto): Promise<InfoUserDto> {
-    return this.authService.register(user);
-  }
+  // @Post('register')
+  // @Public()
+  // @ResponseMessage('Register a new user')
+  // async register(@Body() user: CreateUserDto): Promise<InfoUserDto> {
+  //   return this.authService.register(user);
+  // }
 
   // @Get('account')
   // @ApiOperation({ summary: 'Get user account by access token' })
