@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@tailwindcss/line-clamp": "^0.4.4",
     "axios": "^1.6.2",
+    "baosranger": "file:",
     "date-fns": "^3.6.0",
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.6.4",

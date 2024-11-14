@@ -1,7 +1,10 @@
-import Header from "../components/Header";
-import { Carousel, Typography } from "@material-tailwind/react";
-import { specialties, hospitalLocations, doctors } from "./constants";
+import Header from "../../components/Header";
+import { Button, Carousel, Typography } from "@material-tailwind/react";
+import { specialties, hospitalLocations, doctors } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+
 const MedicalSpecialty = () => {
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
@@ -168,12 +171,12 @@ const Doctors = () => {
                     <img
                       src={item.img}
                       alt={item.label}
-                      className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                       onClick={() => {
                         console.log("click");
-                        navigate("/bookAppointment");
+                        navigate("/user/bookAppointment");
                         window.scrollTo(0, 0);
                       }}
+                      className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                     />
                     <p className="mt-4 text-center text-lg font-semibold text-gray-700">
                       {item.label}
@@ -190,11 +193,11 @@ const Doctors = () => {
   );
 };
 
-const HomePage = () => {
+const HomePageUser = () => {
   return (
     <>
       <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
-        <Header role="main" />
+        <Header role="user" />
         <div className="flex w-full flex-col items-center justify-center gap-12 p-8">
           <MedicalSpecialty />
           <Hospitals />
@@ -205,4 +208,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomePageUser;

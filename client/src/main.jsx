@@ -3,15 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import HomePageUser from "./pages/HomePageUser.jsx";
-import HomePageAdmin from "./pages/HomePageAdmin.jsx";
-import FindHospital from "./pages/FindHospital.jsx";
-import Schedule from "./pages/Schedule.jsx";
-import DoctorManagement from "./pages/DoctorManagement.jsx";
-import AppointmentManagement from "./pages/AppointmentManagement.jsx";
-// import AdminHospital from "./pages/AdminHospital.jsx"
-import AdminDepartment from "./pages/AdminDepartment.jsx";
-import UserHistory from "./pages/UserHistory.jsx";
+// import HomePageUser from "./pages/HomePageUser.jsx";
+// import HomePageAdmin from "./pages/HomePageAdmin.jsx";
+// import FindHospital from "./pages/FindHospital.jsx";
+// import Schedule from "./pages/Schedule.jsx";
+// import DoctorManagement from "./pages/DoctorManagement.jsx";
+// import AppointmentManagement from "./pages/AppointmentManagement.jsx";
+// // import AdminHospital from "./pages/AdminHospital.jsx"
+// import AdminDepartment from "./pages/AdminDepartment.jsx";
+// import UserHistory from "./pages/UserHistory.jsx";
+import HomePageUser from "./pages/Users/HomePageUser.jsx";
+import BookingAppointment from "./pages/Users/BookingAppointment.jsx";
+import AppointmentHistory from "./pages/Users/AppointmentHistory.jsx";
 import "./index.css";
 import { path } from "../src/utils/constant.js";
 import {
@@ -29,16 +32,23 @@ const router = createBrowserRouter(
 
       <Route path="/" element={<App />}>
         <Route index={true} element={<HomePage />} />
+        <Route path="/bookAppointment" element={<BookingAppointment />} />
         <Route path="/user">
           <Route index={true} element={<HomePageUser />}></Route>
           <Route path=":user_id" element={<HomePageUser />} />
           <Route
+            path="/user/bookAppointment"
+            element={<BookingAppointment />}
+          />
+          <Route path="/user/history" element={<AppointmentHistory />} />
+
+          {/* <Route
             path="/user/:user_id/findHospital"
             element={<FindHospital />}
-          />
-          <Route path="/user/:user_id/history" element={<UserHistory />} />
+          /> */}
+          {/* <Route path="/user/:user_id/history" element={<UserHistory />} /> */}
         </Route>
-        <Route path="/admin">
+        {/* <Route path="/admin">
           <Route index={true} element={<HomePageAdmin />}></Route>
           <Route
             path="/admin/hospital/:hospital_id/department"
@@ -56,7 +66,7 @@ const router = createBrowserRouter(
             path="/admin/hospital/:hospital_id/department/:department_id/doctor/:doctor_id/appointment"
             element={<AppointmentManagement />}
           />
-        </Route>
+        </Route> */}
       </Route>
     </>,
   ),

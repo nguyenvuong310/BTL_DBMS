@@ -1,63 +1,80 @@
-import { useState, useEffect, cloneElement } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
 import { HomeIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import {
   Typography,
+  Button,
+  Input,
+  Avatar,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
 } from "@material-tailwind/react";
 // import iconImage from '../../assets/icon.jpg';
-import iconImage from '../assets/icon.jpg';
+import iconImage from "../assets/icon.jpg";
 import { path, USER_ROLE } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getInfoUserById } from "../service/userService";
+import { FaHistory, FaSignOutAlt } from "react-icons/fa";
+
+
 const Header = ({ role }) => {
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState([]);
   const params = useParams();
-  const [openNav, setOpenNav] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const getInfoUser = async () => {
       if (role === "user") {
         const user_id = params.user_id;
-        const data = await getInfoUserById(user_id)
-        setUser(data.data)
+        const data = await getInfoUserById(user_id);
+        setUser(data.data);
       }
-    }
-    getInfoUser()
+    };
+    getInfoUser();
   }, []);
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     "resize",
-  //     () => window.innerWidth >= 960 && setOpenNav(false),
-  //   );
 
-  // }, []);
-  const backAdminpage = () => {
-    navigate(path.HOMEPAGEADMIN);
-  }
+  const backHomepage = () => {
+    navigate(path.HOME);
+  };
   const backUserpage = (id) => {
     navigate("/user/" + id);
-  }
-  const handleNav = (event) => {
-    if (event === "Book") {
-      navigate("/user/" + user.id + "/findHospital")
-    }
-    else if (event === "History") {
-      navigate("/user/" + user.id + "/history")
-    }
-  }
+  };
 
-  if (role == 'main') {
+  const handleNavLogin = () => {
+    navigate("/login");
+  };
+
+  const profileMenuItems = [
+    {
+      label: "Lịch sử đặt hẹn",
+      icon: FaHistory,
+    },
+    {
+      label: "Đăng xuất",
+      icon: FaSignOutAlt,
+    },
+  ];
+
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const closeMenu = () => setIsMenuOpen(false);
+
+  if (role == "main") {
     return (
-      <nav class="bg-white  sticky top-0 z-50 shadow-md">
+      <nav class="sticky  top-0 z-50 bg-white shadow-md">
         <div class="mx-auto h-[70px]  px-2 sm:px-6 lg:px-8">
           <div class="relative flex h-16 items-center justify-between">
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div class="flex flex-shrink-0 items-center">
-              </div>
-              <div class="flex flex-rol items-center  px-3 py-2">
+              <div class="flex flex-shrink-0 items-center"></div>
+              <div class="flex flex-row items-center">
                 <img src={iconImage} alt="Logo" className="w-[75px]" />
-                <Typography variant="small" className=" font-bold text-blue-500 text-[20px] font-sans">
+                <Typography
+                  variant="h1"
+                  className="pt-2 font-sans text-[25px] font-bold text-blue-500"
+                  onClick={backHomepage}
+                >
                   BOOKING CARE
                 </Typography>
               </div>
@@ -65,117 +82,137 @@ const Header = ({ role }) => {
             <div class="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-[60px]">
-                  <div class="text-[#636363] space-x-[50px] flex flex-rol rounded-md px-3 text-md font-semibold items-center">
-                    <div>
-                      Home
-                    </div>
-                    <div>
-                      About Us
-                    </div>
-                    <div>
-                      Service
-                    </div>
-                    <div>
-                      Blog
-                    </div>
-                    <div>
-                      Contact Us
+                  <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
+                    <div className="w-72">
+                      <Input
+                        label="Tìm kiếm"
+                        icon={
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                          </svg>
+                        }
+                      />
                     </div>
                   </div>
-                  <div class="">
-                    <a
-                      href="/login"
-                      class="rounded-md bg-blue-700 px-5 py-2 text-md font-medium  text-white"
-                      aria-current="page"
-                    >
-                      Log In
-                    </a>
-                  </div>
+                  <Button color="blue" onClick={handleNavLogin}>
+                    Đăng nhập
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </nav>
-    )
-  };
-  if (role == 'user') {
+    );
+  }
+  if (role == "user") {
     return (
-      <nav class="bg-white shadow-md sticky top-0 z-50">
+      <nav class="sticky  top-0 z-50 bg-white shadow-md">
         <div class="mx-auto h-[70px]  px-2 sm:px-6 lg:px-8">
           <div class="relative flex h-16 items-center justify-between">
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div class="flex flex-shrink-0 items-center">
-              </div>
-              <div class="flex flex-rol items-center space-x-[40px] px-3 py-2 cursor-pointer " >
-                <img src={iconImage} alt="Logo" className="w-[75px]" onClick={() => backUserpage(user.id)} />
-                <Typography onClick={() => backUserpage(user.id)} variant="small" className=" font-bold text-blue-500 text-[20px] font-sans">
+              <div class="flex flex-shrink-0 items-center"></div>
+              <div class="flex flex-row items-center">
+                <img src={iconImage} alt="Logo" className="w-[75px]" />
+                <Typography
+                  variant="h1"
+                  className="pt-2 font-sans text-[25px] font-bold text-blue-500"
+                  onClick={() => backUserpage(user.id)}
+                >
                   BOOKING CARE
-                </Typography>
-                <Typography onClick={() => handleNav("Book")} variant="small" className=" font-bold text-blue-500 text-[20px] hover:text-blue-700 font-sans cursor-pointer">
-                  Book an appointment
-                </Typography>
-                <Typography onClick={() => handleNav("History")} variant="small" className=" font-bold text-blue-500 text-[20px] hover:text-blue-700 font-sans cursor-pointer">
-                  History
                 </Typography>
               </div>
             </div>
             <div class="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-[60px]">
-                  <div class="flex items-center space-x-4">
-                    <p className="font-bold text-blue-800 text-[20px]">{user.name}</p>
-                    <a
-                      href="/"
-                      class="rounded-md bg-blue-500 px-4 py-2 text-md font-medium  text-white"
-                      aria-current="page"
-                    >
-                      Log Out
-                    </a>
+                  <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
+                    <div className="w-72">
+                      <Input
+                        label="Tìm kiếm"
+                        icon={
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                          >
+                            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                          </svg>
+                        }
+                      />
+                    </div>
                   </div>
+                  <Menu
+                    open={isMenuOpen}
+                    handler={setIsMenuOpen}
+                    placement="bottom-end"
+                  >
+                    <MenuHandler>
+                      <Button
+                        variant="text"
+                        color="blue-gray"
+                        className="flex items-center rounded-full p-0"
+                      >
+                        <Avatar
+                          variant="circular"
+                          size="md"
+                          alt="tania andrew"
+                          withBorder={true}
+                          color="blue-gray"
+                          className=" p-0.5"
+                          src="https://cdn-icons-png.flaticon.com/512/17002/17002124.png"
+                        />
+                      </Button>
+                    </MenuHandler>
+                    <MenuList className="p-1">
+                      {profileMenuItems.map(({ label, icon }, key) => {
+                        const isLastItem = key === profileMenuItems.length - 1;
+                        return (
+                          <MenuItem
+                            key={label}
+                            onClick={closeMenu}
+                            className={`flex items-center gap-2 rounded ${
+                              isLastItem
+                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                                : ""
+                            }`}
+                            onClick={() => {
+                              if (label === "Đăng xuất") {
+                                navigate(path.HOME);
+                              }
+                              if (label === "Lịch sử đặt hẹn") {
+                                navigate(`/user/history`);
+                              }
+                            }}
+                          >
+                            {React.createElement(icon, {
+                              className: `h-4 w-4 ${
+                                isLastItem ? "text-red-500" : ""
+                              }`,
+                              strokeWidth: 2,
+                            })}
+                            <Typography
+                              as="span"
+                              variant="small"
+                              className="font-normal"
+                              color={isLastItem ? "red" : "inherit"}
+                            >
+                              {label}
+                            </Typography>
+                          </MenuItem>
+                        );
+                      })}
+                    </MenuList>
+                  </Menu>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </nav>
-    )
-  };
-  if (role == 'admin') {
-    return (
-      <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="mx-auto h-[70px]  px-2 sm:px-6 lg:px-8">
-          <div class="relative flex h-16 items-center justify-between">
-            <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-              <div class="flex flex-shrink-0 items-center">
-              </div>
-              <div class="flex flex-rol items-center  px-3 py-2 cursor-pointer" onClick={() => backAdminpage()}>
-                <img src={iconImage} alt="Logo" className="w-[75px]" />
-                <Typography variant="small" className=" font-bold text-blue-500 text-[20px] font-sans">
-                  BOOKING CARE
-                </Typography>
-              </div>
-            </div>
-            <div class="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
-              <div class="hidden sm:ml-6 sm:block">
-                <div class="flex space-x-[60px]">
-                  <div class="flex items-center space-x-4">
-                    <p className="font-bold text-blue-800 text-[20px]">Administrator</p>
-                    <a
-                      href="/"
-                      class="rounded-md bg-blue-500 px-4 py-2 text-md font-medium  text-white"
-                      aria-current="page"
-                    >
-                      Log Out
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    )
-  };
+    );
+  }
 };
 export default Header;
