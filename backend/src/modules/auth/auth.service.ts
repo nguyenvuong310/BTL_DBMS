@@ -7,7 +7,7 @@ import { Response } from 'express';
 import ms from 'ms';
 
 import { UserProfileDto } from './dto/user-profile';
-import { CreateUserDto } from '../users/dto/create-user.dto';
+
 import { InfoUserDto } from '../users/dto/info-user.dto';
 
 @Injectable()

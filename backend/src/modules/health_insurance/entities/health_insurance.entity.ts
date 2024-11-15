@@ -1,5 +1,5 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Patient } from 'src/modules/patients/entities/patient.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Patient } from '../../../modules/patients/entities/patient.entity';
 
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
@@ -8,7 +8,7 @@ export class HealthInsurance extends AbstractEntity {
   @Column()
   gender: string;
 
-  @Column()
+  @Column({ unique: true })
   insuranceNumber: string;
 
   @Column()
@@ -21,6 +21,6 @@ export class HealthInsurance extends AbstractEntity {
   timeEnd: Date;
 
   @OneToOne(() => Patient, (patient) => patient.health_insurance)
-  @JoinColumn({ name: 'patient_id' })
+  @JoinColumn({ name: 'onwer_id' })
   owner: Patient;
 }

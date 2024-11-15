@@ -4,6 +4,7 @@ import { DoctorsService } from '../doctors/doctors.service';
 import { PatientsService } from '../patients/patients.service';
 
 import { InfoUserDto } from './dto/info-user.dto';
+import { Role } from 'src/constants/action.enum';
 
 @Injectable()
 export class UsersService {
@@ -18,11 +19,11 @@ export class UsersService {
   async findByEmail(email: string): Promise<InfoUserDto> {
     const doctor = await this.doctorsService.findByEmail(email);
     if (doctor) {
-      return new InfoUserDto(doctor, 'doctor');
+      return new InfoUserDto(doctor, Role.DOCTOR);
     }
     const patient = await this.patientsService.findByEmail(email);
     if (patient) {
-      return new InfoUserDto(patient, 'patient');
+      return new InfoUserDto(patient, Role.PATIENT);
     }
     return null;
   }
@@ -42,12 +43,15 @@ export class UsersService {
 
   async findUserByRefreshToken(refreshToken: string) {
     const doctor = await this.doctorsService.findByRefreshToken(refreshToken);
+    console.log(refreshToken);
     if (doctor) {
-      return new InfoUserDto(doctor, 'doctor');
+      console.log('doctor');
+      return new InfoUserDto(doctor, Role.DOCTOR);
     }
     const patient = await this.patientsService.findByRefreshToken(refreshToken);
     if (patient) {
-      return new InfoUserDto(patient, 'patient');
+      console.log('patient');
+      return new InfoUserDto(patient, Role.PATIENT);
     }
     return null;
   }

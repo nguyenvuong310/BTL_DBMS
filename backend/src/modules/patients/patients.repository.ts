@@ -12,6 +12,9 @@ export class PatientRepository {
   }
 
   async findByRefreshToken(refreshToken: string) {
+    console.log('refreshToken', refreshToken);
+    const a = await this.patientSchedulerRepository.findOne({ where: { refreshToken } });
+
     return this.patientSchedulerRepository.findOne({ where: { refreshToken } });
   }
 

@@ -14,32 +14,6 @@ import { Public } from 'src/decorator/public.decorator';
 export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
 
-  @Post()
-  async create(@Body() createPatientDto: CreatePatientDto) {
-    return this.patientsService.create(createPatientDto);
-  }
-
-  @Public()
-  @Post('health-insurance')
-  async createHealthInsurance(@Body() createHealthInsuranceDto: CreateHealthInsuranceDto) {
-    return this.patientsService.createHealthInsurance(createHealthInsuranceDto);
-  }
-
-  @Patch('health-insurance/:id')
-  async updateHealthInsurance(@Param('id') id: string, @Body() updateHealthInsuranceDto: UpdateHealthInsuranceDto) {
-    return this.patientsService.updateHealthInsurance(id, updateHealthInsuranceDto);
-  }
-
-  @Delete('health-insurance/:id')
-  async removeHealthInsurance(@Param('id') id: string) {
-    return this.patientsService.removeHealthInsurance(id);
-  }
-
-  @Get('health-insurance')
-  async healthInsuranceByUserId(@Param('user_id') user_id: string) {
-    return this.patientsService.healthInsuranceByUserId(user_id);
-  }
-
   @Post('feedback')
   async createFeedback(@Body() createFeedbackDto: CreateFeedbackDto) {
     return this.patientsService.createFeedback(createFeedbackDto);

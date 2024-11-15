@@ -1,26 +1,22 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSpecialtyDto } from './dto/create-specialty.dto';
-import { UpdateSpecialtyDto } from './dto/update-specialty.dto';
+import { Inject, Injectable } from '@nestjs/common';
+
+import { SpecialtyRepository } from './specialty.repository';
+import { InfoSpecialtyDto } from './dto/info-specialty.dto';
 
 @Injectable()
 export class SpecialtyService {
-  create(createSpecialtyDto: CreateSpecialtyDto) {
-    return 'This action adds a new specialty';
+  constructor(
+    @Inject(SpecialtyRepository)
+    private specialtyRepository: SpecialtyRepository,
+  ) {}
+
+  async findAll(): Promise<InfoSpecialtyDto[]> {
+    const specialties = await this.specialtyRepository.findAll();
+    return specialties.map((specialty) => new InfoSpecialtyDto(specialty));
   }
 
-  findAll() {
-    return `This action returns all specialty`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} specialty`;
-  }
-
-  update(id: number, updateSpecialtyDto: UpdateSpecialtyDto) {
-    return `This action updates a #${id} specialty`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} specialty`;
+  async findById(id: string): Promise<InfoSpecialtyDto> {
+    const specialty = await this.specialtyRepository.findOne(id);
+    return new InfoSpecialtyDto(specialty);
   }
 }

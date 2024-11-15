@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { MedicineService } from './medicine.service';
-import { CreateMedicineDto } from './dto/create-medicine.dto';
-import { UpdateMedicineDto } from './dto/update-medicine.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/decorator/public.decorator';
 
 @ApiTags('Medicine')
 @Controller('medicine')
@@ -10,7 +9,16 @@ export class MedicineController {
   constructor(private readonly medicineService: MedicineService) {}
 
   @Get()
-  findAll() {
-    return this.medicineService.findAll();
+  @Public()
+  @ApiQuery({
+    name: 'excludeIds',
+    required: false,
+    description: 'Comma-separated list of medicine IDs to exclude',
+    type: String,
+  })
+  @ApiOperation({ summary: 'Get all medicines' })
+  findAll(@Query('excludeIds') excludeIds: string) {
+    const ids = excludeIds ? excludeIds.split(',') : [];
+    return this.medicineService.findAll(ids);
   }
 }

@@ -1,20 +1,20 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Doctor } from '../../../modules/doctors/entities/doctor.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('hospitals')
 export class Hospital extends AbstractEntity {
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   address: string;
 
-  @Column()
+  @Column({ nullable: true })
   bio: string;
 
-  @Column()
-  avatar: string;
+  @Column({ nullable: true })
+  logo: string;
 
   @OneToMany(() => Doctor, (doctor) => doctor.hospital)
   doctors: Doctor[];

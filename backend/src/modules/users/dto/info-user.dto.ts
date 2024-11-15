@@ -1,5 +1,5 @@
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
-import { Patient } from 'src/modules/patients/entities/patient.entity';
+import { Doctor } from '../../../modules/doctors/entities/doctor.entity';
+import { Patient } from '../../../modules/patients/entities/patient.entity';
 
 export class InfoUserDto {
   user: Doctor | Patient;

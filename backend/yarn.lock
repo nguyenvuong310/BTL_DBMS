@@ -8574,7 +8574,7 @@
     "@ts-morph/common" "~0.23.0"
     "code-block-writer" "^13.0.1"
 
-"ts-node@^10.7.0", "ts-node@>=9.0.0":
+"ts-node@^10.7.0", "ts-node@^10.9.2", "ts-node@>=9.0.0":
   "integrity" "sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ=="
   "resolved" "https://registry.npmjs.org/ts-node/-/ts-node-10.9.2.tgz"
   "version" "10.9.2"
@@ -8755,7 +8755,7 @@
     "uuid" "^9.0.0"
     "yargs" "^17.6.2"
 
-"typescript@*", "typescript@>=2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=4.3", "typescript@>=4.3.5", "typescript@>=4.9.5", "typescript@>3.6.0", "typescript@4.9.5":
+"typescript@*", "typescript@^4.9.5", "typescript@>=2.7", "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=4.3", "typescript@>=4.3.5", "typescript@>=4.9.5", "typescript@>3.6.0", "typescript@4.9.5":
   "integrity" "sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.9.5.tgz"
   "version" "4.9.5"

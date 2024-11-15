@@ -1,7 +1,7 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Appointment } from 'src/modules/appointment/entities/appointment.entity';
-import { Feedback } from 'src/modules/feedbacks/entities/feedback.entity';
-import { HealthInsurance } from 'src/modules/health_insurance/entities/health_insurance.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Appointment } from '../../../modules/appointment/entities/appointment.entity';
+import { Feedback } from '../../../modules/feedbacks/entities/feedback.entity';
+import { HealthInsurance } from '../../../modules/health_insurance/entities/health_insurance.entity';
 
 import { Column, Entity, OneToMany, OneToOne } from 'typeorm';
 

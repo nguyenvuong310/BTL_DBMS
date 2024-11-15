@@ -1,7 +1,7 @@
-import { TimePeriod } from 'src/constants/action.enum';
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Medicine } from 'src/modules/medicine/entities/medicine.entity';
-import { Prescription } from 'src/modules/prescription/entities/prescription.entity';
+import { TimePeriod } from '../../../constants/action.enum';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Medicine } from '../../../modules/medicine/entities/medicine.entity';
+import { Prescription } from '../../../modules/prescription/entities/prescription.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('prescription_items')

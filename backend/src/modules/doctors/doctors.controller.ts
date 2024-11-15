@@ -38,4 +38,14 @@ export class DoctorsController {
   create(@Body() createDoctorDto: CreateDoctorDto) {
     return 'sdjsj';
   }
+
+  @Get()
+  findAll() {
+    return 'find all';
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return 'find one';
+  }
 }

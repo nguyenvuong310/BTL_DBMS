@@ -10,8 +10,11 @@ import { UpdateHealthInsuranceDto } from './dto/update-health_insurance.dto';
 export class HealthInsuranceRepository {
   constructor(@InjectRepository(HealthInsurance) private healthInsuranceRepository: Repository<HealthInsurance>) {}
 
-  async save(health_insurance: CreateHealthInsuranceDto): Promise<HealthInsurance> {
-    return this.healthInsuranceRepository.save(health_insurance);
+  async save(health_insurance: CreateHealthInsuranceDto, user_id: string): Promise<HealthInsurance> {
+    return this.healthInsuranceRepository.save({
+      ...health_insurance,
+      owner: { id: user_id },
+    });
   }
 
   async update(id: string, health_insurance: UpdateHealthInsuranceDto): Promise<HealthInsurance> {

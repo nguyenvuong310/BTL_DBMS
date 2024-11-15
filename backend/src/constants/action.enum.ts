@@ -1,11 +1,24 @@
 export enum StatusType {
-  PENDING = 'pending',
-  CONFIRMED = 'confirmed',
-  CANCELLED = 'cancelled',
+  PENDING = 'PENDING',
+  CONFIRMED = 'CONFIRMED',
+  CANCELLED = 'CANCELLED',
+  DONE = 'DONE',
 }
 
 export enum TimePeriod {
-  MORNING = 'morning',
-  AFTERNOON = 'afternoon',
-  EVENING = 'evening',
+  MORNING = 'MORNING',
+  AFTERNOON = 'AFTERNOON',
+  EVENING = 'EVENING',
+}
+
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+  OTHER = 'OTHER',
+}
+
+export enum Role {
+  ADMIN = 'ADMIN',
+  DOCTOR = 'DOCTOR',
+  PATIENT = 'PATIENT',
 }

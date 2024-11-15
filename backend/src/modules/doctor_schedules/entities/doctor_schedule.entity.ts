@@ -1,6 +1,5 @@
-import { Transform } from 'class-transformer';
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Doctor } from '../../../modules/doctors/entities/doctor.entity';
 
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 

@@ -1,9 +1,8 @@
-import { StatusType } from 'src/constants/action.enum';
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { DoctorSchedule } from 'src/modules/doctor_schedules/entities/doctor_schedule.entity';
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
-import { Patient } from 'src/modules/patients/entities/patient.entity';
-import { Prescription } from 'src/modules/prescription/entities/prescription.entity';
+import { StatusType } from '../../../constants/action.enum';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { DoctorSchedule } from '../../../modules/doctor_schedules/entities/doctor_schedule.entity';
+import { Patient } from '../../../modules/patients/entities/patient.entity';
+import { Prescription } from '../../../modules/prescription/entities/prescription.entity';
 
 import { Column, Entity, ManyToOne, OneToOne } from 'typeorm';
 

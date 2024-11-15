@@ -1,6 +1,6 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Appointment } from 'src/modules/appointment/entities/appointment.entity';
-import { PrescriptionItem } from 'src/modules/prescription_items/entities/prescription_item.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Appointment } from '../../../modules/appointment/entities/appointment.entity';
+import { PrescriptionItem } from '../../../modules/prescription_items/entities/prescription_item.entity';
 
 import { Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 

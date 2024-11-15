@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { HospitalsService } from './hospitals.service';
 import { CreateHospitalDto } from './dto/create-hospital.dto';
 import { UpdateHospitalDto } from './dto/update-hospital.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Public } from 'src/decorator/public.decorator';
+import { InfoHospitalDto } from './dto/info-hospital.dto';
 
 @ApiTags('Hospitals')
 @Controller('hospitals')
@@ -10,12 +12,16 @@ export class HospitalsController {
   constructor(private readonly hospitalsService: HospitalsService) {}
 
   @Get()
-  findAll() {
+  @Public()
+  @ApiOperation({ summary: 'Retrieve a list of all hospitals' })
+  findAll(): Promise<InfoHospitalDto[]> {
     return this.hospitalsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.hospitalsService.findOne(+id);
+  @Public()
+  @ApiOperation({ summary: 'Retrieve a hospital by id' })
+  findOne(@Param('id') id: string): Promise<InfoHospitalDto> {
+    return this.hospitalsService.findById(id);
   }
 }

@@ -1,4 +1,4 @@
-import { CreatePrescriptionItemDto } from 'src/modules/prescription_items/dto/create-prescription_item.dto';
+import { CreatePrescriptionItemDto } from '../../../modules/prescription_items/dto/create-prescription_item.dto';
 
 export class CreatePrescriptionDto {
   appointmentId: string;

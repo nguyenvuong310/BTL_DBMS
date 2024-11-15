@@ -1,9 +1,8 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Appointment } from 'src/modules/appointment/entities/appointment.entity';
-import { DoctorSchedule } from 'src/modules/doctor_schedules/entities/doctor_schedule.entity';
-import { Feedback } from 'src/modules/feedbacks/entities/feedback.entity';
-import { Hospital } from 'src/modules/hospitals/entities/hospital.entity';
-import { Specialty } from 'src/modules/specialty/entities/specialty.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { DoctorSchedule } from '../../../modules/doctor_schedules/entities/doctor_schedule.entity';
+import { Feedback } from '../../../modules/feedbacks/entities/feedback.entity';
+import { Hospital } from '../../../modules/hospitals/entities/hospital.entity';
+import { Specialty } from '../../../modules/specialty/entities/specialty.entity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('doctors')

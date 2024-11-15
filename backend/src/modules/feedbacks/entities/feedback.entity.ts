@@ -1,6 +1,6 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
-import { Patient } from 'src/modules/patients/entities/patient.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { Doctor } from '../../../modules/doctors/entities/doctor.entity';
+import { Patient } from '../../../modules/patients/entities/patient.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity('feedbacks')

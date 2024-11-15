@@ -1,5 +1,5 @@
-import { AbstractEntity } from 'src/custom/abstract.entity';
-import { PrescriptionItem } from 'src/modules/prescription_items/entities/prescription_item.entity';
+import { AbstractEntity } from '../../../custom/abstract.entity';
+import { PrescriptionItem } from '../../../modules/prescription_items/entities/prescription_item.entity';
 import { Column, Entity, OneToMany } from 'typeorm';
 
 @Entity('medicines')
