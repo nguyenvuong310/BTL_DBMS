@@ -34,6 +34,7 @@ import { PrescriptionModule } from './modules/prescription/prescription.module';
         database: configService.get<string>('MYSQL_DATABASE'),
         entities: ['dist/**/*.entity{.ts,.js}'],
         synchronize: true,
+        // logging: true,
       }),
       inject: [ConfigService],
     }),

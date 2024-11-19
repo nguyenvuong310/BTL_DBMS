@@ -9,7 +9,7 @@ import { PrescriptionModule } from '../prescription/prescription.module';
 import { PatientRepository } from './patients.repository';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Patient]), FeedbacksModule, PrescriptionModule],
+  imports: [TypeOrmModule.forFeature([Patient])],
   controllers: [PatientsController],
   providers: [PatientsService, PatientRepository],
   exports: [PatientsService],

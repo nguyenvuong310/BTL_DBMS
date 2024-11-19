@@ -16,16 +16,16 @@ export class Doctor extends AbstractEntity {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 512, nullable: true })
   bio: string;
 
   @Column()
   avatar: string;
 
-  @Column()
+  @Column({ default: 300000 })
   examinationPrice: number;
 
-  @Column()
+  @Column({ default: 0 })
   rating: number;
 
   @Column({ type: 'varchar', length: 512, nullable: true })

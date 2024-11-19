@@ -11,12 +11,6 @@ import { PatientRepository } from './patients.repository';
 @Injectable()
 export class PatientsService {
   constructor(
-    @Inject(FeedbacksService)
-    private feedbacksService: FeedbacksService,
-
-    @Inject(PrescriptionService)
-    private prescriptionService: PrescriptionService,
-
     @Inject(PatientRepository)
     private patientRepository: PatientRepository,
   ) {}
@@ -31,26 +25,6 @@ export class PatientsService {
 
   async updateRefreshToken(patientId: string, refreshToken: string) {
     return this.patientRepository.updateRefreshToken(patientId, refreshToken);
-  }
-
-  async viewPrescriptions(appointment_id: string) {
-    return this.prescriptionService.getPrescriptionsByAppointmentId(appointment_id);
-  }
-
-  async createFeedback(createFeedbackDto: CreateFeedbackDto) {
-    return this.feedbacksService.create(createFeedbackDto);
-  }
-
-  async getFeedbacksByDoctorId(doctor_id: string) {
-    return this.feedbacksService.getFeedBacksByDoctorId(doctor_id);
-  }
-
-  async updateFeedback(id: string, updateFeedbackDto: UpdateFeedbackDto) {
-    return this.feedbacksService.update(id, updateFeedbackDto);
-  }
-
-  async removeFeedback(id: string) {
-    return this.feedbacksService.remove(id);
   }
 
   findAll() {

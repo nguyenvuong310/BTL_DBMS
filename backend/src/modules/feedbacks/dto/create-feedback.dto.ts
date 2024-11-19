@@ -1,4 +1,4 @@
-import { IsNumber, IsString, IsUUID } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateFeedbackDto {
   @IsNumber()
@@ -6,7 +6,4 @@ export class CreateFeedbackDto {
 
   @IsString()
   comment: string;
-
-  @IsUUID()
-  doctor_id: string;
 }

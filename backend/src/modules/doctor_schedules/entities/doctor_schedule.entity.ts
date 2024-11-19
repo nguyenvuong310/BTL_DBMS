@@ -5,8 +5,8 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('doctor_schedules')
 export class DoctorSchedule extends AbstractEntity {
-  @Column()
-  day: string;
+  @Column({ nullable: true })
+  day: Date;
 
   @Column()
   max_slots: number;
@@ -15,7 +15,10 @@ export class DoctorSchedule extends AbstractEntity {
   doctor: Doctor;
 
   @Column({ type: 'varchar', length: 5 })
-  time: string;
+  start_time: string;
+
+  @Column({ type: 'varchar', length: 5 })
+  end_time: string;
 
   @OneToMany(() => DoctorSchedule, (doctorSchedule) => doctorSchedule.doctor)
   appointments: DoctorSchedule[];

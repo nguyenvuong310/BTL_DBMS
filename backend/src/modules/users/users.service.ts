@@ -33,10 +33,10 @@ export class UsersService {
   }
 
   async updateRefreshToken(userId: string, refreshToken: string, role: string) {
-    if (role === 'doctor') {
+    if (role === Role.DOCTOR) {
       return await this.doctorsService.updateRefreshToken(userId, refreshToken);
     }
-    if (role === 'patient') {
+    if (role === Role.PATIENT) {
       return await this.patientsService.updateRefreshToken(userId, refreshToken);
     }
   }
@@ -45,12 +45,10 @@ export class UsersService {
     const doctor = await this.doctorsService.findByRefreshToken(refreshToken);
     console.log(refreshToken);
     if (doctor) {
-      console.log('doctor');
       return new InfoUserDto(doctor, Role.DOCTOR);
     }
     const patient = await this.patientsService.findByRefreshToken(refreshToken);
     if (patient) {
-      console.log('patient');
       return new InfoUserDto(patient, Role.PATIENT);
     }
     return null;
