@@ -10,8 +10,12 @@ import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 export class FeedbacksRepository {
   constructor(@InjectRepository(Feedback) private feedbacksRepository: Repository<Feedback>) {}
 
-  async save(feedback: CreateFeedbackDto): Promise<Feedback> {
-    return this.feedbacksRepository.save(feedback);
+  async save(feedback: CreateFeedbackDto, doctor_id: string, patient_id: string): Promise<Feedback> {
+    return this.feedbacksRepository.save({
+      ...feedback,
+      doctor: { id: doctor_id },
+      patient: { id: patient_id },
+    });
   }
 
   async update(id: string, feedback: UpdateFeedbackDto): Promise<Feedback> {
@@ -23,6 +27,6 @@ export class FeedbacksRepository {
   }
 
   async getFeedBacksByDoctorId(doctor_id: string): Promise<Feedback[]> {
-    return this.feedbacksRepository.find({ where: { doctor: { id: doctor_id } } });
+    return this.feedbacksRepository.find({ where: { doctor: { id: doctor_id } }, relations: ['doctor', 'patient'] });
   }
 }

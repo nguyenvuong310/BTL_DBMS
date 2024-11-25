@@ -3,6 +3,7 @@ import { Hospital } from '../../modules/hospitals/entities/hospital.entity';
 import { Medicine } from '../../modules/medicine/entities/medicine.entity';
 import { Specialty } from '../../modules/specialty/entities/specialty.entity';
 import { Doctor } from '../../modules/doctors/entities/doctor.entity';
+import { Patient } from '../../modules/patients/entities/patient.entity';
 
 async function runSeed() {
   await dataSource.initialize();
@@ -13,6 +14,37 @@ async function runSeed() {
   const medicineRepository = dataSource.getRepository(Medicine);
   const specialtyRepository = dataSource.getRepository(Specialty);
   const doctorRepository = dataSource.getRepository(Doctor);
+  const patientRepository = dataSource.getRepository(Patient);
+
+  const patients = [
+    {
+      name: 'Nguyen Trung Vuong',
+      email: 'trungvuong@gmail.com',
+      password: '123456',
+    },
+    {
+      name: 'Nguyen Thai Thoi',
+      email: 'thaithoi@gmail.com',
+      password: '123456',
+    },
+    {
+      name: 'Nguyen Ngoc Khanh My',
+      email: 'khanhmy@gmail.com',
+      password: '123456',
+    },
+    {
+      name: 'Doan Minh Hieu',
+      email: 'minhhieu@gmail.com',
+      password: '123456',
+    },
+    {
+      name: 'Nguyen Anh Duy',
+      email: 'anhduy@gmail.com',
+      password: '123456',
+    },
+  ];
+
+  if ((await patientRepository.count()) === 0) await patientRepository.save(patients);
 
   const hospitals = [
     {

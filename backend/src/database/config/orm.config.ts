@@ -33,4 +33,5 @@ export const dataSource = new DataSource({
     Prescription,
   ],
   synchronize: true,
+  migrations: ['src/database/migrations/**/*.ts'],
 });

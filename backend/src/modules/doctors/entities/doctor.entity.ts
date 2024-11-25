@@ -22,7 +22,7 @@ export class Doctor extends AbstractEntity {
   @Column()
   avatar: string;
 
-  @Column({ default: 300000 })
+  @Column({ default: 300001 })
   examinationPrice: number;
 
   @Column({ default: 0 })

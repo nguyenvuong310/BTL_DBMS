@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
 
 import { TransformInterceptor } from './core/transform.interceptor';
 import cookieParser from 'cookie-parser';
@@ -66,6 +66,8 @@ async function bootstrap() {
   });
 
   await app.listen(configService.get<string>('PORT') || 3000);
+
+  console.log('Trigger executed successfully');
   console.log(`Application is running on: http://localhost:${configService.get<string>('PORT')}`);
 }
 

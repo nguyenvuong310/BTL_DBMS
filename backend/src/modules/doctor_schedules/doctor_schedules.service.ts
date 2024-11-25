@@ -48,30 +48,30 @@ export class DoctorSchedulesService {
   }
 
   async getDoctorSchedulesByDoctorId(doctor_id: string): Promise<any[]> {
-    // Fetch the doctor schedules based on doctor ID
     const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesByDoctorId(doctor_id);
 
-    // Group schedules by day and return the formatted result
-    const result = schedules.reduce((acc, schedule) => {
-      // Find if the day already exists in the accumulator
-      let dayGroup = acc.find((item) => item.day === schedule.day);
-
-      // If the day doesn't exist, create a new group
-      if (!dayGroup) {
-        dayGroup = { day: schedule.day, times: [] };
-        acc.push(dayGroup);
+    const groupedByDay = schedules.reduce((acc, schedule) => {
+      const day = schedule.day.toISOString().split('T')[0];
+      if (!acc[day]) {
+        acc[day] = [];
       }
 
-      // Add the start_time and end_time to the 'times' array
-      dayGroup.times.push({
+      acc[day].push({
         start_time: schedule.start_time,
         end_time: schedule.end_time,
       });
 
       return acc;
-    }, []);
+    }, {});
 
-    // Return the result as the formatted array
-    return result;
+    return Object.entries(groupedByDay).map(([day, times]) => ({
+      day,
+      times,
+    }));
+  }
+
+  async findDoctorScheduleByDoctorIdAndDay(doctorId: string, day: Date) {
+    const schedules = await this.doctorSchedulesRepository.getDoctorScheduleByDoctorIdAndDay(doctorId, day);
+    return schedules.map((schedule) => new InfoDoctorScheduleDto(schedule));
   }
 }

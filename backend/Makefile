@@ -6,6 +6,7 @@ up:
 bootstrap:
 	npm install
 	docker-compose up -d
+	npm run migation:run
 	npm run seed
 	npm run start:dev
 

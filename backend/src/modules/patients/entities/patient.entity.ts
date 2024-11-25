@@ -19,10 +19,10 @@ export class Patient extends AbstractEntity {
   @Column({ type: 'varchar', length: 512, nullable: true })
   refreshToken: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 512, nullable: true })
   bio: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 
   @OneToOne(() => HealthInsurance, (health_insurance) => health_insurance.owner)

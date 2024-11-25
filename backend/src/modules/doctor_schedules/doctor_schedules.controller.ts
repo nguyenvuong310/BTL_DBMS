@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { DoctorSchedulesService } from './doctor_schedules.service';
 import { CreateDoctorScheduleDto } from './dto/create-doctor_schedule.dto';
 import { UpdateDoctorScheduleDto } from './dto/update-doctor_schedule.dto';
@@ -33,9 +33,10 @@ export class DoctorSchedulesController {
     return this.doctorSchedulesService.getDoctorSchedulesByDoctorId(user?.id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.doctorSchedulesService.findOne(+id);
+  @Get(':doctorId')
+  findOne(@Param('doctorId') id: string, @Query('day') day: string) {
+    const normalizedDay = new Date(day.split('T')[0]);
+    return this.doctorSchedulesService.findDoctorScheduleByDoctorIdAndDay(id, normalizedDay);
   }
 
   @Patch(':id')

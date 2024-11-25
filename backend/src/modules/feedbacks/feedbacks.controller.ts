@@ -3,6 +3,8 @@ import { FeedbacksService } from './feedbacks.service';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { User } from 'src/decorator/user.decorator';
+import { UserDto } from '../users/dto/user.dto';
 
 @ApiTags('Feedbacks')
 @Controller('feedbacks')
@@ -10,13 +12,15 @@ export class FeedbacksController {
   constructor(private readonly feedbacksService: FeedbacksService) {}
 
   @Post(':doctorId')
-  create(@Param('doctorId') doctorId: string, @Body() createFeedbackDto: CreateFeedbackDto) {
-    return this.feedbacksService.create(createFeedbackDto);
+  @ApiOperation({ summary: 'patient feedback for doctor' })
+  create(@Param('doctorId') doctorId: string, @Body() createFeedbackDto: CreateFeedbackDto, @User() user: UserDto) {
+    return this.feedbacksService.create(createFeedbackDto, doctorId, user?.id);
   }
 
   @Get(':doctorId')
-  findAll(@Param('doctorId') doctorId: string) {
-    return 'this.feedbacksService.findAll()';
+  @ApiOperation({ summary: 'Get all feedbacks about doctor' })
+  findFeedBackByDoctor(@Param('doctorId') doctorId: string) {
+    return this.feedbacksService.getFeedBacksByDoctorId(doctorId);
   }
 
   @Get()

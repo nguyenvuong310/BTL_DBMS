@@ -19,14 +19,16 @@ export class IsTimeRangeValidConstraint implements ValidatorConstraintInterface 
 
     const parseTime = (time: string): number => {
       const [hours, minutes] = time.split(':').map(Number);
+      if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+        return NaN;
+      }
       return hours * 60 + minutes;
     };
 
-    return parseTime(start_time) < parseTime(end_time);
-  }
+    const startMinutes = parseTime(start_time);
+    const endMinutes = parseTime(end_time);
 
-  defaultMessage(args: ValidationArguments): string {
-    return 'timeStart must be earlier than timeEnd';
+    return !isNaN(startMinutes) && !isNaN(endMinutes) && startMinutes < endMinutes;
   }
 }
 
