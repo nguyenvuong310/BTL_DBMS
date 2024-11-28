@@ -16,6 +16,12 @@ export class Patient extends AbstractEntity {
   @Column()
   password: string;
 
+  @Column({ nullable: true })
+  birthDate: string;
+
+  @Column({ nullable: true })
+  location: string;
+
   @Column({ type: 'varchar', length: 512, nullable: true })
   refreshToken: string;
 

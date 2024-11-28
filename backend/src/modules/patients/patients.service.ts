@@ -1,11 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CreatePatientDto } from './dto/create-patient.dto';
-import { UpdatePatientDto } from './dto/update-patient.dto';
+import { CreatePatientUnRegisterDto } from './dto/create-patient.dto';
 
-import { FeedbacksService } from '../feedbacks/feedbacks.service';
-import { CreateFeedbackDto } from '../feedbacks/dto/create-feedback.dto';
-import { UpdateFeedbackDto } from '../feedbacks/dto/update-feedback.dto';
-import { PrescriptionService } from '../prescription/prescription.service';
 import { PatientRepository } from './patients.repository';
 
 @Injectable()
@@ -35,11 +30,15 @@ export class PatientsService {
     return `This action returns a #${id} patient`;
   }
 
-  update(id: number, updatePatientDto: UpdatePatientDto) {
-    return `This action updates a #${id} patient`;
-  }
+  // update(id: number, updatePatientDto: UpdatePatientDto) {
+  //   return `This action updates a #${id} patient`;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} patient`;
+  // remove(id: number) {
+  //   return `This action removes a #${id} patient`;
+  // }
+
+  async create(createPatientDto: CreatePatientUnRegisterDto) {
+    return this.patientRepository.create(createPatientDto);
   }
 }

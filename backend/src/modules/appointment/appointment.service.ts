@@ -1,26 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
-import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+
+import { PatientsService } from '../patients/patients.service';
+
+import { AppointmentRepository } from './appointment.repository';
+import { InfoAppointmentDto } from './dto/info-appointment.dto';
 
 @Injectable()
 export class AppointmentService {
-  create(createAppointmentDto: CreateAppointmentDto) {
-    return 'This action adds a new appointment';
-  }
-
-  findAll() {
-    return `This action returns all appointment`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} appointment`;
-  }
-
-  update(id: number, updateAppointmentDto: UpdateAppointmentDto) {
-    return `This action updates a #${id} appointment`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} appointment`;
+  constructor(
+    @Inject(PatientsService)
+    private patientsService: PatientsService,
+    @Inject(AppointmentRepository)
+    private appointmentRepository: AppointmentRepository,
+  ) {}
+  async create(createAppointmentDto: CreateAppointmentDto, userId: string) {
+    const appointment = await this.appointmentRepository.save(createAppointmentDto, userId);
+    const infoAppointment = await this.appointmentRepository.getInfoAppointment(appointment.id);
+    return new InfoAppointmentDto(infoAppointment);
   }
 }

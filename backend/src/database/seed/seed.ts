@@ -252,6 +252,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.973879',
       name: 'Ngoại thần kinh',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-ngoai-than-kinh.png',
+      description:
+        '{"doctorDescription": ["Các giáo sư, bác sĩ uy tín đầu ngành chuyên khoa Ngoại Thần kinh đã và đang công tác tại các bệnh viện lớn như: Bệnh viện 108, Bệnh viện Bạch Mai, Bệnh viện Việt Đức, Bệnh viện Đại học Y Hà Nội...", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội Thần kinh Việt Nam, Hội Phẫu thuật Thần kinh...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp."], "symptomDescription": ["U não", "Bệnh lý về chấn thương sọ não", "Não úng thủy", "Đau dây thần kinh", "Dị dạng động tĩnh mạch", "Dị dạng mạch máu não", "Túi phình mạch máu não", "Khuyết sọ", "U dây thần kinh ngoại biên", "..."]}',
     },
     {
       id: '125e38be-5bb3-4a85-90b6-b23f3dec1ec0',
@@ -259,6 +261,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.979628',
       name: 'Tiểu đường - Nội tiết',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-duong.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Bạch Mai, Bệnh viện Quân Y 103, Bệnh viện Nội tiết Trung ương, Bệnh viện Đại học Y Hà Nội.", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp."], "symptomDescription": ["Bướu cổ", "Cường cận giáp", "Đái tháo đường", "Suy giáp,Cường giáp", "Suy tuyến yên,U tuyến yên", "Tăng đường huyết bệnh tiểu đường", "Tiền tiểu đường", "Tiểu đường", "Tiểu đường tuýp 1, 2", "Ung thư tuyến giáp"]}',
     },
     {
       id: '16d42f09-a720-4ee4-abc7-481937b09152',
@@ -266,6 +270,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.987335',
       name: 'Bọc răng sứ',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-boc-rang-su.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: '18aea0c2-313b-4874-acb9-974c76fe9f22',
@@ -273,6 +278,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.936974',
       name: 'Tim mạch',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tim-mach.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia được đào tạo bài bản về chuyên ngành Tim mạch tại các trường đại học trong nước và quốc tế.", "Các giáo sư, phó giáo sư nghiên cứu và giảng dạy tại Đại học Y Hà Nội", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Viện Tim Mạch Quốc Gia, Bệnh viện Bạch Mai, Bệnh viện Việt Đức, Bệnh Viện E, Bệnh Viện Tim Hà Nội", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Tim Mạch Việt Nam", "Đạt danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,..."], "symptomDescription": ["Khó thở, Đau ngực, đau tim", "Tăng huyết áp, hạ huyết áp", "Rối loạn mỡ máu, cao huyết áp, chóng mặt", "Bệnh van tim (Hẹp hở van tim),Hẹp động mạch chủ", "Cảm giác hồi hộp, tim đập nhanh", "Tim bẩm sinh, có tiền sử bệnh tim to, tiền sử tai biến", "Đã đặt stent tim,nong động mạch vành", "Giãn tĩnh mạch chân", "..."]}',
     },
     {
       id: '1bf5326d-418e-441d-841f-5df309c0c5df',
@@ -280,6 +287,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.930026',
       name: 'Cơ Xương Khớp',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-co-xuong-khop.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm", "Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Cơ Xương Khớp - Bệnh viện Bạch Mai, Bệnh viện Hữu nghị Việt Đức,Bệnh Viện E.", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hiệp hội Cơ Xương Khớp, Hội Thấp khớp học,...", "Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,..."], "symptomDescription": ["Gout", "Thoái hóa khớp: khớp gối, cột sống thắt lưng, cột sống cổ", "Viêm khớp dạng thấp, Viêm đa khớp, Viêm gân", "Tràn dịch khớp gối, Tràn dịch khớp háng, Tràn dịch khớp khủy, Tràn dịch khớp vai", "Loãng xương, đau nhức xương", "Viêm xương, gai xương", "Viêm cơ, Teo cơ, chứng đau mỏi cơ", "Yếu cơ, Loạn dưỡng cơ", "Các chấn thương về cơ, xương, khớp", "..."]}',
     },
     {
       id: '1f959768-c79a-4a62-a456-5d5b35a662c8',
@@ -287,6 +296,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.982544',
       name: 'Ung bướu',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-ung-buou.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Ung bướu - Bệnh viện K, Bệnh viện Hữu nghị Việt Đức, Bệnh viện Ung bướu Hưng Việt,..."], "symptomDescription": ["Ung thư gan", "Ung thư phổi", "Ung thư tuỵ", "Ung thư dạ dày, đại tràng", "Ung thư vú", "Ung thư tuyến giáp", "..."]}',
     },
     {
       id: '2419c5a5-ddd0-479d-9637-9396ab8e0fb4',
@@ -294,6 +305,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.981967',
       name: 'Nội soi Tiêu hóa',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-soi-tieu-hoa.png',
+      description:
+        '{"doctorDescription": ["Đau thượng vị, buồn nôn, nôn mửa, nuốt nghẹn, nuốt khó", "Các rối loạn tiêu hóa như chậm tiêu, ợ hơi, ợ nóng, nóng rát thượng vị.", "Các triệu chứng trào ngược, thiếu máu, sụt cân không rõ nguyên nhân, xuất huyết tiêu hóa trên.", "Bệnh lý viêm, loét, u đường tiêu hóa dưới", "Tiêu chảy kéo dài không lý giải được, đau bụng không lý giải được."], "symptomDescription": ["Nội soi dạ dày", "Nội soi dạ dày không đau", "Nội soi dạ dày mê", "Nội soi dạ dày tá tràng", "Nội soi dạ dày trẻ em", "Nội soi đại tràng trẻ", "Nội soi đại tràng", "Nội soi đại tràng không đau", "Nội soi đại tràng mê", "Nội soi đại trực tràng", "Nội soi tiêu hóa", "Nội soi tiêu hóa không đau", "Nội soi tiêu hóa mê"]}',
     },
     {
       id: '25ef6979-c226-4b02-addf-d30acb84ec36',
@@ -301,6 +314,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.980836',
       name: 'Chụp Cộng hưởng từ',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cong-huong-tu.png',
+      description:
+        '{"doctorDescription": [], "symptomDescription": ["Chụp cộng hưởng từ cổ chân", "Chụp cộng hưởng từ cổ tay", "Chụp cộng hưởng từ cột sống", "Chụp cộng hưởng từ cột sống lưng", "Chụp cộng hưởng từ gan mật", "Chụp cộng hưởng từ gối", "Chụp cộng hưởng từ háng", "Chụp cộng hưởng từ hầu họng", "Chụp cộng hưởng từ hốc mắt", "Chụp cộng hưởng từ khớp vai", "Chụp cộng hưởng từ não", "Chụp cộng hưởng từ phần mềm", "Chụp cộng hưởng từ thắt lưng", "Chụp cộng hưởng từ tiểu khung", "Chụp cộng hưởng từ toàn thân", "Chụp cộng hưởng từ tuyến yên", "Chụp cổng hưởng từ vú", "Chụp MRI các phần mềm", "Chụp MRI cổ chân", "Chụp MRI cổ tay", "Chụp MRI cột sống cổ", "Chụp MRI cột sống lưng", "Chụp MRI cột sống thắt lưng", "Chụp MRI gan mật", "Chụp MRI gối", "Chụp MRI háng", "Chụp MRI hầu họng", "Chụp MRI hốc mắt", "Chụp MRI khớp vai", "Chụp MRI sọ não", "Chụp MRI Tiểu khung", "Chụp MRI toàn thân", "Chụp MRI tuyến yên", "Chụp MRI vú 2 bên", "Thuốc đối quang từ"]}',
     },
     {
       id: '3a84d949-a830-4063-bc52-91b508b89d36',
@@ -308,6 +323,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.980246',
       name: 'Phục hồi chức năng',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-phuc-hoi-chuc-nang.png',
+      description:
+        '{"doctorDescription": ["Các bác sĩ uy tín đầu ngành chuyên khoa Phục hồi chức năng đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y Hà Nội, Bệnh viện Thanh Nhàn,...", "Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm"], "symptomDescription": ["Âm ngữ trị liệu cho trẻ chậm phát triển trí tuệ, chậm nói, nói ngọng, nói lắp, các loại nói khó, tự kỷ, tăng động, giảm chú ý", "Mất giọng, khàn tiếng sau cắt, phẫu thuật thanh quản, giọng nhi hoá, rối loạn giọng", "Thất ngôn sau tai biến mạch máu não", "Khám, điều trị bàn chân bẹt, chân khoèo, chân chữ O, chữ X", "Dị tật bẩm sinh về vận động,Điều trị trẻ bị vẹo cột sống", "Điều trị trật khớp háng,Điều trị trẻ vẹo cổ, thắt lưng", "Điều trị trẻ mắc Down,Chữa trẻ chậm phát triển trí tuệ"]}',
     },
     {
       id: '3fe8ee6e-4fed-414e-9e7d-dd75641dfe2b',
@@ -315,6 +332,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.988892',
       name: 'Nha khoa tổng quát',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/104709-nha-khoa-tong-quat.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: '480674b3-c4f5-435f-b35d-57d2b68e5af5',
@@ -322,6 +340,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.968455',
       name: 'Sức khỏe tâm thần',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-suc-khoe-tam-than.png',
+      description:
+        '{"doctorDescription": ["Các giáo sư, bác sĩ uy tín đầu ngành chuyên khoa Sức khỏe tâm thần đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Tâm thần Trung ương, Bệnh viện Chợ Rẫy, Bệnh viện Lão khoa...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp."], "symptomDescription": ["Ảo giác, Hoang tưởng, Nói cười một mình", "Bi quan, Bồn chồn, Buồn rầu, Hoảng hốt", "Khó tập trung tâm trí, Nhầm lẫn tư duy", "Lo âu, Lo lắng", "Rối loạn giấc ngủ", "Sợ hãi, Sợ một mình, Sợ nơi đông người", "Xa lánh mọi người, Ý nghĩ kì lạ"]}',
     },
     {
       id: '48e8ff21-1b82-4af9-8ce1-2d161938d736',
@@ -329,6 +349,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.969196',
       name: 'Dị ứng miễn dịch',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-di-ung-mien-dich.png',
+      description:
+        '{"doctorDescription": ["Các bác sĩ uy tín đầu ngành chuyên khoa Dị ứng miễn dịch đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y dược 1 TP.HCM, Bệnh viện E,...", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội dị ứng miễn dịch châu Âu, Hội Hen – Dị ứng - Miễn dịch Lâm sàng TPHCM..."], "symptomDescription": ["Lupus ban đỏ hệ thống, Xơ cứng bì hệ thống", "Viêm da cơ, viêm đa cơ, Bệnh mô liên kết hỗn hợp", "Hội chứng kháng Phospholipid", "Viêm mạch Schoenlein-Henoch, Viêm gan tự miễn"]}',
     },
     {
       id: '4b85de4b-ccfa-446e-999f-e0ecd0b7c924',
@@ -336,6 +358,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.978543',
       name: 'Nội khoa',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-noi-khoa.png',
+      description:
+        '{"doctorDescription": ["Kiểm tra sức khỏe", "Chóng mặt", "Mêt mỏi", "Hoa mắt", "Kém ăn", "Giảm sút cân", "Khó ngủ", "Đau đầu", "Ngộ độc rượu", "Ngộ độc thức ăn", "Dị ứng", "Viêm da dị ứng", "Dị ứng thực phẩm", "Dị ứng côn trùng", "Dị ứng vật nuôi", "Nổi mề đay", "Rối loạn miễn dịch", "Rối loạn chuyển hóa"], "symptomDescription": []}',
     },
     {
       id: '5a12d3b9-d640-44ff-be2c-62b15f69a1c8',
@@ -343,6 +367,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.965028',
       name: 'Bệnh Viêm gan',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-viem-gan.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành bệnh về gan", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh Viện Việt Đức...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,..."], "symptomDescription": ["Khám, tư vấn, điều trị các bệnh truyền nhiễm", "Khám, tư vấn, điều trị các bệnh viêm gan virus B", "Khám, tư vấn, điều trị các bệnh viêm gan virus A,C.", "Viêm gan B cấp tính", "Viêm gan B mạn tính"]}',
     },
     {
       id: '5adee64f-ebaf-4500-b3e8-c92175e6ea78',
@@ -350,6 +376,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.984165',
       name: 'Bác sĩ gia đình',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-bac-si-gia-dinh.png',
+      description:
+        '{"doctorDescription": ["Dịch vụ Bác sĩ tại nhà nhằm đáp ứng nhu cầu thuận tiện chăm sóc người bệnh tại chính ngôi nhà của mình,"], "symptomDescription": ["Thăm khám và điều trị các bệnh lý về Nội khoa như: bệnh lý Cơ xương khớp, bệnh lý Tiêu hóa, bệnh lý Tim mạch..", "Tiêm truyền, thay băng, cắt chỉ, chăm sóc vết thương… theo y lệnh Bác sỹ", "Chăm sóc người bệnh ung thư", "Chăm sóc người cao tuổi", "Chăm sóc người bệnh mãn tính (tiểu đường, tim mạch,…)", "Chăm sóc người bệnh tai biến, đột quỵ", "Chăm sóc mẹ và bé sau sinh", "Lấy mẫu máu xét nghiệm và trả kết quả tại nhà", "Vật lý trị liệu, phục hồi chức năng", "Chăm sóc giảm đau", "Hỗ trợ sinh hoạt hàng ngày và chăm sóc cá nhân", "Tư vấn chế độ dinh dưỡng"]}',
     },
     {
       id: '5fe0e976-0b1d-4c4d-9c56-83fe7eba10f6',
@@ -357,6 +385,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.986801',
       name: 'Niềng răng',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nieng-rang.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: '64dede27-b12c-4c26-9971-bbfc9ae5f294',
@@ -364,6 +393,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.986260',
       name: 'Chấn thương chỉnh hình',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-chan-thuong-chinh-hinh.png',
+      description:
+        '{"doctorDescription": ["Các bác sĩ uy tín đầu ngành chuyên khoa Chấn thương chỉnh hình đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y Hà Nội, Bệnh viện Thanh Nhàn, Bệnh viện Chấn thương chỉnh hình...", "Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm"], "symptomDescription": ["Gãy xương", "Thoái hóa khớp háng, gối,", "Bong gân trật khớp", "Viêm đa cơ", "Viêm khớp nhiễm trùng…"]}',
     },
     {
       id: '6fe0aca7-7531-4c8f-915b-0bd0327f9339',
@@ -371,6 +402,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.937636',
       name: 'Tai Mũi Họng',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tai-mui-hong.png',
+      description:
+        '{"doctorDescription": [], "symptomDescription": ["Ù tai, đau tai, chảy máu tai", "Thủng màng nhĩ, điếc đột ngột", "Viêm tai giữa", "Amidan, V.A", "Viêm xoang", "Nghẹt mũi", "Hay bị chảy máu cam", "Đau cổ họng, khó nuốt", "Ho kéo dài", "Ngủ ngáy", "..."]}',
     },
     {
       id: '7329cfe1-dd8f-4c42-bf35-5363479f3808',
@@ -378,6 +411,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.987865',
       name: 'Trồng răng implant',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-trong-rang.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: '74117fbc-6822-47ea-bb88-8b1a4f64fcbf',
@@ -385,6 +419,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.936203',
       name: 'Tiêu hoá',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tieu-hoa.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Tiêu hóa tại Hà Nội", "Các giáo sư, phó giáo sư là giảng viên Đại học Y khoa Hà Nội", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh Viện Việt Đức, Bệnh Viện Nhi Trung ương, Bệnh viện Y học Cổ truyền Việt Nam...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,..."], "symptomDescription": ["Ăn uống kém, không ngon", "Rối loạn tiêu hóa, táo bón, trĩ", "Nhiễm vi khuẩn HP (Helicobacter pylori)", "Nội soi dạ dày, đại tràng, tiêu hóa", "Buồn nôn, chướng bụng, đầy bụng ợ chua, đầy hơi", "Co thắt thực quản,Hội chứng ruột kích thích", "Đau bụng, dạ dày, đại tràng, thượng vị", "Viêm đại tràng, dạ dày, tá tràng", "Ung thư dạ dày, U nang tuyến tụy", "Bệnh lý về gan, mật", "..."]}',
     },
     {
       id: '77060656-150b-49a3-a697-4de39fef1d94',
@@ -392,6 +428,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.983611',
       name: 'Truyền nhiễm',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-truyen-nhiem.png',
+      description:
+        '{"doctorDescription": ["Các bác sĩ uy tín đầu ngành chuyên khoa Bệnh Truyền nhiễm đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Đại học Y dược 1 TP.HCM, Bệnh viện E,...", "Là thành viên tổ chức chuyên môn như: Hội Truyền nhiễm Việt Nam", "Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,..."], "symptomDescription": ["HIV/ AIDS", "Viêm Gan B", "Sốt xuất huyết, sốt phát ban", "Bại liệt, cúm, dại, đậu mùa, dịch hạch", "Viêm gan virus (A,B,C,D,E)", "Lao phổi", "Giang mai", "Lậu", "Sởi", "Tả", "Thủy đậu", "Tay chân miệng", "Tiêu chảy cấp", "Uốn ván", "Viêm màng não mô cầu"]}',
     },
     {
       id: '7b1c4a41-d8fe-40bf-9850-57caa96f1806',
@@ -399,6 +437,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.981339',
       name: 'Chụp cắt lớp vi tính',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-chup-cat-lop.png',
+      description:
+        '{"doctorDescription": ["Chụp CT bụng chung", "Chụp CT một chi", "Chụp CT hai chi", "Chụp CT động mạch chủ 64 dãy", "Chụp CT gan-mật-tụy", "Chụp CT vòm mũi họng", "Chụp CT hệ tiết niệu", "Chụp CT mõm trâm", "Chụp CT mạch vành 64 dãy", "Chụp CT ngực", "Chụp CT sọ não", "Chụp CT Tiểu khung", "Chụp CT xoang", "Chụp CT vùng hầu họng 64 dãy", "Chụp CT khớp háng", "Chụp CT mô mềm"], "symptomDescription": []}',
     },
     {
       id: '827ae910-1e3c-45d8-9cac-4ad41ef0cfdc',
@@ -406,6 +446,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.990387',
       name: 'Chuyên khoa Vú',
       logo: 'https://cdn.bookingcare.vn/fo/2024/10/16/115336-vu.png',
+      description:
+        '{"doctorDescription": ["Bệnh lý phì đại tuyến vú của nữ giới, nam giới", "Các biểu hiện chảy dịch đầu vú", "Các biểu hiện đau vú", "Các bất thường về tuyến vú và tuyến vú phụ ở phụ nữ", "Các loại khối u phylldoes (còn gọi là u dạng lá)", "Các loại  u lành của tuyến vú như u xơ, u nang, u nhú nội ống,..", "Áp-xe vú, đặc biệt là các trường hợp áp-xe phức tạp, tái phát nhiều lần", "Ung thư vú", "Ung thư cổ tử cung", "Ung thư buồng trứng"], "symptomDescription": []}',
     },
     {
       id: '9d39f336-08cc-4fa9-9504-36856177c436',
@@ -413,6 +455,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.985726',
       name: 'Vô sinh - Hiếm muộn',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-vo-sinh-hiem-muon.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu Khoa Vô sinh -  Hiếm muộn Bệnh viện Chuyên khoa Nam học và Hiếm muộn Hà Nội, Bệnh viện Chuyên khoa Nam học và Hiếm muộn Việt - Bỉ, Trung tâm Hỗ trợ sinh sản IVF Hồng Ngọc, ..."], "symptomDescription": ["Khám, điều trị, phẫu thuật các bệnh lý vô sinh cho cả Nam và Nữ.", "Kích thích rụng trứng bằng phác đồ chuẩn, hiện đại, hiệu quả cao nhất.", "Làm thụ thai nhân tạo (IUI)", "Thụ tinh ống nghiệm (IVF, ICSI)", "Ngân hàng tinh trùng (Sperm bank),ngân hàng phôi sẵn sàng cung cấp cho người có nhu cầu", "Bơm tinh trùng vào buồng tử cung (IUI)", "Thụ tinh ống nghiệm kích trứng tối thiểu (Mini IVF) và chu kỳ tự nhiên", "Lựa chọn tinh trùng sống bằng máy laser (LAISS)", "Chọn tinh trùng bằng từ trường (MACS)", "Vi phẫu lấy tinh trùng ở mào tinh (MESA)", "Lấy tinh trùng bằng chọc mào tinh qua da (PESA)", "Lấy tinh trùng từ tinh hoàn bằng phẫu thuật xẻ tinh hoàn (TESE)", "Sàng lọc tinh trùng bằng dòng vi dịch (MFSS)", "Chẩn đoán và sàng lọc di truyền tiền làm tổ (PGD/ PGS)"]}',
     },
     {
       id: 'a042f641-5936-4646-a45c-9e43d8b8ee72',
@@ -420,6 +464,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.977323',
       name: 'Chuyên khoa Mắt',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-mat.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên khoa Mắt tại Hà Nội.", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Mắt Trung ương, Viện Y học Hàng không - Không quân, Bệnh viện Mắt Quốc tế DND...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,..."], "symptomDescription": ["Lác mắt", "Viêm giác mạc", "Đục thủy tinh thể", "Dịch kính võng mạc", "Bong võng mạc", "Bệnh thoái hóa hoàng điểm tuổi già"]}',
     },
     {
       id: 'a07d934e-6eac-4c73-b59f-ed39585dec6d',
@@ -427,6 +473,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.933809',
       name: 'Thần kinh',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-than-kinh.png',
+      description:
+        '{"doctorDescription": ["Các giáo sư, bác sĩ uy tín đầu ngành chuyên khoa Thần kinh đã và đang công tác tại các bệnh viện lớn như: Bệnh viện Bạch Mai, Bệnh viện Việt Đức, Bệnh viện 108, Bệnh viện Đại học Y Hà Nội, Bệnh viện 103.", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội Thần kinh Việt Nam, Hội Phẫu thuật Thần kinh...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp."], "symptomDescription": ["Bại Não", "Đau đầu, chóng mặt, buồn nôn", "Bệnh Pakison, bệnh tiền đình", "Bị co cơ, căng dây thần kinh", "Động kinh, có những cơn vãng ý thức", "Bị tê bì nửa mặt, chèn dây thần kinh", "Bồn chồn, lo lắng, hồi hộp, chân tay run", "Có dấu hiệu tăng động", "Co rút cổ, đau đầu với mặt, chân tay, vã mồ hôi", "Chấn thương đầu, dây thần kinh", "..."]}',
     },
     {
       id: 'aa04ce0b-e390-48f9-88ba-bd48d46b835f',
@@ -434,6 +482,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.955501',
       name: 'Sản Phụ khoa',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-san-phu-khoa.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Sản phụ khoa tại Hà Nội", "Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Phụ sản Trung ương, Bệnh viện Phụ sản Hà Nội, Khoa Sản - Bệnh viện Bạch Mai."], "symptomDescription": ["Rối loạn kinh nguyệt, chậm kinh, đau bụng kinh", "Tắc hai vòi trứng, Đa nang buồng trứng, Chụp vòi trứng,", "Khám hiếm muộn, vô sinh", "Khám Phụ Khoa", "Khám thai sản", "Khám tiền hôn nhân, Tiền sinh", "Kiểm tra phụ khoa", "Loạn dưỡng vú", "Rong kinh kéo dài", "Siêu âm thai định kỳ", "Thai lưu", "U xơ tử cung,Viêm lộ tuyến", "..."]}',
     },
     {
       id: 'b288a40a-ad5c-4931-95d5-c238cc6b8726',
@@ -441,6 +491,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.939132',
       name: 'Y học Cổ truyền',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-y-hoc-co-truyen.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên khoa Y học Cổ truyền", "Các bác sĩ đã, đang công tác tại chuyên Khoa Y học Cổ truyền - Bệnh viện Y học Cổ truyền Trung ương, Bệnh viện Bạch Mai, Thanh Nhàn..", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,.."], "symptomDescription": ["Bệnh lý thần kinh: đau đầu, mất ngủ, suy nhược thần kinh...", "Bệnh lý cơ xương khớp: đau mỏi tay chân, thoái hóa khớp, viêm khớp...", "Bệnh lý tim mạch: Tăng huyết áp, huyết áp thấp, đau thắt ngực...", "Bệnh lý đường tiêu hóa: đau bụng, rối loạn chức năng tiêu hóa..."]}',
     },
     {
       id: 'b611b687-43e9-48c7-ace8-9d4eecda9ce3',
@@ -448,6 +500,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.976638',
       name: 'Nam học',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nam-hoc.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Nam học tại Hà Nội", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh Viện Việt Đức, Bệnh viện Xanh-pôn,...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,..."], "symptomDescription": ["Mãn dục nam giới,Suy sinh dục nam", "Viêm đường tiết niệu – sinh dục", "Viêm nhiễm: viêm bao quy đầu, viêm tinh hoàn", "Bệnh lý bao quy đầu: hẹp, dài bao quy đầu", "Rối loạn chức năng sinh dục: xuất tinh sớm, rối loạn cương dương, rối loạn xuất tinh, Xuất tinh kèm máu…", "Bệnh xã hội: lậu, giang mai, sùi mào gà, herpes…", "Các trường hợp sẩn ngứa, sẩn cục cơ quan sinh dục", "Xuất tinh ngược,Viêm tinh hoàn", "Các bệnh lý liên quan đến hiếm muộn", "Tinh hoàn ẩn", "..."]}',
     },
     {
       id: 'b7338e23-4da4-40ba-9a0f-ed912ffccfe1',
@@ -455,6 +509,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.969924',
       name: 'Hô hấp - Phổi',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-ho-hap-phoi.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện, phòng khám lớn  như: Bệnh viện Đại học Y dược, Phòng khám Phổi Sài Gòn, Bệnh viện Phổi Trung ương,...", "Là thành viên hoặc lãnh đạo các tổ chức chuyên môn như: Hội Phổi Việt Nam, Hội Hô Hấp Việt Nam..."], "symptomDescription": ["Lao", "Lao kháng thuốc", "Hen", "COPD", "Các bệnh Phổi nghề nghiệp", "Các bệnh hô hấp"]}',
     },
     {
       id: 'bf185054-ed77-4778-a16a-156d991d8266',
@@ -462,6 +518,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.983063',
       name: 'Da liễu thẩm mỹ',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-da-lieu-tham-my.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội như: Bệnh viện Da liễu Trung ương, Bệnh viện Da liễu Hà Nội"], "symptomDescription": ["Bớt sắc tố: Nốt, mảng tăng sắc tố khu trú hoặc lan tỏa trên cơ thể, bề mặt phẳng, màu nâu, đen , xanh. Không đau , không ngứa rát.", "Nám da: Dát tăng sắc tố màu nâu, xanh đen đối xứng 2 bên mặt, bằng phẳng, bờ không đều, không teo da, không ngứa.", "Trứng cá: Mụn nhân trắng đen, mụn viêm , mụn nang, mụn bọc", "Sẹo lõm: Tổn thương lõm sâu xuống dưới bề mặt da, màu đậm hoặc cùng màu da, không đau. Sẹo đáy nhọn, sẹo đáy hộp, sẹo đáy tròn", "Sẹo lồi: Tổn thương nổi gồ trên bề mặt da, không đau, màu trùng màu da hoặc đậm hơn", "Lão hóa da: Da bị chảy xệ, trùng nhão không được săn chắc. Nhiều nếp nhăn vùng trán, đuôi mắt, rãnh mũi má"]}',
     },
     {
       id: 'bf8bffd7-5192-49e8-8a14-35ee49311133',
@@ -469,6 +527,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.979071',
       name: 'Nha khoa',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nha-khoa.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, nhiều năm kinh nghiệm và khám, điều trị các bệnh lý nha khoa và răng thẩm mỹ tại Hà Nội.", "Các bác sĩ đã hoặc đang công tác tại các bệnh viện, phòng khám nha khoa uy tín, với các trang thiết bị hiện đại."], "symptomDescription": ["Nhổ răng", "Hàn răng", "Điều trị tủy", "Điều trị Viêm nha chu", "Bọc răng sứ", "Làm răng giả", "Dán sứ Veneer", "Niềng răng (nắn chỉnh răng)"]}',
     },
     {
       id: 'c77cd7bb-024c-4a9e-b4d1-ec91bec01d74',
@@ -476,6 +536,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.989872',
       name: 'Tuyến giáp',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-tuyen-giap.png',
+      description:
+        '{"doctorDescription": ["Các bác sĩ là những người được đào tạo chuyên sâu và tích luỹ nhiều năm kinh nghiệm làm việc tại các bệnh viện hàng đầu như: Bệnh viện Bạch Mai, Bệnh viện Quân Y 103, Bệnh viện Nội tiết Trung ương và Bệnh viện Đại học Y Hà Nội,...", "Các bác sĩ không chỉ được công nhận về trình độ chuyên môn mà còn được vinh danh bằng các danh hiệu cao quý như \\"Thầy thuốc Nhân dân,\\" \\"Thầy thuốc Ưu tú,\\" và \\"Bác sĩ Cao cấp.\\""], "symptomDescription": ["Cường cận giáp", "Suy giáp", "Cường giáp", "Ung thư tuyến giáp"]}',
     },
     {
       id: 'c8832e70-cfd6-48dd-abad-a3d5d3bb4cdf',
@@ -483,6 +545,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.989374',
       name: 'Nha khoa trẻ em',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nha-khoa-tre-em.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: 'd135470d-015d-4d11-b553-3f7010fefbdd',
@@ -490,6 +553,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.985215',
       name: 'Tư vấn, trị liệu Tâm lý',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-tu-van-tam-ly.png',
+      description:
+        '{"doctorDescription": ["Chuyên gia được đào tạo bài bản về chuyên ngành Tâm lý tại các trường đại học trong nước và quốc tế.", "Nhà Tâm lý học là những người có nhiều kinh nghiệm trong lĩnh vực tâm lý, chăm sóc sức khỏe tinh thần.", "Các nhà chuyên môn nghiên cứu, tư vấn và trị liệu theo các phương pháp tiếp cận mới, hiệu quả.", "Lắng nghe và thấu hiểu khách hàng để giúp họ vượt qua khó khăn của bản thân."], "symptomDescription": ["Khó khăn, rối nhiễu tâm lý", "Phát triển cá nhân", "Mâu thuẫn, lạm dụng và tổn thương tâm lý", "Tái hòa nhập xã hội", "Vấn đề khuyết tật và nhóm yếu thế", "Những vấn đề của vị thành niên", "Giới tính và tình dục", "Những vấn đề trong mối quan hệ gia đình"]}',
     },
     {
       id: 'd3fb55a2-2a10-4a82-a40d-909888f528c5',
@@ -497,6 +562,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.945805',
       name: 'Châm cứu',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cham-cuu.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên khoa Y học Cổ truyền", "Các bác sĩ đã, đang công tác tại chuyên Khoa Y học Cổ truyền - Bệnh viện Y học Cổ truyền Trung ương, Bệnh viện Bạch Mai, Thanh Nhàn..", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,.."], "symptomDescription": ["Bệnh lý thần kinh: đau đầu, mất ngủ, suy nhược thần kinh...", "Bệnh lý cơ xương khớp: đau mỏi tay chân, thoái hóa khớp, viêm khớp...", "Bệnh lý tim mạch: Tăng huyết áp, huyết áp thấp, đau thắt ngực...", "Bệnh lý đường tiêu hóa: đau bụng, rối loạn chức năng tiêu hóa..."]}',
     },
     {
       id: 'd79a660d-15fb-4d58-901d-3cdb90c7b803',
@@ -504,6 +571,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.962519',
       name: 'Da liễu',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101638-da-lieu.png',
+      description:
+        '{"doctorDescription": ["Bệnh vẩy nến,Da khô, Ngứa da", "Rám tàn nhang", "Mụn cóc sinh dục", "Nấm cơ thể,Nấm da đầu", "Nấm móng tay, móng chân", "Rụng tóc, hói đầu", "Viêm da dị ứng, Viêm da tiếp xúc, Viêm da tiết bã", "Viêm nang lông", "Xơ cứng bì", "Zona thần kinh"], "symptomDescription": []}',
     },
     {
       id: 'dc2b55fb-de84-40eb-909c-33c50a3cc78d',
@@ -511,6 +580,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.984717',
       name: 'Tạo hình Hàm Mặt',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-tao-hinh-ham-mat.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, nhiều kinh nghiệm", "Các bác sĩ đã, đang công tác tại bệnh viện Bệnh viện Hữu nghị Việt Đức."], "symptomDescription": ["Khám và điều trị các bệnh lý liên quan hàm mặt - tạo hình - thẩm mĩ", "Nối thành công vành tai đứt rời, mũi đứt rời bằng kỹ thuật vi phẫu", "Phẫu thuật đám rối thần kinh cánh tay ở người lớn và trẻ em", "Phối hợp với chuyên khoa Phẫu thuật thần kinh phẫu thuật cho các bệnh nhân có khối u sọ mặt lớn và tạo hình một thì bằng xương sọ tự thân", "Ứng dụng kỹ thuật nội soi trong điều trị các bệnh lý vùng sọ mặt và chấn thương hàm mặt", "Ứng dụng kỹ thuật nội soi trong phẫu tích vạt, che phủ hoặc tạo hình các khuyết hổng lớn vùng ngực, bụng", "Ứng dụng kĩ thuật nội soi tiên tiến trong phẫu thuật thẩm mĩ mi mắt, mũi, tạo hình ngực, bụng…."]}',
     },
     {
       id: 'e04d6702-4840-49ac-a46b-ed5b2007ef4c',
@@ -518,6 +589,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.960262',
       name: 'Siêu âm thai',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101713-sieu-am-thai.png',
+      description:
+        '{"doctorDescription": ["Khám thai sản", "Khám thai lần đầu", "Siêu âm thai định kỳ", "Siêu âm thai tuần thứ 12", "Siêu âm thai tuần thứ 16", "Siêu âm thai tuần thứ 18", "Siêu âm thai tuần thứ 22"], "symptomDescription": []}',
     },
     {
       id: 'e615746d-f338-4f3c-ac5f-d10397bcf23c',
@@ -525,6 +598,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.938264',
       name: 'Cột sống',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101627-cot-song.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên khoa Thần kinh - Cột sống - Xương khớp tại Hà Nội", "Các giáo sư, tiến sĩ, bác sĩ là giảng viên Đại học Y khoa Hà Nội, Học viện Quân Y.", "Các bác sĩ đã, đang công tác tại chuyên Khoa Thần Kinh, Cột sống, Xương Khớp - Bệnh viện Bạch Mai, Bệnh Viện Việt Đức, Bệnh Viện Trung ương Quân đội 108, Bệnh viện 103...", "Được nhà nước công nhận các danh hiệu Thầy thuốc Nhân dân, Thầy thuốc Ưu tú, Bác sĩ Cao cấp,..."], "symptomDescription": ["Đau cột sống, đau thắt lưng", "Chấn thương cột sống", "Cột sống bị đau, sưng, cong, vẹo", "Đau mỏi cổ vai gáy, bả vai", "Đau tê mông xuống chân", "Phồng đĩa đệm", "Tê bì tay chân", "Thóa hóa đốt sống", "Thoái hóa L4, L5", "Thoát vị đĩa đệm", "Vôi hóa cột sống", "Xẹp cột sống", "..."]}',
     },
     {
       id: 'ec2303e7-d7ef-4c72-a624-95f0ee957cbb',
@@ -532,6 +607,8 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.977976',
       name: 'Thận - Tiết niệu',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101739-than-tiet-nieu.png',
+      description:
+        '{"doctorDescription": ["Hệ thống BookingCare cung cấp thông tin và lịch khám của các bác sĩ uy tín đầu ngành tại Việt Nam.", "Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn về chuyên ngành Thận - Tiết niệu tại Hà Nội.", "Các giáo sư, phó giáo sư đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội.", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như Bệnh viện Bạch Mai, Bệnh viện Việt Đức,...", "Được nhà nước công nhận các danh hiệu Thầy thuốc nhân dân, thầy thuốc ưu tú, bác sĩ cao cấp,..."], "symptomDescription": ["Các bệnh về tiền liệt tuyến, phì đại tiền liệt tuyến, đi tiểu ra máu", "Thận đa nang", "Ung thư tuyến tiền liệt", "Viêm bàng quang", "Tiểu không tự chủ", "Ung thư bàng quang", "Sỏi bàng quang", "Sỏi thận", "Viêm đài bể thận", "U nang thận", "Áp xe quanh thận", "Vôi hóa tuyến tiền liệt"]}',
     },
     {
       id: 'ef7e65db-4727-47ae-a29f-dd9640b32e92',
@@ -539,6 +616,7 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.988392',
       name: 'Nhổ răng khôn',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nho-rang-khon.png',
+      description: '{"doctorDescription": [], "symptomDescription": []}',
     },
     {
       id: 'fd85a89e-4d35-4fd5-9627-72ec3b3f783a',
@@ -546,9 +624,10 @@ async function runSeed() {
       updatedAt: '2024-11-15 08:47:54.961135',
       name: 'Nhi khoa',
       logo: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-nhi-khoa.png',
+      description:
+        '{"doctorDescription": ["Các chuyên gia có quá trình đào tạo bài bản, kinh nghiệm công tác tại các bệnh viện lớn tại Hà Nội", "Các giảng viên đã và đang trực tiếp nghiên cứu và giảng dạy tại Đại học Y khoa Hà Nội", "Các bác sĩ đã, đang công tác tại các bệnh viện hàng đầu như: Bệnh viện Nhi Trung ương, Khoa Nhi - Bệnh viện Bạch Mai."], "symptomDescription": ["Bệnh lý sơ sinh", "Bệnh tiêu hóa", "Bệnh tuần hoàn", "Bệnh hô hấp", "Bệnh huyết học", "Bệnh thận Tiết niệu", "Bệnh thần kinh", "Bệnh ngoài da", "Bệnh xương khớp"]}',
     },
   ];
-
   if ((await specialtyRepository.count()) === 0) await specialtyRepository.save(specialties);
 
   if ((await hospitalRepository.count()) !== 0 && (await specialtyRepository.count()) !== 0) {

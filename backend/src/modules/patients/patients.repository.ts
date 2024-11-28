@@ -18,4 +18,8 @@ export class PatientRepository {
   async updateRefreshToken(patientId: string, refreshToken: string) {
     return this.patientSchedulerRepository.update(patientId, { refreshToken });
   }
+
+  async create(createPatientDto: any) {
+    return this.patientSchedulerRepository.save(createPatientDto);
+  }
 }

@@ -8,7 +8,7 @@ import { DoctorSchedulesModule } from './modules/doctor_schedules/doctor_schedul
 import { AppointmentModule } from './modules/appointment/appointment.module';
 import { DoctorsModule } from './modules/doctors/doctors.module';
 import { SpecialtyModule } from './modules/specialty/specialty.module';
-
+import { ScheduleModule } from '@nestjs/schedule';
 import { PatientsModule } from './modules/patients/patients.module';
 
 import { HealthInsuranceModule } from './modules/health_insurance/health_insurance.module';
@@ -17,12 +17,13 @@ import { SearchModule } from './modules/search/search.module';
 import { MedicineModule } from './modules/medicine/medicine.module';
 import { PrescriptionItemsModule } from './modules/prescription_items/prescription_items.module';
 import { PrescriptionModule } from './modules/prescription/prescription.module';
-
+import { MailModule } from './modules/mail/mail.module';
 @Module({
   imports: [
     AuthModule,
     HospitalsModule,
     ConfigModule.forRoot({ isGlobal: true }),
+    ScheduleModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -49,6 +50,7 @@ import { PrescriptionModule } from './modules/prescription/prescription.module';
     DoctorSchedulesModule,
     AppointmentModule,
     SearchModule,
+    MailModule,
   ],
   controllers: [],
   providers: [],

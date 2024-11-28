@@ -11,9 +11,16 @@ export class InfoSpecialtyDto {
   @ApiProperty({ example: 'https://cdn.bookingcare.vn/fo/2023/12/26/101655-ngoai-than-kinh.png' })
   logo: string;
 
+  doctorsDescription: string[];
+
+  symptomDescriptions: string[];
+
   constructor(specialty: Specialty) {
     this.id = specialty.id;
     this.name = specialty.name;
     this.logo = specialty.logo;
+    const description = JSON.parse(specialty?.description);
+    this.doctorsDescription = description?.doctorDescription;
+    this.symptomDescriptions = description?.symptomDescription;
   }
 }

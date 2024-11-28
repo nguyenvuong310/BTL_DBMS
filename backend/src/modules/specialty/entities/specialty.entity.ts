@@ -10,6 +10,9 @@ export class Specialty extends AbstractEntity {
   @Column()
   logo: string;
 
+  @Column({ type: 'text' })
+  description: string;
+
   @OneToMany(() => Doctor, (doctor) => doctor.specialty)
   doctors: Doctor[];
 }

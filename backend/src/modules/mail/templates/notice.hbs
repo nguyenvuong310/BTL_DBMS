@@ -1,0 +1,38 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Booking Success</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; } .container
+      { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0
+      4px 8px rgba(0, 0, 0, 0.1); } h1 { color: #3F83F8; } p { font-size: 16px; line-height: 1.5; } .button {
+      background-color: #3F83F8; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;
+      font-weight: bold; display: inline-block; margin-top: 20px; } .footer { font-size: 14px; color: #777; text-align:
+      center; margin-top: 40px; }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>Booking Successful!</h1>
+
+      <p>Dear {{customerName}},</p>
+
+      <p>We are pleased to inform you that your booking has been successfully confirmed. Here are the details:</p>
+
+      <ul>
+        <li><strong>Booking Reference Number:</strong> {{bookingReference}}</li>
+        <li><strong>Service Name:</strong> {{serviceName}}</li>
+        <li><strong>Date of Appointment:</strong> {{appointmentDate}}</li>
+        <li><strong>Time:</strong> {{appointmentTime}}</li>
+        <li><strong>Location:</strong> {{location}}</li>
+      </ul>
+
+      <p>If you have any questions or need to modify your booking, please don't hesitate to contact us.</p>
+
+      <a href='{{contactLink}}' class='button'>Contact Us</a>
+
+      <p class='footer'>Thank you for choosing our service. We look forward to serving you!</p>
+    </div>
+  </body>
+</html>
