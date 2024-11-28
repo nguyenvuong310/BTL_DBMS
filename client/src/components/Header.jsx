@@ -13,23 +13,20 @@ import {
 } from "@material-tailwind/react";
 // import iconImage from '../../assets/icon.jpg';
 import iconImage from "../assets/icon.jpg";
-import { path, USER_ROLE } from "../utils/constant";
+import { path } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getInfoUserById } from "../service/userService";
 import { FaHistory, FaSignOutAlt } from "react-icons/fa";
 
-
 const Header = ({ role }) => {
   const [user, setUser] = useState([]);
-  const params = useParams();
   const navigate = useNavigate();
   useEffect(() => {
     const getInfoUser = async () => {
       if (role === "user") {
-        const user_id = params.user_id;
-        const data = await getInfoUserById(user_id);
-        setUser(data.data);
+        const userData = JSON.parse(localStorage.getItem("user"));
+        setUser(userData);
       }
     };
     getInfoUser();
@@ -144,68 +141,78 @@ const Header = ({ role }) => {
                       />
                     </div>
                   </div>
-                  <Menu
-                    open={isMenuOpen}
-                    handler={setIsMenuOpen}
-                    placement="bottom-end"
-                  >
-                    <MenuHandler>
-                      <Button
-                        variant="text"
-                        color="blue-gray"
-                        className="flex items-center rounded-full p-0"
-                      >
-                        <Avatar
-                          variant="circular"
-                          size="md"
-                          alt="tania andrew"
-                          withBorder={true}
+                  <div className="flex flex-row items-center gap-4">
+                    <Typography
+                      variant="h1"
+                      className="font-sans text-base  font-bold text-black"
+                    >
+                      {user.name}
+                    </Typography>
+                    <Menu
+                      open={isMenuOpen}
+                      handler={setIsMenuOpen}
+                      placement="bottom-end"
+                    >
+                      <MenuHandler>
+                        <Button
+                          variant="text"
                           color="blue-gray"
-                          className=" p-0.5"
-                          src="https://cdn-icons-png.flaticon.com/512/17002/17002124.png"
-                        />
-                      </Button>
-                    </MenuHandler>
-                    <MenuList className="p-1">
-                      {profileMenuItems.map(({ label, icon }, key) => {
-                        const isLastItem = key === profileMenuItems.length - 1;
-                        return (
-                          <MenuItem
-                            key={label}
-                            onClick={closeMenu}
-                            className={`flex items-center gap-2 rounded ${
-                              isLastItem
-                                ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
-                                : ""
-                            }`}
-                            onClick={() => {
-                              if (label === "Đăng xuất") {
-                                navigate(path.HOME);
-                              }
-                              if (label === "Lịch sử đặt hẹn") {
-                                navigate(`/user/history`);
-                              }
-                            }}
-                          >
-                            {React.createElement(icon, {
-                              className: `h-4 w-4 ${
-                                isLastItem ? "text-red-500" : ""
-                              }`,
-                              strokeWidth: 2,
-                            })}
-                            <Typography
-                              as="span"
-                              variant="small"
-                              className="font-normal"
-                              color={isLastItem ? "red" : "inherit"}
+                          className="flex items-center rounded-full p-0"
+                        >
+                          <Avatar
+                            variant="circular"
+                            size="md"
+                            alt="tania andrew"
+                            withBorder={true}
+                            color="blue-gray"
+                            className=" p-0.5"
+                            src="https://cdn-icons-png.flaticon.com/512/17002/17002124.png"
+                          />
+                        </Button>
+                      </MenuHandler>
+                      <MenuList className="p-1">
+                        {profileMenuItems.map(({ label, icon }, key) => {
+                          const isLastItem =
+                            key === profileMenuItems.length - 1;
+                          return (
+                            <MenuItem
+                              key={label}
+                              onClick={closeMenu}
+                              className={`flex items-center gap-2 rounded ${
+                                isLastItem
+                                  ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
+                                  : ""
+                              }`}
+                              onClick={() => {
+                                if (label === "Đăng xuất") {
+                                  localStorage.removeItem("accessToken");
+                                  navigate(path.HOME);
+                                }
+                                if (label === "Lịch sử đặt hẹn") {
+                                  navigate(`/user/history`);
+                                }
+                              }}
                             >
-                              {label}
-                            </Typography>
-                          </MenuItem>
-                        );
-                      })}
-                    </MenuList>
-                  </Menu>
+                              {React.createElement(icon, {
+                                className: `h-4 w-4 ${
+                                  isLastItem ? "text-red-500" : ""
+                                }`,
+                                strokeWidth: 2,
+                              })}
+                              <Typography
+                                as="span"
+                                variant="small"
+                                className="font-normal"
+                                color={isLastItem ? "red" : "inherit"}
+                              >
+                                {label}
+                              </Typography>
+                            </MenuItem>
+                          );
+                        })}
+                      </MenuList>
+                    </Menu>
+                  </div>
                 </div>
               </div>
             </div>

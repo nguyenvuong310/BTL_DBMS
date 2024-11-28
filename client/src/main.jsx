@@ -17,6 +17,7 @@ import BookingAppointment from "./pages/Users/BookingAppointment.jsx";
 import AppointmentHistory from "./pages/Users/AppointmentHistory.jsx";
 import HospitalDetail from "./components/HospitalDetail.jsx";
 import SpecialtyDetail from "./components/SpecialtyDetail.jsx";
+import AuthUser from "./service/authUser.jsx";
 import "./index.css";
 import { path } from "../src/utils/constant.js";
 import {
@@ -30,47 +31,20 @@ import { ThemeProvider } from "@material-tailwind/react";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path={path.LOGIN} element={<LoginPage />} />
-
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<App />}>
         <Route index={true} element={<HomePage />} />
         <Route path="/bookAppointment" element={<BookingAppointment />} />
-        <Route path="/user">
-          <Route index={true} element={<HomePageUser />}></Route>
+        <Route path="/:specialty_id" element={<SpecialtyDetail />} />
+        <Route path="/user" element={<AuthUser />}>
+          <Route index={true} element={<HomePageUser />} />
           <Route path=":user_id" element={<HomePageUser />} />
           <Route
             path="/user/bookAppointment"
             element={<BookingAppointment />}
           />
           <Route path="/user/history" element={<AppointmentHistory />} />
-          <Route path="/user/hospital" element={<HospitalDetail />} />
-          <Route path="/user/specialty" element={<SpecialtyDetail />} />
-
-          {/* <Route
-            path="/user/:user_id/findHospital"
-            element={<FindHospital />}
-          /> */}
-          {/* <Route path="/user/:user_id/history" element={<UserHistory />} /> */}
         </Route>
-        {/* <Route path="/admin">
-          <Route index={true} element={<HomePageAdmin />}></Route>
-          <Route
-            path="/admin/hospital/:hospital_id/department"
-            element={<AdminDepartment />}
-          />
-          <Route
-            path="/admin/hospital/:hospital_id/department/:department_id/doctor"
-            element={<DoctorManagement />}
-          />
-          <Route
-            path="/admin/hospital/:hospital_id/department/:department_id/doctor/:doctor_id/schedule"
-            element={<Schedule />}
-          />
-          <Route
-            path="/admin/hospital/:hospital_id/department/:department_id/doctor/:doctor_id/appointment"
-            element={<AppointmentManagement />}
-          />
-        </Route> */}
       </Route>
     </>,
   ),

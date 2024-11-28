@@ -1,11 +1,24 @@
 import Header from "../../components/Header";
 import { Button, Carousel, Typography } from "@material-tailwind/react";
-import { specialties, hospitalLocations, doctors } from "../constants";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {
+  getSpecialty,
+  getPopularDoctors,
+  getHospitals,
+} from "../../service/userService";
 
 const MedicalSpecialty = () => {
   const navigate = useNavigate();
+  const [specialties, setSpecialties] = useState([]);
+
+  useEffect(() => {
+    getSpecialty().then((res) => {
+      setSpecialties(res.data.data);
+    });
+  }, []);
+
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
       <Typography
@@ -16,46 +29,46 @@ const MedicalSpecialty = () => {
       </Typography>
       <Carousel
         loop
-        className="rounded-xl"
+        className=" h-[220px] overflow-hidden rounded-xl"
         transition={{ duration: 1 }}
         navigation={false}
         prevArrow={({ handlePrev }) => (
           <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handlePrev}
           >
-            {"<"}
+            <ArrowLeftIcon className="h-6 w-6" />
           </button>
         )}
         nextArrow={({ handleNext }) => (
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handleNext}
           >
-            {">"}
+            <ArrowRightIcon className="h-6 w-6" />
           </button>
         )}
       >
         {specialties.map((_, index) => {
-          if (index % 3 === 0) {
+          if (index % 4 === 0) {
             return (
               <div key={index} className="flex justify-center gap-16">
-                {specialties.slice(index, index + 3).map((item, subIndex) => (
+                {specialties.slice(index, index + 4).map((item, subIndex) => (
                   <div
                     key={subIndex}
-                    className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:shadow-lg"
+                    className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
+                    onClick={() => {
+                      navigate(`/${item.id}`);
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     <img
-                      src={item.img}
-                      alt={item.label}
+                      src={item.logo}
+                      alt={item.name}
                       className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
-                      onClick={() => {
-                        navigate("/user/specialty");
-                        window.scrollTo(0, 0);
-                      }}
                     />
                     <p className="mt-4 text-center text-lg font-semibold text-gray-700">
-                      {item.label}
+                      {item.name}
                     </p>
                   </div>
                 ))}
@@ -70,7 +83,12 @@ const MedicalSpecialty = () => {
 };
 
 const Hospitals = () => {
-  const navigate = useNavigate();
+  const [hospitalLocations, setHospitalLocations] = useState([]);
+  useEffect(() => {
+    getHospitals().then((res) => {
+      setHospitalLocations(res.data.data);
+    });
+  }, []);
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
       <Typography
@@ -81,48 +99,44 @@ const Hospitals = () => {
       </Typography>
       <Carousel
         loop
-        className="rounded-xl"
+        className=" h-[235px] overflow-hidden rounded-xl"
         transition={{ duration: 1 }}
         navigation={false}
         prevArrow={({ handlePrev }) => (
           <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handlePrev}
           >
-            {"<"}
+            <ArrowLeftIcon className="h-6 w-6" />
           </button>
         )}
         nextArrow={({ handleNext }) => (
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handleNext}
           >
-            {">"}
+            <ArrowRightIcon className="h-6 w-6" />
           </button>
         )}
       >
         {hospitalLocations.map((_, index) => {
-          if (index % 3 === 0) {
+          if (index % 4 === 0) {
             return (
               <div key={index} className="flex justify-center gap-16">
                 {hospitalLocations
-                  .slice(index, index + 3)
+                  .slice(index, index + 4)
                   .map((item, subIndex) => (
                     <div
                       key={subIndex}
-                      className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:shadow-lg"
+                      className="flex h-56 w-52 flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
                     >
                       <img
-                        src={item.img}
-                        alt={item.label}
+                        src={item.logo}
+                        alt={item.name}
                         className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
-                        onClick={() => {
-                          navigate("/user/hospital");
-                          window.scrollTo(0, 0);
-                        }}
                       />
-                      <p className="mt-4 text-center text-lg font-semibold text-gray-700">
-                        {item.label}
+                      <p className="mt-4 text-center text-sm font-semibold text-gray-700">
+                        {item.name}
                       </p>
                     </div>
                   ))}
@@ -138,6 +152,12 @@ const Hospitals = () => {
 
 const Doctors = () => {
   const navigate = useNavigate();
+  const [doctors, setDoctors] = useState([]);
+  useEffect(() => {
+    getPopularDoctors().then((res) => {
+      setDoctors(res.data.data);
+    });
+  }, []);
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
       <Typography
@@ -148,46 +168,47 @@ const Doctors = () => {
       </Typography>
       <Carousel
         loop
-        className="rounded-xl"
+        className="h-[235px] overflow-hidden rounded-xl"
         transition={{ duration: 1 }}
         navigation={false}
         prevArrow={({ handlePrev }) => (
           <button
-            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handlePrev}
           >
-            {"<"}
+            <ArrowLeftIcon className="h-6 w-6" />
           </button>
         )}
         nextArrow={({ handleNext }) => (
           <button
-            className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-gray-100 p-3 text-gray-600 shadow-lg transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
+            className="text-whiteshadow-lg absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-blue-300 p-3 text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-800"
             onClick={handleNext}
           >
-            {">"}
+            <ArrowRightIcon className="h-6 w-6" />
           </button>
         )}
       >
         {doctors.map((_, index) => {
-          if (index % 3 === 0) {
+          if (index % 4 === 0) {
             return (
               <div key={index} className="flex justify-center gap-16">
-                {doctors.slice(index, index + 3).map((item, subIndex) => (
+                {doctors.slice(index, index + 4).map((item, subIndex) => (
                   <div
                     key={subIndex}
-                    className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:shadow-lg"
+                    className="hover:scale-105hover:shadow-lg flex  h-56 w-52 flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 "
                   >
                     <img
-                      src={item.img}
-                      alt={item.label}
+                      src={item.avatar}
+                      alt={item.name}
+                      className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                       onClick={() => {
-                        navigate("/user/bookAppointment");
+                        console.log("click");
+                        navigate("/bookAppointment");
                         window.scrollTo(0, 0);
                       }}
-                      className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                     />
-                    <p className="mt-4 text-center text-lg font-semibold text-gray-700">
-                      {item.label}
+                    <p className="mt-4 text-center text-base font-semibold text-gray-700">
+                      {item.name}
                     </p>
                   </div>
                 ))}
