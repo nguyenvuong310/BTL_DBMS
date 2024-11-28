@@ -24,34 +24,13 @@ export class AuthController {
   @Public()
   @ResponseMessage('User Login')
   @UseGuards(LocalAuthGuard)
+  @ApiBody({ type: LoginDto })
+  @ApiOperation({ summary: 'User login' })
+  @ApiResponse({ status: 201, description: 'User login', type: UserProfileDto })
   async hanldeLogin(@Req() req: Request, @Res({ passthrough: true }) response: Response): Promise<UserProfileDto> {
     const user = await this.authService.login(req.user, response);
     return user;
   }
-
-  @Post('register')
-  @Public()
-  @ResponseMessage('Register a new user')
-  async register(@Body() user: CreateUserDto): Promise<InfoUserDto> {
-    return this.authService.register(user);
-  }
-
-  // @Get('account')
-  // @ApiOperation({ summary: 'Get user account by access token' })
-  // @ResponseMessage('Get user account')
-  // async getAccount(@User() user: IUser): Promise<IUser> {
-  //   const role = await this.rolesService.findOne(user.role._id);
-  //   const permissions = (role?.permissions as unknown as PermissionDto[]) ?? ([] as PermissionDto[]);
-  //   const objUser: IUser = {
-  //     _id: user._id,
-  //     name: user.name,
-  //     email: user.email,
-  //     role: user.role,
-  //     permissions,
-  //   };
-
-  //   return objUser;
-  // }
 
   @Get('refresh')
   @Public()

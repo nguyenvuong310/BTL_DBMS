@@ -20,7 +20,7 @@ services:
     container_name: adminer
     restart: always
     ports:
-      - '8081:8080' # Adminer will be accessible on http://localhost:8080
+      - '8082:8080' # Adminer will be accessible on http://localhost:8080
     depends_on:
       - mysql
     environment:
