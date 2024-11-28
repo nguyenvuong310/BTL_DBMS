@@ -22,3 +22,10 @@ export enum Role {
   DOCTOR = 'DOCTOR',
   PATIENT = 'PATIENT',
 }
+
+export enum SearchType {
+  DOCTOR = 'DOCTOR',
+  HOSPITAL = 'HOSPITAL',
+  SPECIALTY = 'SPECIALTY',
+  ALL = 'ALL',
+}

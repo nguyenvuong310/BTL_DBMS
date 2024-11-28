@@ -45,4 +45,9 @@ export class DoctorsService {
   async updateRefreshToken(doctorId: string, refreshToken: string) {
     return this.doctorRepository.updateRefreshToken(doctorId, refreshToken);
   }
+
+  async searchDoctorByEmailOrName(search: string) {
+    const doctors = await this.doctorRepository.searchDoctorByEmailOrName(search);
+    return doctors.map((doctor) => new InfoDoctorDto(doctor));
+  }
 }

@@ -40,4 +40,12 @@ export class DoctorRepository {
   async updateRefreshToken(doctorId: string, refreshToken: string) {
     return this.doctorSchedulerRepository.update(doctorId, { refreshToken });
   }
+
+  async searchDoctorByEmailOrName(search: string): Promise<Doctor[]> {
+    return this.doctorSchedulerRepository
+      .createQueryBuilder('doctor')
+      .where('doctor.name like :search', { search: `%${search}%` })
+      .orWhere('doctor.email like :search', { search: `%${search}%` })
+      .getMany();
+  }
 }

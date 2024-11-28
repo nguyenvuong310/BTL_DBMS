@@ -21,4 +21,9 @@ export class HospitalsService {
     const hospital = await this.hospitalsRepository.findOne(id);
     return new InfoHospitalDto(hospital);
   }
+
+  async searchHospitalByName(search: string) {
+    const hospitals = await this.hospitalsRepository.searchHospitalByName(search);
+    return hospitals.map((hospital) => new InfoHospitalDto(hospital));
+  }
 }

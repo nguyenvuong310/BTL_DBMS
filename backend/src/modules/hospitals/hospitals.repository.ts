@@ -15,4 +15,11 @@ export class HospitalsRepository {
   async findOne(id: string): Promise<Hospital> {
     return this.hospitalRepository.findOne({ where: { id } });
   }
+
+  async searchHospitalByName(search: string): Promise<Hospital[]> {
+    return this.hospitalRepository
+      .createQueryBuilder('hospital')
+      .where('hospital.name like :search', { search: `%${search}%` })
+      .getMany();
+  }
 }

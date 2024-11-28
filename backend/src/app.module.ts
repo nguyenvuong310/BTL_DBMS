@@ -13,7 +13,7 @@ import { PatientsModule } from './modules/patients/patients.module';
 
 import { HealthInsuranceModule } from './modules/health_insurance/health_insurance.module';
 import { FeedbacksModule } from './modules/feedbacks/feedbacks.module';
-
+import { SearchModule } from './modules/search/search.module';
 import { MedicineModule } from './modules/medicine/medicine.module';
 import { PrescriptionItemsModule } from './modules/prescription_items/prescription_items.module';
 import { PrescriptionModule } from './modules/prescription/prescription.module';
@@ -48,6 +48,7 @@ import { PrescriptionModule } from './modules/prescription/prescription.module';
     FeedbacksModule,
     DoctorSchedulesModule,
     AppointmentModule,
+    SearchModule,
   ],
   controllers: [],
   providers: [],

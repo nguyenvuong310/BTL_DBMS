@@ -19,4 +19,9 @@ export class SpecialtyService {
     const specialty = await this.specialtyRepository.findOne(id);
     return new InfoSpecialtyDto(specialty);
   }
+
+  async searchSpecialtyByName(search: string) {
+    const specialties = await this.specialtyRepository.searchSpecialtyByName(search);
+    return specialties.map((specialty) => new InfoSpecialtyDto(specialty));
+  }
 }
