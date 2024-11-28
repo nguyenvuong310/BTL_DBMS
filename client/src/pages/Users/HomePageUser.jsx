@@ -4,8 +4,8 @@ import { specialties, hospitalLocations, doctors } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-
 const MedicalSpecialty = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
       <Typography
@@ -49,6 +49,10 @@ const MedicalSpecialty = () => {
                       src={item.img}
                       alt={item.label}
                       className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
+                      onClick={() => {
+                        navigate("/user/specialty");
+                        window.scrollTo(0, 0);
+                      }}
                     />
                     <p className="mt-4 text-center text-lg font-semibold text-gray-700">
                       {item.label}
@@ -66,6 +70,7 @@ const MedicalSpecialty = () => {
 };
 
 const Hospitals = () => {
+  const navigate = useNavigate();
   return (
     <div className="relative mx-auto w-[80vw] rounded-lg bg-gray-50 p-8 shadow-md">
       <Typography
@@ -111,6 +116,10 @@ const Hospitals = () => {
                         src={item.img}
                         alt={item.label}
                         className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
+                        onClick={() => {
+                          navigate("/user/hospital");
+                          window.scrollTo(0, 0);
+                        }}
                       />
                       <p className="mt-4 text-center text-lg font-semibold text-gray-700">
                         {item.label}
@@ -172,7 +181,6 @@ const Doctors = () => {
                       src={item.img}
                       alt={item.label}
                       onClick={() => {
-                        console.log("click");
                         navigate("/user/bookAppointment");
                         window.scrollTo(0, 0);
                       }}

@@ -15,6 +15,8 @@ import HomePage from "./pages/HomePage.jsx";
 import HomePageUser from "./pages/Users/HomePageUser.jsx";
 import BookingAppointment from "./pages/Users/BookingAppointment.jsx";
 import AppointmentHistory from "./pages/Users/AppointmentHistory.jsx";
+import HospitalDetail from "./components/HospitalDetail.jsx";
+import SpecialtyDetail from "./components/SpecialtyDetail.jsx";
 import "./index.css";
 import { path } from "../src/utils/constant.js";
 import {
@@ -41,6 +43,8 @@ const router = createBrowserRouter(
             element={<BookingAppointment />}
           />
           <Route path="/user/history" element={<AppointmentHistory />} />
+          <Route path="/user/hospital" element={<HospitalDetail />} />
+          <Route path="/user/specialty" element={<SpecialtyDetail />} />
 
           {/* <Route
             path="/user/:user_id/findHospital"
