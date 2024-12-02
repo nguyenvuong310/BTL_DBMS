@@ -11,6 +11,9 @@ export class Appointment extends AbstractEntity {
   @Column()
   reason: string;
 
+  @Column({ nullable: true })
+  reason_cancel: string;
+
   @Column({
     type: 'enum',
     enum: StatusType,

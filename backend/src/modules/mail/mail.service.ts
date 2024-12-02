@@ -1,13 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InfoMailBookingSuccessDto } from './dto/create-mail.dto';
+
 import { MailerService } from '@nestjs-modules/mailer';
+import { UserDto } from '../users/dto/user.dto';
+import { InfoAppointmentDto } from '../appointment/dto/info-appointment.dto';
 
 @Injectable()
 export class MailService {
   constructor(private readonly mailerService: MailerService) {}
-  noticeSuccess(infoMail: InfoMailBookingSuccessDto) {
-    this.mailerService.sendMail({
-      to: 'trungvuong2169@gmail.com',
+  async noticeSuccess(infoMail: InfoAppointmentDto, user: UserDto) {
+    await this.mailerService.sendMail({
+      to: user.email,
       from: '"Support Team" <support@example.com>', // override default from
       subject: 'Welcome to Nice App! Confirm your Email',
       template: 'notice',
@@ -15,7 +17,7 @@ export class MailService {
         patientName: infoMail.patientName,
         doctorName: infoMail.doctorName,
         date: infoMail.date,
-        time: infoMail.time,
+        time: infoMail.start_time + ' - ' + infoMail.end_time,
         reason: infoMail.reason,
         hospitalName: infoMail.hospitalName,
         address: infoMail.address,

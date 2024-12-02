@@ -4,6 +4,163 @@ import { Medicine } from '../../modules/medicine/entities/medicine.entity';
 import { Specialty } from '../../modules/specialty/entities/specialty.entity';
 import { Doctor } from '../../modules/doctors/entities/doctor.entity';
 import { Patient } from '../../modules/patients/entities/patient.entity';
+import { DoctorSchedule } from '../../modules/doctor_schedules/entities/doctor_schedule.entity';
+import { Feedback } from '../../modules/feedbacks/entities/feedback.entity';
+import { StatusType } from '../../constants/action.enum';
+import { Appointment } from '../../modules/appointment/entities/appointment.entity';
+
+function createDoctorSchedules(doctors: Doctor[]) {
+  const times = [
+    {
+      start_time: '08:00',
+      end_time: '09:00',
+    },
+    {
+      start_time: '09:00',
+      end_time: '10:00',
+    },
+    {
+      start_time: '10:00',
+      end_time: '11:00',
+    },
+    {
+      start_time: '11:00',
+      end_time: '12:00',
+    },
+    {
+      start_time: '13:00',
+      end_time: '14:00',
+    },
+    {
+      start_time: '14:00',
+      end_time: '15:00',
+    },
+    {
+      start_time: '15:00',
+      end_time: '16:00',
+    },
+    {
+      start_time: '16:00',
+      end_time: '17:00',
+    },
+    {
+      start_time: '17:00',
+      end_time: '18:00',
+    },
+    {
+      start_time: '18:00',
+      end_time: '19:00',
+    },
+    {
+      start_time: '19:00',
+      end_time: '20:00',
+    },
+    {
+      start_time: '20:00',
+      end_time: '21:00',
+    },
+  ];
+  const now = new Date(); // Get the current date
+  const days = Array.from({ length: 15 }, (_, i) => {
+    const day = new Date(now); // Copy the current date
+    day.setDate(now.getDate() + (i - 7)); // Add (i - 7) days to the current date, where i ranges from 0 to 14
+    return day;
+  });
+
+  return doctors.flatMap((doctor) =>
+    days.flatMap((day) =>
+      times.map((time) => ({
+        doctor: doctor,
+        day: day,
+        start_time: time.start_time,
+        end_time: time.end_time,
+        max_slots: 10,
+      })),
+    ),
+  );
+}
+
+function createFeedBacks(doctors: Doctor[], patients: Patient[]) {
+  const commentsWithRatings = [
+    {
+      comment: 'Bác sĩ rất tận tâm và luôn giải thích cặn kẽ tình trạng bệnh.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    {
+      comment: 'Bác sĩ rất chuyên nghiệp, tôi cảm thấy thoải mái khi đến thăm khám.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    { comment: 'Chế độ chăm sóc của bác sĩ rất chu đáo và tận tình.', rating: Math.floor(Math.random() * 3) + 3 },
+    {
+      comment: 'Bác sĩ lắng nghe rất kỹ và đưa ra những lời khuyên rất hợp lý.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    { comment: 'Tôi cảm thấy an tâm khi được bác sĩ tư vấn và điều trị.', rating: Math.floor(Math.random() * 3) + 3 },
+    {
+      comment: 'Bác sĩ rất kiên nhẫn, luôn sẵn sàng giải đáp mọi thắc mắc của bệnh nhân.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    {
+      comment: 'Dịch vụ chăm sóc sức khỏe tại đây rất tốt, bác sĩ luôn quan tâm đến sức khỏe của tôi.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    {
+      comment: 'Tôi rất hài lòng với sự chăm sóc của bác sĩ, tôi cảm thấy mình được quan tâm.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    {
+      comment: 'Bác sĩ có kiến thức chuyên môn vững vàng và luôn thân thiện với bệnh nhân.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+    {
+      comment: 'Mỗi lần đến khám, tôi luôn cảm thấy được bác sĩ chăm sóc chu đáo và nhiệt tình.',
+      rating: Math.floor(Math.random() * 3) + 3,
+    },
+  ];
+  const commentWithRatings = commentsWithRatings.map((commentWithRating) => commentWithRating);
+  return patients.flatMap((patient) =>
+    doctors.map((doctor) => {
+      const commentWithRating = commentWithRatings[Math.floor(Math.random() * commentWithRatings.length)];
+      return {
+        doctor: doctor,
+        patient: patient,
+        comment: commentWithRating.comment,
+        rating: commentWithRating.rating,
+      };
+    }),
+  );
+}
+
+function random(...args: StatusType[]): StatusType {
+  const randomIndex = Math.floor(Math.random() * args.length);
+  return args[randomIndex];
+}
+
+function createAppointments(patients: Patient[], doctorSchedules: DoctorSchedule[]) {
+  return patients.flatMap((patient) =>
+    doctorSchedules.map((doctorSchedule) => {
+      const status =
+        doctorSchedule.day < new Date()
+          ? random(StatusType.DONE, StatusType.CANCELLED)
+          : random(StatusType.PENDING, StatusType.CONFIRMED);
+
+      const appointment = {
+        patient: patient,
+        doctor_schedule: doctorSchedule,
+        reason: 'Không khoẻ trong người',
+        status: status,
+      };
+
+      // If the status is CANCELLED, add the reason_cancel field with a random cancellation reason
+      if (status === StatusType.CANCELLED) {
+        const cancelReasons = ['Trễ hẹn', 'Bận công việc đột xuất', 'Đổi lịch'];
+        appointment['reason_cancel'] = cancelReasons[Math.floor(Math.random() * cancelReasons.length)];
+      }
+
+      return appointment;
+    }),
+  );
+}
 
 async function runSeed() {
   await dataSource.initialize();
@@ -15,6 +172,9 @@ async function runSeed() {
   const specialtyRepository = dataSource.getRepository(Specialty);
   const doctorRepository = dataSource.getRepository(Doctor);
   const patientRepository = dataSource.getRepository(Patient);
+  const doctorScheduleRepository = dataSource.getRepository(DoctorSchedule);
+  const feedbackRepository = dataSource.getRepository(Feedback);
+  const appointmentRepository = dataSource.getRepository(Appointment);
 
   const patients = [
     {
@@ -3924,6 +4084,22 @@ async function runSeed() {
     ];
     if ((await doctorRepository.count()) === 0) {
       await doctorRepository.save(doctors);
+    }
+    const doctorSaveds = await doctorRepository.find();
+    const patientSaved = await patientRepository.find();
+
+    const doctorSchedules = createDoctorSchedules(doctorSaveds);
+    await doctorScheduleRepository.save(doctorSchedules);
+
+    const doctorScheduleSaved = await doctorScheduleRepository.find({ take: 100 });
+    if (doctorScheduleSaved.length > 0 && patientSaved.length > 0) {
+      const appointments = createAppointments(patientSaved, doctorScheduleSaved);
+      await appointmentRepository.save(appointments);
+    }
+
+    if (patientSaved.length > 0) {
+      const feedbacks = createFeedBacks(doctorSaveds, patientSaved);
+      await feedbackRepository.save(feedbacks);
     }
   }
 

@@ -29,23 +29,23 @@ export class MailController {
   //   });
   // }
 
-  @Get()
-  @Public()
-  async testEmail() {
-    await this.mailerService.sendMail({
-      to: 'trungvuong2169@gmail.com',
-      from: '"Support Team" <support@example.com>', // override default from
-      subject: 'Welcome to Nice App! Confirm your Email',
-      template: 'notice',
-      context: {
-        customerName: 'Nguyen Thi Mai',
-        bookingReference: 'ABC123456',
-        serviceName: 'General Health Check-up',
-        appointmentDate: '2024-12-05',
-        appointmentTime: '10:00 AM',
-        location: 'HealthCare Clinic, 123 ABC Street, Hanoi',
-        contactLink: 'https://healthcareclinic.vn/contact',
-      },
-    });
-  }
+  // @Get()
+  // @Public()
+  // async testEmail() {
+  //   await this.mailerService.sendMail({
+  //     to: 'trungvuong2169@gmail.com',
+  //     from: '"Support Team" <support@example.com>', // override default from
+  //     subject: 'Welcome to Nice App! Confirm your Email',
+  //     template: 'notice',
+  //     context: {
+  //       customerName: 'Nguyen Thi Mai',
+  //       bookingReference: 'ABC123456',
+  //       serviceName: 'General Health Check-up',
+  //       appointmentDate: '2024-12-05',
+  //       appointmentTime: '10:00 AM',
+  //       location: 'HealthCare Clinic, 123 ABC Street, Hanoi',
+  //       contactLink: 'https://healthcareclinic.vn/contact',
+  //     },
+  //   });
+  // }
 }

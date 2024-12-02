@@ -8,14 +8,21 @@ export class InfoAppointmentDto {
   doctorName: string;
   @ApiProperty({ example: '01/01/2021' })
   date: string;
-  @ApiProperty({ example: '08:00 - 09:00' })
-  time: string;
+  @ApiProperty({ example: '08:00' })
+  start_time: string;
+  @ApiProperty({ example: '10:00' })
+  end_time: string;
   @ApiProperty({ example: 'Đau họng' })
   reason: string;
   @ApiProperty({ example: 'Bệnh viện Bạch Mai' })
   hospitalName: string;
   @ApiProperty({ example: '78 Đường Giải Phóng, Thanh Xuân, Hà Nội' })
   address: string;
+  @ApiProperty({ example: '30/12/2020' })
+  createdAt: string;
+
+  @ApiProperty({ example: 'PENDIND' })
+  status: string;
 
   constructor(appointment: Appointment) {
     this.patientName = appointment.patient.name;
@@ -26,9 +33,12 @@ export class InfoAppointmentDto {
       2,
       '0',
     )}/${date.getFullYear()}`;
-    this.time = appointment.doctor_schedule.start_time + ' - ' + appointment.doctor_schedule.end_time;
+    this.start_time = appointment.doctor_schedule.start_time;
+    this.end_time = appointment.doctor_schedule.end_time;
     this.reason = appointment.reason;
     this.hospitalName = appointment.doctor_schedule.doctor.hospital.name;
     this.address = appointment.doctor_schedule.doctor.hospital.address;
+    this.createdAt = appointment.createdAt.toISOString();
+    this.status = appointment.status;
   }
 }

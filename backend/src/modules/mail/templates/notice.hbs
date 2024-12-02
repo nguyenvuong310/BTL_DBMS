@@ -1,8 +1,8 @@
-<html lang='en'>
+<html lang='vi'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-    <title>Booking Success</title>
+    <title>Đặt Lịch Thành Công</title>
     <style>
       body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; } .container
       { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0
@@ -14,25 +14,26 @@
   </head>
   <body>
     <div class='container'>
-      <h1>Booking Successful!</h1>
+      <h1>Đặt Lịch Thành Công!</h1>
 
-      <p>Dear {{customerName}},</p>
+      <p>Kính gửi {{patientName}},</p>
 
-      <p>We are pleased to inform you that your booking has been successfully confirmed. Here are the details:</p>
+      <p>Chúng tôi rất vui được thông báo rằng lịch hẹn của bạn đã được xác nhận thành công. Dưới đây là chi tiết:</p>
 
       <ul>
-        <li><strong>Booking Reference Number:</strong> {{bookingReference}}</li>
-        <li><strong>Service Name:</strong> {{serviceName}}</li>
-        <li><strong>Date of Appointment:</strong> {{appointmentDate}}</li>
-        <li><strong>Time:</strong> {{appointmentTime}}</li>
-        <li><strong>Location:</strong> {{location}}</li>
+
+        <li><strong>Ngày hẹn:</strong> {{date}}</li>
+        <li><strong>Giờ:</strong> {{time}}</li>
+        <li><strong>Bệnh viện:</strong> {{hospitalName}}</li>
+        <li><strong>Địa chỉ:</strong> , {{address}}</li>
+        <li><strong>Lý do khám:</strong> {{reason}}</li>
       </ul>
 
-      <p>If you have any questions or need to modify your booking, please don't hesitate to contact us.</p>
+      <p>Nếu bạn có bất kỳ câu hỏi nào hoặc cần thay đổi lịch hẹn, xin vui lòng liên hệ với chúng tôi.</p>
 
-      <a href='{{contactLink}}' class='button'>Contact Us</a>
+      {{!-- <a href='{{contactLink}}' class='button'>Liên Hệ Với Chúng Tôi</a> --}}
 
-      <p class='footer'>Thank you for choosing our service. We look forward to serving you!</p>
+      <p class='footer'>Cảm ơn bạn đã chọn dịch vụ của chúng tôi. Chúng tôi mong được phục vụ bạn!</p>
     </div>
   </body>
 </html>
