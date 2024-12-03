@@ -10,5 +10,6 @@ import { MedicineRepository } from './medicine.repository';
   imports: [TypeOrmModule.forFeature([Medicine])],
   controllers: [MedicineController],
   providers: [MedicineService, MedicineRepository],
+  exports: [MedicineService],
 })
 export class MedicineModule {}

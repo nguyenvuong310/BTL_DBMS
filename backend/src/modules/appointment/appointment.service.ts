@@ -7,10 +7,11 @@ import { AppointmentRepository } from './appointment.repository';
 import { InfoAppointmentDto } from './dto/info-appointment.dto';
 import { AppointmentSortDto } from './dto/appointment-sort.dto';
 
-import { StatusType } from '../../constants/action.enum';
+import { Role, StatusType } from '../../constants/action.enum';
 import { AppointmentList } from './dto/appointment-list.dto';
 import { MailService } from '../mail/mail.service';
 import { UserDto } from '../users/dto/user.dto';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Injectable()
 export class AppointmentService {
@@ -42,5 +43,18 @@ export class AppointmentService {
 
     const infoAppointment = appointmentPaging.map((appointment) => new InfoAppointmentDto(appointment));
     return new AppointmentList(+limit, +currentPage, appointmentPaging.length, infoAppointment);
+  }
+
+  async update(id: string, updateAppointmentDto: UpdateAppointmentDto, user: UserDto) {
+    const appointment = await this.appointmentRepository.update(id, updateAppointmentDto, user?.id);
+    const infoAppointment = await this.appointmentRepository.getInfoAppointment(appointment.id);
+    const infoAppointmentDto = new InfoAppointmentDto(infoAppointment);
+    if (user.role === Role.PATIENT) {
+      this.mailService.noticeCancelByPatient(infoAppointmentDto, user);
+    }
+    if (user.role === Role.DOCTOR) {
+      this.mailService.noticeCancelByDoctor(infoAppointmentDto, user);
+    }
+    return infoAppointmentDto;
   }
 }

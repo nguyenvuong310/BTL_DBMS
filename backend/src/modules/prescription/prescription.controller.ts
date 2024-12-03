@@ -3,6 +3,10 @@ import { PrescriptionService } from './prescription.service';
 import { CreatePrescriptionDto } from './dto/create-prescription.dto';
 import { UpdatePrescriptionDto } from './dto/update-prescription.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Role } from '../../constants/action.enum';
+import { AuthorRole } from '../../decorator/author-role.decorator';
+import { UserDto } from '../users/dto/user.dto';
+import { User } from '../../decorator/user.decorator';
 
 @ApiTags('Prescription')
 @Controller('prescription')
@@ -10,28 +14,15 @@ export class PrescriptionController {
   constructor(private readonly prescriptionService: PrescriptionService) {}
 
   @Post()
+  @AuthorRole(Role.DOCTOR)
   @ApiOperation({ summary: 'Create prescription by doctor for patient in appointment' })
-  create(@Body() createPrescriptionDto: CreatePrescriptionDto) {
-    return this.prescriptionService.create(createPrescriptionDto);
+  create(@Body() createPrescriptionDto: CreatePrescriptionDto, @User() user: UserDto) {
+    return this.prescriptionService.create(createPrescriptionDto, user.id);
   }
 
-  @Get()
-  findAll() {
-    return this.prescriptionService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.prescriptionService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePrescriptionDto: UpdatePrescriptionDto) {
-    return this.prescriptionService.update(+id, updatePrescriptionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.prescriptionService.remove(+id);
+  @Get(':appointmentId')
+  @ApiOperation({ summary: 'Get prescription by appointment id' })
+  findOne(@Param('appointmentId') id: string) {
+    return this.prescriptionService.findPrescription(id);
   }
 }

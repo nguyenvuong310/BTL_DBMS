@@ -14,4 +14,8 @@ export class MedicineService {
     const medicines = await this.medicineRepository.findAll(exceptListId);
     return medicines.map((medicine) => new InfoMedicineDto(medicine.id, medicine.name));
   }
+
+  async findById(id: string) {
+    return await this.medicineRepository.findById(id);
+  }
 }

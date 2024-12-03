@@ -29,4 +29,7 @@ export class Appointment extends AbstractEntity {
 
   @OneToOne(() => Prescription, (prescription) => prescription.appointment)
   prescription: Prescription;
+
+  @Column({ nullable: true })
+  updatedBy: string;
 }

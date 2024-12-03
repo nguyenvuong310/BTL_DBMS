@@ -8,6 +8,7 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AppointmentSortDto } from './dto/appointment-sort.dto';
 
 import { StatusType } from 'src/constants/action.enum';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 
 @Injectable()
 export class AppointmentRepository {
@@ -54,6 +55,7 @@ export class AppointmentRepository {
       .orderBy('doctor_schedule.day', 'DESC')
       .orderBy('doctor_schedule.start_time', 'ASC')
       .orderBy('appointment.createdAt', 'DESC')
+      .where('patient.id = :userId', { userId }) // Filter appointments by patient ID
       // Pagination settings: take (limit) and skip (pagination)
       .take(+limit) // Limit the number of results (based on the page size)
       .skip((+currentPage - 1) * +limit); // Skip results based on the current page
@@ -79,5 +81,13 @@ export class AppointmentRepository {
 
     // Execute the query and return the results
     return await queryBuilder.getMany();
+  }
+
+  async update(id: string, updateAppointmentDto: UpdateAppointmentDto, userId: string): Promise<Appointment> {
+    const appointment = await this.appointmentRepository.findOne({ where: { id } });
+    appointment.status = updateAppointmentDto.status;
+    appointment.reason_cancel = updateAppointmentDto.reason_cancel;
+    appointment.updatedBy = userId;
+    return this.appointmentRepository.save(appointment);
   }
 }

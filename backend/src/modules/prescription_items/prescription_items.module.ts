@@ -4,10 +4,10 @@ import { PrescriptionItemsService } from './prescription_items.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PrescriptionItem } from './entities/prescription_item.entity';
 import { PrescriptionItemsRepository } from './prescription_items.repository';
+import { MedicineModule } from '../medicine/medicine.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PrescriptionItem])],
-  // controllers: [PrescriptionItemsController],
+  imports: [TypeOrmModule.forFeature([PrescriptionItem]), MedicineModule],
   providers: [PrescriptionItemsService, PrescriptionItemsRepository],
   exports: [PrescriptionItemsService],
 })

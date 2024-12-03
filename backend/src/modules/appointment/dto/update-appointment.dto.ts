@@ -1,4 +1,12 @@
-import { PartialType } from '@nestjs/swagger';
-import { CreateAppointmentDto } from './create-appointment.dto';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEnum } from 'class-validator';
+import { StatusType } from 'src/constants/action.enum';
 
-export class UpdateAppointmentDto extends PartialType(CreateAppointmentDto) {}
+export class UpdateAppointmentDto {
+  @ApiProperty({ enum: StatusType })
+  @IsEnum(StatusType)
+  status: StatusType;
+
+  @ApiProperty()
+  reason_cancel?: string;
+}

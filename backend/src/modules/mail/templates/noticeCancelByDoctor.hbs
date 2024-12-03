@@ -1,0 +1,38 @@
+<html lang='vi'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Cuộc Hẹn Bị Hủy</title>
+    <style>
+      body { font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; } .container
+      { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0
+      4px 8px rgba(0, 0, 0, 0.1); } h1 { color: #F44336; } p { font-size: 16px; line-height: 1.5; } .button {
+      background-color: #F44336; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px;
+      font-weight: bold; display: inline-block; margin-top: 20px; } .footer { font-size: 14px; color: #777; text-align:
+      center; margin-top: 40px; }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>Thông Báo Hủy Lịch Hẹn</h1>
+
+      <p>Kính gửi {{patientName}},</p>
+
+      <p>Chúng tôi rất tiếc phải thông báo rằng lịch hẹn của bạn đã bị hủy. Dưới đây là chi tiết:</p>
+
+      <ul>
+        <li><strong>Ngày hẹn:</strong> {{date}}</li>
+        <li><strong>Giờ:</strong> {{time}}</li>
+        <li><strong>Bệnh viện:</strong> {{hospitalName}}</li>
+        <li><strong>Địa chỉ:</strong> {{address}}</li>
+        <li><strong>Lý do hủy:</strong> {{reason}}</li>
+      </ul>
+
+      <p>Nếu bạn muốn đặt lại lịch hẹn hoặc có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi.</p>
+
+      {{!-- <a href='{{contactLink}}' class='button'>Liên Hệ Với Chúng Tôi</a> --}}
+
+      <p class='footer'>Cảm ơn bạn đã thông cảm. Chúng tôi rất mong được phục vụ bạn trong lần sau!</p>
+    </div>
+  </body>
+</html>

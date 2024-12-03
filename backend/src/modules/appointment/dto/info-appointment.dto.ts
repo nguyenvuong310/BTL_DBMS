@@ -2,6 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Appointment } from '../entities/appointment.entity';
 
 export class InfoAppointmentDto {
+  @ApiProperty({ example: 'a02dd4ad-a083-4591-b09d-08ae34b6e298' })
+  id: string;
   @ApiProperty({ example: 'Nguyễn Văn A' })
   patientName: string;
   @ApiProperty({ example: 'Tiến sĩ, Bác sĩ Vũ Hải' })
@@ -24,7 +26,11 @@ export class InfoAppointmentDto {
   @ApiProperty({ example: 'PENDIND' })
   status: string;
 
+  @ApiProperty({ example: 'Bận' })
+  reason_cancel?: string | null;
+
   constructor(appointment: Appointment) {
+    this.id = appointment.id;
     this.patientName = appointment.patient.name;
     this.doctorName = appointment.doctor_schedule.doctor.name;
 
@@ -40,5 +46,6 @@ export class InfoAppointmentDto {
     this.address = appointment.doctor_schedule.doctor.hospital.address;
     this.createdAt = appointment.createdAt.toISOString();
     this.status = appointment.status;
+    this.reason_cancel = appointment.reason_cancel;
   }
 }

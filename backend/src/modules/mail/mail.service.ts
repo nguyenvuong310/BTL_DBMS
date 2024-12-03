@@ -24,4 +24,42 @@ export class MailService {
       },
     });
   }
+
+  async noticeCancelByPatient(infoMail: InfoAppointmentDto, user: UserDto) {
+    await this.mailerService.sendMail({
+      to: user.email,
+      from: '"Support Team" <support@example.com>', // override default from
+      subject: 'Welcome to Nice App! Confirm your Email',
+      template: 'noticeCancelByPatient',
+      context: {
+        patientName: infoMail.patientName,
+        doctorName: infoMail.doctorName,
+        date: infoMail.date,
+        time: infoMail.start_time + ' - ' + infoMail.end_time,
+        reason: infoMail.reason,
+        hospitalName: infoMail.hospitalName,
+        address: infoMail.address,
+        reason_cancel: infoMail.reason_cancel,
+      },
+    });
+  }
+
+  async noticeCancelByDoctor(infoMail: InfoAppointmentDto, user: UserDto) {
+    await this.mailerService.sendMail({
+      to: user.email,
+      from: '"Support Team" <support@example.com>', // override default from
+      subject: 'Welcome to Nice App! Confirm your Email',
+      template: 'noticeCancelByDoctor',
+      context: {
+        patientName: infoMail.patientName,
+        doctorName: infoMail.doctorName,
+        date: infoMail.date,
+        time: infoMail.start_time + ' - ' + infoMail.end_time,
+        reason: infoMail.reason,
+        hospitalName: infoMail.hospitalName,
+        address: infoMail.address,
+        reason_cancel: infoMail.reason_cancel,
+      },
+    });
+  }
 }

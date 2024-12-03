@@ -64,6 +64,7 @@ function createDoctorSchedules(doctors: Doctor[]) {
   const days = Array.from({ length: 15 }, (_, i) => {
     const day = new Date(now); // Copy the current date
     day.setDate(now.getDate() + (i - 7)); // Add (i - 7) days to the current date, where i ranges from 0 to 14
+    day.setHours(0, 0, 0, 0);
     return day;
   });
 

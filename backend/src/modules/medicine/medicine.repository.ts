@@ -15,4 +15,8 @@ export class MedicineRepository {
       },
     });
   }
+
+  async findById(id: string): Promise<Medicine> {
+    return this.healthInsuranceRepository.findOne({ where: { id } });
+  }
 }

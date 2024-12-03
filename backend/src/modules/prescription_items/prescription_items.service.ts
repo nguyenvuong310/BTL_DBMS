@@ -1,32 +1,41 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreatePrescriptionItemDto } from './dto/create-prescription_item.dto';
-import { UpdatePrescriptionItemDto } from './dto/update-prescription_item.dto';
+
 import { PrescriptionItemsRepository } from './prescription_items.repository';
+import { PrescriptionItem } from './entities/prescription_item.entity';
+import { Prescription } from '../prescription/entities/prescription.entity';
+import { Medicine } from '../medicine/entities/medicine.entity';
+
+import { QueryRunner } from 'typeorm';
+import { MedicineService } from '../medicine/medicine.service';
 
 @Injectable()
 export class PrescriptionItemsService {
   constructor(
     @Inject(PrescriptionItemsRepository)
     private prescriptionItemsRepository: PrescriptionItemsRepository,
+
+    @Inject(MedicineService)
+    private medicineService: MedicineService,
   ) {}
 
-  create(createPrescriptionItemsDto: CreatePrescriptionItemDto[]) {
-    return this.prescriptionItemsRepository.save(createPrescriptionItemsDto);
-  }
+  async create(
+    createPrescriptionItemsDto: CreatePrescriptionItemDto[],
+    prescription: Prescription,
+    queryRunner: QueryRunner,
+  ): Promise<PrescriptionItem[]> {
+    const prescription_items: PrescriptionItem[] = await Promise.all(
+      createPrescriptionItemsDto.map(async (item) => {
+        const prescriptionItem = new PrescriptionItem();
 
-  findAll() {
-    return `This action returns all prescriptionItems`;
-  }
+        prescriptionItem.prescription = prescription;
+        prescriptionItem.medicine = await this.medicineService.findById(item.medicineId);
+        prescriptionItem.dosage = item.dosage;
+        prescriptionItem.status = item.status;
 
-  findOne(id: number) {
-    return `This action returns a #${id} prescriptionItem`;
-  }
-
-  update(id: number, updatePrescriptionItemDto: UpdatePrescriptionItemDto) {
-    return `This action updates a #${id} prescriptionItem`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} prescriptionItem`;
+        return prescriptionItem;
+      }),
+    );
+    return this.prescriptionItemsRepository.save(prescription_items, queryRunner);
   }
 }

@@ -14,6 +14,8 @@ services:
       - '3306:3306'
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - backend
 
   adminer:
     image: adminer
@@ -25,6 +27,35 @@ services:
       - mysql
     environment:
       - ADMINER_DEFAULT_SERVER=mysql
+    networks:
+      - backend
+
+  redis:
+    image: redis:6.0.7
+    container_name: redis
+    restart: always
+    volumes:
+      - redis:/data
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
+  redis_insight:
+    image: redislabs/redisinsight:1.14.0
+    container_name: redis_insight
+    restart: always
+    ports:
+      - 8001:8001
+    volumes:
+      - redis:/db
+    networks:
+      - backend
 
 volumes:
   mysql:
+  redis:
+
+networks:
+  backend:
+    driver: bridge

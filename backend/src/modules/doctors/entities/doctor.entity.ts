@@ -1,3 +1,4 @@
+import { Prescription } from 'src/modules/prescription/entities/prescription.entity';
 import { AbstractEntity } from '../../../custom/abstract.entity';
 import { DoctorSchedule } from '../../../modules/doctor_schedules/entities/doctor_schedule.entity';
 import { Feedback } from '../../../modules/feedbacks/entities/feedback.entity';
@@ -42,4 +43,7 @@ export class Doctor extends AbstractEntity {
 
   @OneToMany(() => Feedback, (feedback) => feedback.doctor)
   feedbacks: Feedback[];
+
+  @OneToMany(() => Prescription, (prescription) => prescription.doctor)
+  prescriptions: Prescription[];
 }

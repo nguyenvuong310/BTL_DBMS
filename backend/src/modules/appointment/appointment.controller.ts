@@ -48,14 +48,14 @@ export class AppointmentController {
     return this.appointmentService.findAll(currentPage, limit, sort, filter, user.id);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return 'this.appointmentService.findOne(+id)';
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return 'this.appointmentService.findOne(+id)';
+  // }
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update appointment by patient or doctor' })
-  update(@Param('id') id: string, @Body() updateAppointmentDto: UpdateAppointmentDto) {
-    return 'this.appointmentService.update(+id, updateAppointmentDto)';
+  update(@Param('id') id: string, @Body() updateAppointmentDto: UpdateAppointmentDto, @User() user: UserDto) {
+    return this.appointmentService.update(id, updateAppointmentDto, user);
   }
 }
