@@ -48,4 +48,11 @@ export class DoctorRepository {
       .orWhere('doctor.email like :search', { search: `%${search}%` })
       .getMany();
   }
+
+  async getDoctorById(id: string) {
+    return this.doctorSchedulerRepository.findOne({
+      where: { id },
+      relations: ['hospital', 'specialty'],
+    });
+  }
 }

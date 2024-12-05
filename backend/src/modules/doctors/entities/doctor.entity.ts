@@ -1,4 +1,4 @@
-import { Prescription } from 'src/modules/prescription/entities/prescription.entity';
+import { Prescription } from '../../../modules/prescription/entities/prescription.entity';
 import { AbstractEntity } from '../../../custom/abstract.entity';
 import { DoctorSchedule } from '../../../modules/doctor_schedules/entities/doctor_schedule.entity';
 import { Feedback } from '../../../modules/feedbacks/entities/feedback.entity';

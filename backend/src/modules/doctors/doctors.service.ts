@@ -50,4 +50,9 @@ export class DoctorsService {
     const doctors = await this.doctorRepository.searchDoctorByEmailOrName(search);
     return doctors.map((doctor) => new InfoDoctorDto(doctor));
   }
+
+  async getDoctorById(id: string) {
+    const doctor = await this.doctorRepository.getDoctorById(id);
+    return new InfoDoctorDto(doctor);
+  }
 }

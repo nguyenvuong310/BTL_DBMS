@@ -34,15 +34,11 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<App />}>
         <Route index={true} element={<HomePage />} />
-        <Route path="/bookAppointment" element={<BookingAppointment />} />
-        <Route path="/:specialty_id" element={<SpecialtyDetail />} />
+        <Route path="/doctor/:doctorId" element={<BookingAppointment />} />
+        <Route path="/specialty/:specialty_id" element={<SpecialtyDetail />} />
         <Route path="/user" element={<AuthUser />}>
           <Route index={true} element={<HomePageUser />} />
           <Route path=":user_id" element={<HomePageUser />} />
-          <Route
-            path="/user/bookAppointment"
-            element={<BookingAppointment />}
-          />
           <Route path="/user/history" element={<AppointmentHistory />} />
         </Route>
       </Route>

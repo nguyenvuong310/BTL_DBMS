@@ -10,17 +10,41 @@ const getUser = async () => {
 const saveUserToLocalStorage = async (user) => {
   await localStorage.setItem("user", JSON.stringify(user));
 };
-const saveRoleToLocalStorage = async (role) => {
-  console.log("role", role);
-  await localStorage.setItem("role", JSON.stringify(role));
+const hanleBookAppointment = async (data) => {
+  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+
+  const url = `${backendURL}/api/appointments`;
+
+  return await axios.post(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`, // Add the Bearer token to the headers
+    },
+  });
 };
-const getRoleFromLocalStorage = () => {
-  return JSON.parse(localStorage.getItem("role"));
+const getAppointmentHistory = async (current) => {
+  const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
+
+  const url = `${backendURL}/api/appointments?current=${current}&pageSize=10`;
+  console.log(url);
+  return await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
-const logout = () => {
-  localStorage.removeItem("role");
+
+const getUserFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem("user"));
+};
+const logout = async () => {
   localStorage.removeItem("user");
+  localStorage.removeItem("accessToken");
   // window.open(`${backendURL}/auth/logout`, "_self");
+  return await axios.post(
+    `${backendURL}/auth/logout`,
+    {},
+    { withCredentials: true },
+  );
 };
 
 const getUserInfo = async () => {
@@ -149,10 +173,7 @@ const UpdateAppointment = async (data) => {
   const url = `${backendURL}/api/Appointment/UpdateAppointmentById/${data.id}`;
   return await axios.put(url, data);
 };
-const getAppointmentHistory = async (user_id) => {
-  const url = `${backendURL}/api/Appointment/GetAllDepartmentByUser/${user_id}`;
-  return await axios.get(url);
-};
+
 const getSpecialty = async () => {
   const url = `${backendURL}/api/specialty`;
   return await axios.get(url);
@@ -204,4 +225,6 @@ export {
   getPopularDoctors,
   getHospitals,
   loginUser,
+  getUserFromLocalStorage,
+  hanleBookAppointment,
 };

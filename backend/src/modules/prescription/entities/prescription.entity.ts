@@ -1,9 +1,9 @@
-import { Doctor } from 'src/modules/doctors/entities/doctor.entity';
+import { Doctor } from '../../../modules/doctors/entities/doctor.entity';
 import { AbstractEntity } from '../../../custom/abstract.entity';
 import { Appointment } from '../../../modules/appointment/entities/appointment.entity';
 import { PrescriptionItem } from '../../../modules/prescription_items/entities/prescription_item.entity';
 
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne } from 'typeorm';
+import { Entity, JoinColumn, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity('prescriptions')
 export class Prescription extends AbstractEntity {

@@ -57,7 +57,7 @@ export const DoctorsCarousel = () => {
                       className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                       onClick={() => {
                         console.log("click");
-                        navigate("/bookAppointment");
+                        navigate("/doctor/" + item.id);
                         window.scrollTo(0, 0);
                       }}
                     />

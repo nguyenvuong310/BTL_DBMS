@@ -57,7 +57,8 @@ export class DoctorsController {
   }
 
   @Get(':id')
+  @Public()
   findOne(@Param('id') id: string) {
-    return 'find one';
+    return this.doctorsService.getDoctorById(id);
   }
 }

@@ -4,6 +4,7 @@ import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { FeedbacksRepository } from './feedbacks.repository';
 import { In } from 'typeorm';
 import { InfoFeedbackDto } from './dto/info-feedback.dto';
+import { FeedbackDoctorsDto } from './dto/feedback-doctor.dto';
 
 @Injectable()
 export class FeedbacksService {
@@ -24,8 +25,19 @@ export class FeedbacksService {
     return this.feedbacksRepository.remove(id);
   }
 
-  async getFeedBacksByDoctorId(doctor_id: string): Promise<InfoFeedbackDto[]> {
+  async getFeedBacksByDoctorId(doctor_id: string): Promise<FeedbackDoctorsDto> {
     const feedbacks = await this.feedbacksRepository.getFeedBacksByDoctorId(doctor_id);
-    return feedbacks.map((feedback) => new InfoFeedbackDto(feedback));
+    if (feedbacks.length === 0) {
+      return new FeedbackDoctorsDto({}, [], null);
+    }
+    const doctor = feedbacks[0].doctor;
+    const ratingCounts = feedbacks.reduce((acc, feedback) => {
+      const rating = feedback.rating;
+      const ratingKey = `star${rating}`; // Create a key like "5Star", "4Star", etc.
+      acc[ratingKey] = (acc[ratingKey] || 0) + 1;
+      return acc;
+    }, {});
+    const inforFeedback = feedbacks.map((feedback) => new InfoFeedbackDto(feedback));
+    return new FeedbackDoctorsDto(ratingCounts, inforFeedback, doctor);
   }
 }

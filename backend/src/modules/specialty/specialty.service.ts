@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
 import { SpecialtyRepository } from './specialty.repository';
 import { InfoSpecialtyDto } from './dto/info-specialty.dto';
@@ -17,6 +17,9 @@ export class SpecialtyService {
 
   async findById(id: string): Promise<InfoSpecialtyDto> {
     const specialty = await this.specialtyRepository.findOne(id);
+    if (!specialty) {
+      throw new NotFoundException('Specialty not found');
+    }
     return new InfoSpecialtyDto(specialty);
   }
 

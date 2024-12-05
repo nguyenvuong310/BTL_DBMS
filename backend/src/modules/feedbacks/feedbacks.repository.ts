@@ -27,6 +27,10 @@ export class FeedbacksRepository {
   }
 
   async getFeedBacksByDoctorId(doctor_id: string): Promise<Feedback[]> {
-    return this.feedbacksRepository.find({ where: { doctor: { id: doctor_id } }, relations: ['doctor', 'patient'] });
+    return this.feedbacksRepository.find({
+      where: { doctor: { id: doctor_id } },
+      relations: ['doctor', 'patient'],
+      order: { createdAt: 'DESC' },
+    });
   }
 }

@@ -53,4 +53,11 @@ export class DoctorSchedulesController {
   remove(@Param('id') id: string) {
     return this.doctorSchedulesService.remove(+id);
   }
+
+  @Get('/now/:doctorId')
+  @Public()
+  @ApiOperation({ summary: 'Get doctor schedule now' })
+  async findDoctorScheduleNow(@Param('doctorId') doctorId: string) {
+    return this.doctorSchedulesService.findDoctorScheduleNow(doctorId);
+  }
 }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Feedback } from '../entities/feedback.entity';
+import { InfoDoctorDto } from 'src/modules/doctors/dto/info-doctor.dto';
 
 export class InfoFeedbackDto {
   @ApiProperty({
@@ -12,17 +13,25 @@ export class InfoFeedbackDto {
   @ApiProperty({ example: 'good' })
   comment: string;
 
-  @ApiProperty({ example: '006b7cce-361d-41b3-9840-5a453c40db20' })
-  doctor_id: string;
+  @ApiProperty({ example: '20/10/2024' })
+  createdAt: string;
 
-  @ApiProperty({ example: 'acfa91cf-a332-11ef-a2a3-0242ac140003' })
-  feedbacker: string;
+  feedbacker: {
+    id: string;
+    name: string;
+    avatar: string;
+  };
 
   constructor(feedback: Feedback) {
     this.id = feedback?.id;
     this.rating = feedback?.rating;
     this.comment = feedback?.comment;
-    this.doctor_id = feedback?.doctor?.id;
-    this.feedbacker = feedback?.patient?.id;
+    this.feedbacker = {
+      id: feedback?.patient?.id,
+      name: feedback?.patient?.name,
+      avatar: feedback?.patient?.avatar,
+    };
+    const date = new Date(feedback?.createdAt);
+    this.createdAt = date.toLocaleDateString('en-GB');
   }
 }

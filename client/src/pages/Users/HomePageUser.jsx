@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import { Button, Carousel, Typography } from "@material-tailwind/react";
+import { Carousel, Typography } from "@material-tailwind/react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -58,7 +58,8 @@ const MedicalSpecialty = () => {
                     key={subIndex}
                     className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
                     onClick={() => {
-                      navigate(`/${item.id}`);
+                      console.log("click");
+                      navigate(`/specialty/${item.id}`);
                       window.scrollTo(0, 0);
                     }}
                   >
@@ -203,7 +204,7 @@ const Doctors = () => {
                       className="h-32 w-32 rounded-md object-cover transition-transform duration-200 hover:scale-105"
                       onClick={() => {
                         console.log("click");
-                        navigate("/bookAppointment");
+                        navigate("/doctor/" + item.id);
                         window.scrollTo(0, 0);
                       }}
                     />

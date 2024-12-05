@@ -5,6 +5,7 @@ import { UpdateFeedbackDto } from './dto/update-feedback.dto';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/decorator/user.decorator';
 import { UserDto } from '../users/dto/user.dto';
+import { Public } from 'src/decorator/public.decorator';
 
 @ApiTags('Feedbacks')
 @Controller('feedbacks')
@@ -18,6 +19,7 @@ export class FeedbacksController {
   }
 
   @Get(':doctorId')
+  @Public()
   @ApiOperation({ summary: 'Get all feedbacks about doctor' })
   findFeedBackByDoctor(@Param('doctorId') doctorId: string) {
     return this.feedbacksService.getFeedBacksByDoctorId(doctorId);

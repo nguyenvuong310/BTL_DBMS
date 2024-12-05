@@ -3,6 +3,7 @@ import { CreateDoctorScheduleDto } from './dto/create-doctor_schedule.dto';
 import { UpdateDoctorScheduleDto } from './dto/update-doctor_schedule.dto';
 import { DoctorSchedulerRepository } from './doctor_schedulers.repository';
 import { InfoDoctorScheduleDto } from './dto/info-doctor_schedule.dto';
+import { DayDto } from './dto/day.dto';
 
 @Injectable()
 export class DoctorSchedulesService {
@@ -73,5 +74,15 @@ export class DoctorSchedulesService {
   async findDoctorScheduleByDoctorIdAndDay(doctorId: string, day: Date) {
     const schedules = await this.doctorSchedulesRepository.getDoctorScheduleByDoctorIdAndDay(doctorId, day);
     return schedules.map((schedule) => new InfoDoctorScheduleDto(schedule));
+  }
+
+  async findDoctorScheduleNow(doctorId: string) {
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    const next7Days = new Date();
+    next7Days.setDate(now.getDate() + 7);
+    const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesNow(doctorId, now, next7Days);
+    console.log(schedules);
+    return schedules.map((schedule) => new DayDto(schedule.schedule_day));
   }
 }

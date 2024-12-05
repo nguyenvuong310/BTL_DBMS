@@ -83,6 +83,10 @@ export class AppointmentRepository {
     return await queryBuilder.getMany();
   }
 
+  async countAppointments(userId: string): Promise<number> {
+    return this.appointmentRepository.count({ where: { patient: { id: userId } } });
+  }
+
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto, userId: string): Promise<Appointment> {
     const appointment = await this.appointmentRepository.findOne({ where: { id } });
     appointment.status = updateAppointmentDto.status;

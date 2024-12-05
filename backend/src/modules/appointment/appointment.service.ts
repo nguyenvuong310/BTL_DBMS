@@ -40,9 +40,9 @@ export class AppointmentService {
       filter,
       userId,
     );
-
+    const totalItems = await this.appointmentRepository.countAppointments(userId);
     const infoAppointment = appointmentPaging.map((appointment) => new InfoAppointmentDto(appointment));
-    return new AppointmentList(+limit, +currentPage, appointmentPaging.length, infoAppointment);
+    return new AppointmentList(+limit, +currentPage, totalItems, infoAppointment);
   }
 
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto, user: UserDto) {

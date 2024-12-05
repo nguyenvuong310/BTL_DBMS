@@ -53,7 +53,7 @@ export const MedicalSpecialty = () => {
                     key={subIndex}
                     className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
                     onClick={() => {
-                      navigate(`/${item.id}`);
+                      navigate(`/specialty/${item.id}`);
                       window.scrollTo(0, 0);
                     }}
                   >

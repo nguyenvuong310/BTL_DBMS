@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { LessThan, MoreThan, Not, Repository } from 'typeorm';
+import { Between, LessThan, MoreThan, Not, Repository } from 'typeorm';
 
 import { InjectRepository } from '@nestjs/typeorm';
 import { DoctorSchedule } from './entities/doctor_schedule.entity';
@@ -47,5 +47,16 @@ export class DoctorSchedulerRepository {
       .getMany();
 
     return overlappingSchedules.length === 0;
+  }
+
+  async getDoctorSchedulesNow(doctorId: string, today: Date, next7Days: Date): Promise<any> {
+    return this.doctorSchedulerRepository
+      .createQueryBuilder('schedule')
+      .select(['schedule.day'])
+      .where('schedule.doctorId = :doctorId', { doctorId })
+      .andWhere('schedule.day BETWEEN :today AND :next7Days', { today, next7Days })
+      .groupBy('schedule.day')
+      .orderBy('schedule.day', 'ASC')
+      .getRawMany();
   }
 }
