@@ -13,12 +13,102 @@ import {
   handleGetDoctorScheduleNow,
   handleGetFeedback,
 } from "../../service/doctorService";
+import { FaStar } from "react-icons/fa";
 
 import {
   getUserFromLocalStorage,
   hanleBookAppointment,
 } from "../../service/userService";
 const user = getUserFromLocalStorage();
+
+const RatingModal = ({ isOpenModal, setIsOpenModal, handleSubmit }) => {
+  const [rating, setRating] = useState(0); // For storing selected rating
+  const [hover, setHover] = useState(0); // For hover effect on stars
+  const [comment, setComment] = useState(""); // For storing comment
+
+  if (!isOpenModal) return null; // Don't render if modal is closed
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-96 rounded-lg bg-white p-6 shadow-lg">
+        {/* Title */}
+        <Typography
+          variant="h5"
+          className="mb-4 text-center font-bold"
+          style={{
+            color: "#3e83f8",
+          }}
+        >
+          Đánh giá & nhận xét
+        </Typography>
+
+        {/* Star Rating */}
+        <div className="mb-6 flex justify-center gap-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <button
+              key={star}
+              className={`text-2xl ${
+                star <= (hover || rating) ? "text-yellow-400" : "text-gray-300"
+              }`}
+              onClick={() => setRating(star)}
+              onMouseEnter={() => setHover(star)}
+              onMouseLeave={() => setHover(rating)}
+            >
+              <FaStar />
+            </button>
+          ))}
+        </div>
+
+        {/* Comment Input */}
+        <div className="mb-6">
+          <Typography
+            variant="body1"
+            className="mb-2 font-bold"
+            style={{
+              color: "#3e83f8",
+            }}
+          >
+            Bình luận của bạn
+          </Typography>
+          <textarea
+            rows="4"
+            className="w-full rounded border border-gray-300 p-3 focus:border-blue-500 focus:ring-blue-500"
+            placeholder="Viết bình luận..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          ></textarea>
+        </div>
+
+        {/* Buttons */}
+        <div className="mt-4 flex justify-end gap-4">
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => setIsOpenModal(false)}
+          >
+            Đóng
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              handleSubmit(rating, comment); // Pass rating and comment to parent
+              setIsOpenModal(false); // Close modal after submitting
+            }}
+            style={{
+              backgroundColor: "#3e83f8", // Set background color
+              color: "white", // Set text color
+              padding: "10px 20px", // Add padding
+              borderRadius: "8px", // Rounded corners
+            }}
+          >
+            Gửi đánh giá
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const DoctorProfile = () => {
   const navigate = useNavigate();
@@ -33,6 +123,7 @@ const DoctorProfile = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [reason, setReason] = useState("");
   const [scheduleId, setScheduleId] = useState("");
+  const [isOpenModalComment, setIsOpenModalComment] = useState(false);
 
   const handleChange = async (selectedOption) => {
     setSelectedDate(selectedOption);
@@ -94,6 +185,10 @@ const DoctorProfile = () => {
   if (!selectedDate || dateOptions.length === 0) {
     return <div>Loading...</div>;
   }
+
+  const handleSubmit = (rating, comment) => {
+    console.log("Rating:", rating, "Comment:", comment); // Handle the submitted values
+  };
   return (
     <>
       {/* <div>
@@ -209,6 +304,11 @@ const DoctorProfile = () => {
             )}
           </div>
         )}
+        <RatingModal
+          isOpenModal={isOpenModalComment}
+          setIsOpenModal={setIsOpenModalComment}
+          handleSubmit={handleSubmit}
+        />
 
         {/* Rating Section */}
         <div className="mt-8 rounded-lg bg-gray-100 p-4">
@@ -222,6 +322,7 @@ const DoctorProfile = () => {
                   {feedback?.meta?.totalComments} đánh giá
                 </span>
               </div>
+
               <div className="mt-2 flex flex-col space-y-1">
                 {feedbackCount.map((count, index) => (
                   <div key={index} className="flex items-center space-x-2">
@@ -237,6 +338,19 @@ const DoctorProfile = () => {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="flex h-20 items-center justify-center border-b border-t border-gray-300">
+            <Button
+              onClick={() => setIsOpenModalComment(!isOpenModalComment)}
+              style={{
+                backgroundColor: "#3e83f8", // Set background color
+                color: "white", // Set text color
+                padding: "10px 20px", // Add padding
+                borderRadius: "8px", // Rounded corners
+              }}
+            >
+              Đánh giá ngay
+            </Button>
           </div>
           <div className="mx-auto max-w-3xl p-4">
             {/* Review Cards */}
