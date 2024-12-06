@@ -15,10 +15,10 @@ export class HealthInsurance extends AbstractEntity {
   placeOfRegistration: string;
 
   @Column()
-  timeStart: Date;
+  timeStart: string;
 
   @Column()
-  timeEnd: Date;
+  timeEnd: string;
 
   @OneToOne(() => Patient, (patient) => patient.health_insurance)
   @JoinColumn({ name: 'onwer_id' })

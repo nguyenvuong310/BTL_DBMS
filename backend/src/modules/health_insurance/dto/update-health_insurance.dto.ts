@@ -23,16 +23,19 @@ export class UpdateHealthInsuranceDto {
   placeOfRegistration?: string;
 
   @IsOptional()
-  @IsDate()
-  @Type(() => Date)
-  @ApiPropertyOptional({ example: '2024-11-15T09:37:17.689Z' })
-  timeStart?: Date;
+  @IsString()
+  @ApiPropertyOptional({ example: '2024-11-15' })
+  timeStart?: string;
 
   @IsOptional()
-  @IsDate()
-  @Type(() => Date)
-  @ApiPropertyOptional({ example: '2025-11-15T09:37:17.689Z' })
-  timeEnd?: Date;
+  @IsString()
+  @ApiPropertyOptional({ example: '2025-11-15' })
+  timeEnd?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiPropertyOptional({ example: '2025-11-15' })
+  birthDate?: string;
 
   constructor(healthInsurance: HealthInsurance) {
     this.gender = healthInsurance?.gender;
@@ -40,5 +43,6 @@ export class UpdateHealthInsuranceDto {
     this.placeOfRegistration = healthInsurance?.placeOfRegistration;
     this.timeStart = healthInsurance?.timeStart;
     this.timeEnd = healthInsurance?.timeEnd;
+    this.birthDate = healthInsurance?.owner?.birthDate;
   }
 }

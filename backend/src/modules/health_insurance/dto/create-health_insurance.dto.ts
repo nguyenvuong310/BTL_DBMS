@@ -16,15 +16,13 @@ export class CreateHealthInsuranceDto {
   @ApiProperty({ example: 'BV Da Khoa TPHCM' })
   placeOfRegistration: string;
 
-  @IsDate()
-  @Type(() => Date)
-  @ApiProperty({ example: '2024-11-15T09:37:17.689Z' })
-  timeStart: Date;
+  @IsString()
+  @ApiProperty({ example: '2024-11-15' })
+  timeStart?: string;
 
-  @IsDate()
-  @Type(() => Date)
-  @ApiProperty({ example: '2025-11-15T09:37:17.689Z' })
-  timeEnd: Date;
+  @IsString()
+  @ApiProperty({ example: '2025-11-15' })
+  timeEnd?: string;
 
   constructor(healthInsurance: HealthInsurance) {
     this.gender = healthInsurance?.gender;

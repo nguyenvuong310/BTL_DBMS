@@ -53,12 +53,6 @@ const SpecialtyDetail = () => {
 
     // Execute the async function
     fetchSpecialtyInfo();
-
-    // Get user data from local storage
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData) {
-      setRole(userData.role);
-    }
   }, []);
 
   return (

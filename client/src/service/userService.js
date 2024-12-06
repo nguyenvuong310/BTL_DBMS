@@ -33,6 +33,33 @@ const getAppointmentHistory = async (current) => {
   });
 };
 
+const handleGetHealthInsurance = async () => {
+  const token = localStorage.getItem("accessToken");
+  const url = `${backendURL}/api/health-insurance`;
+  return await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+const handleUpdateOrCreateHealthInsurance = async (data, isUpdate, id) => {
+  const token = localStorage.getItem("accessToken");
+  const url = `${backendURL}/api/health-insurance`;
+  if (isUpdate) {
+    return await axios.patch(url + "/" + id, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  return await axios.post(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const getUserFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
@@ -227,4 +254,6 @@ export {
   loginUser,
   getUserFromLocalStorage,
   hanleBookAppointment,
+  handleGetHealthInsurance,
+  handleUpdateOrCreateHealthInsurance,
 };

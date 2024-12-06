@@ -22,7 +22,7 @@ export class HealthInsuranceRepository {
   }
 
   async findByUserId(user_id: string): Promise<HealthInsurance> {
-    return this.healthInsuranceRepository.findOne({ where: { owner: { id: user_id } } });
+    return this.healthInsuranceRepository.findOne({ where: { owner: { id: user_id } }, relations: ['owner'] });
   }
 
   async remove(id: string): Promise<void> {

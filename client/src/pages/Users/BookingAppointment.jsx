@@ -18,6 +18,7 @@ import {
   getUserFromLocalStorage,
   hanleBookAppointment,
 } from "../../service/userService";
+const user = getUserFromLocalStorage();
 
 const DoctorProfile = () => {
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const DoctorProfile = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [reason, setReason] = useState("");
   const [scheduleId, setScheduleId] = useState("");
-  const user = getUserFromLocalStorage();
 
   const handleChange = async (selectedOption) => {
     setSelectedDate(selectedOption);
@@ -290,7 +290,7 @@ const BookingAppointment = () => {
   return (
     <>
       <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
-        <Header />
+        <Header role={user ? user.role : "main"} />
         <DoctorProfile />
       </div>
     </>

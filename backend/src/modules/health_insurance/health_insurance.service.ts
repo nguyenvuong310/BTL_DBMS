@@ -20,7 +20,7 @@ export class HealthInsuranceService {
     const health_insurance = await this.healthInsuranceRepository.findByUserId(user_id);
 
     if (!health_insurance) {
-      throw new Error('Health insurance not found');
+      return null;
     }
     return new InfoHealthInsuranceDto(health_insurance);
   }

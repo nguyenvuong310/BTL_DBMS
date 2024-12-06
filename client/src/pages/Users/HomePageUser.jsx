@@ -9,6 +9,9 @@ import {
   getHospitals,
 } from "../../service/userService";
 
+import { getUserFromLocalStorage } from "../../service/userService";
+
+const user = getUserFromLocalStorage();
 const MedicalSpecialty = () => {
   const navigate = useNavigate();
   const [specialties, setSpecialties] = useState([]);
@@ -227,7 +230,7 @@ const HomePageUser = () => {
   return (
     <>
       <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
-        <Header role="user" />
+        <Header role={user ? user.role : "main"} />
         <div className="flex w-full flex-col items-center justify-center gap-12 p-8">
           <MedicalSpecialty />
           <Hospitals />

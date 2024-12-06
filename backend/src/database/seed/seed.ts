@@ -182,21 +182,25 @@ async function runSeed() {
       name: 'Nguyen Trung Vuong',
       email: 'trungvuong@gmail.com',
       password: '123456',
+      birthdate: '03/10/2003',
     },
     {
       name: 'Nguyen Thai Thoi',
       email: 'thaithoi@gmail.com',
       password: '123456',
+      birthdate: '15/02/2003',
     },
     {
       name: 'Nguyen Ngoc Khanh My',
       email: 'khanhmy@gmail.com',
       password: '123456',
+      birthdate: '21/05/2003',
     },
     {
       name: 'Doan Minh Hieu',
       email: 'minhhieu@gmail.com',
       password: '123456',
+      birthdate: '18/07/2003',
     },
     {
       name: 'Nguyen Anh Duy',

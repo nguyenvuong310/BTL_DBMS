@@ -1,8 +1,26 @@
 import React from "react";
 import { Card, CardBody, Typography, Button } from "@material-tailwind/react";
 import Header from "./Header";
+import { handleGetInforHospital } from "../service/hospitalService";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const HospitalDetail = () => {
+  const { hospitalId } = useParams();
+  const [hospital, setHospital] = useState({});
+  useEffect(() => {
+    const fetchHospital = async () => {
+      try {
+        const response = await handleGetInforHospital(hospitalId); // Use the updated current page
+        setHospital(response.data.data);
+      } catch (error) {
+        console.error("Error fetching hospital:", error);
+      }
+    };
+
+    fetchHospital();
+  }, []);
+
   return (
     <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
       <Header role="user" />
@@ -10,10 +28,10 @@ const HospitalDetail = () => {
         {/* Header Section */}
         <header className="my-8 text-center">
           <Typography variant="h2" color="blue-gray">
-            Bệnh viện Chợ Rẫy
+            {hospital.name}
           </Typography>
           <Typography variant="h6" color="gray">
-            201B Nguyễn Chí Thanh, Phường 12, Quận 5, Hồ Chí Minh
+            {hospital.address}
           </Typography>
         </header>
 
@@ -25,11 +43,11 @@ const HospitalDetail = () => {
                 Giới thiệu
               </Typography>
               <Typography color="gray">
-                Bệnh viện Chợ Rẫy với lịch sử thành lập trên 100 năm, là bệnh
-                viện hạng đặc biệt tuyến Trung ương lớn nhất cả nước với trên
-                1.800 giường và trên 3.000 kỹ thuật y tế được thực hiện. Hàng
-                ngày Bệnh viện Chợ Rẫy tiếp nhận trung bình 6,000 - 8,000 bệnh
-                nhân đến khám.
+                Bệnh viện {hospital.name} với lịch sử thành lập trên 100 năm, là
+                bệnh viện hạng đặc biệt tuyến Trung ương lớn nhất cả nước với
+                trên 1.800 giường và trên 3.000 kỹ thuật y tế được thực hiện.
+                Hàng ngày Bệnh viện {hospital.name} tiếp nhận trung bình 6,000 -
+                8,000 bệnh nhân đến khám.
               </Typography>
             </CardBody>
           </Card>
@@ -99,7 +117,7 @@ const HospitalDetail = () => {
               </Typography>
               <div className="h-64 w-full">
                 <iframe
-                  title="Bản đồ Bệnh viện Chợ Rẫy"
+                  title={hospital.name}
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.676933048839!2d106.660982315334!3d10.759917992332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ecf1b0b1b0b%3A0x7e2f8e8e8e8e8e8e!2sB%E1%BB%87nh%20vi%E1%BB%87n%20Ch%E1%BB%A3%20R%E1%BA%ABy!5e0!3m2!1svi!2s!4v1633072800000!5m2!1svi!2s"
                   width="100%"
                   height="100%"
