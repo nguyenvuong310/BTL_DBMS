@@ -18,8 +18,27 @@ const handleGetDoctorScheduleNow = (doctor_id) => {
   );
 };
 
+const getAllScheduleDoctor = () => {
+  const token = localStorage.getItem("accessToken");
+
+  return axios.get(`${backendURL}/api/doctor-schedules`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const handleGetFeedback = (doctor_id) => {
   return axios.get(`${backendURL}/api/feedbacks/${doctor_id}`, "_self");
+};
+
+const handleCreateSchedule = (data) => {
+  const token = localStorage.getItem("accessToken");
+  return axios.post(`${backendURL}/api/doctor-schedules`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export {
@@ -27,4 +46,6 @@ export {
   handleGetDoctorSchedule,
   handleGetDoctorScheduleNow,
   handleGetFeedback,
+  getAllScheduleDoctor,
+  handleCreateSchedule,
 };

@@ -28,6 +28,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
+import { CreateSchedule } from "./pages/doctors/CreateSchedule.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,9 @@ const router = createBrowserRouter(
             path="/user/health-insurance"
             element={<PageHealthInsurance />}
           />
+        </Route>
+        <Route path="/doctor">
+          <Route index={true} element={<CreateSchedule />} />
         </Route>
       </Route>
     </>,

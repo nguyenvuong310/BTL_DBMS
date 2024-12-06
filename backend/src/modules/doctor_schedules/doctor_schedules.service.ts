@@ -4,6 +4,7 @@ import { UpdateDoctorScheduleDto } from './dto/update-doctor_schedule.dto';
 import { DoctorSchedulerRepository } from './doctor_schedulers.repository';
 import { InfoDoctorScheduleDto } from './dto/info-doctor_schedule.dto';
 import { DayDto } from './dto/day.dto';
+import { ScheduleInfo } from './dto/schedule_infor.dto';
 
 @Injectable()
 export class DoctorSchedulesService {
@@ -22,7 +23,10 @@ export class DoctorSchedulesService {
       );
 
       if (!overlapSchedules) {
-        throw new HttpException('Schedule overlapped', HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(
+          'Lịch bị xung đột, vui lòng kiểm tra lại lịch của bạn',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       }
       const schedule = await this.doctorSchedulesRepository.save(createDoctorScheduleDto, userId);
       return new InfoDoctorScheduleDto(schedule);
@@ -48,27 +52,10 @@ export class DoctorSchedulesService {
     return `This action removes a #${id} doctorSchedule`;
   }
 
-  async getDoctorSchedulesByDoctorId(doctor_id: string): Promise<any[]> {
+  async getDoctorSchedulesByDoctorId(doctor_id: string): Promise<ScheduleInfo[]> {
     const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesByDoctorId(doctor_id);
 
-    const groupedByDay = schedules.reduce((acc, schedule) => {
-      const day = schedule.day.toISOString().split('T')[0];
-      if (!acc[day]) {
-        acc[day] = [];
-      }
-
-      acc[day].push({
-        start_time: schedule.start_time,
-        end_time: schedule.end_time,
-      });
-
-      return acc;
-    }, {});
-
-    return Object.entries(groupedByDay).map(([day, times]) => ({
-      day,
-      times,
-    }));
+    return schedules.map((schedule) => new ScheduleInfo(schedule));
   }
 
   async findDoctorScheduleByDoctorIdAndDay(doctorId: string, day: Date) {
