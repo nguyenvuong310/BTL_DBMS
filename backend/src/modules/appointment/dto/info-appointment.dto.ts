@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Appointment } from '../entities/appointment.entity';
-
+import { timeToMinutes } from '../../../utils/TimeToMinutes';
 export class InfoAppointmentDto {
   @ApiProperty({ example: 'a02dd4ad-a083-4591-b09d-08ae34b6e298' })
   id: string;
@@ -29,6 +29,9 @@ export class InfoAppointmentDto {
   @ApiProperty({ example: 'Bận' })
   reason_cancel?: string | null;
 
+  @ApiProperty({ example: 'false' })
+  canCancel: boolean;
+
   constructor(appointment: Appointment) {
     this.id = appointment.id;
     this.patientName = appointment.patient.name;
@@ -47,5 +50,15 @@ export class InfoAppointmentDto {
     this.createdAt = appointment.createdAt.toISOString();
     this.status = appointment.status;
     this.reason_cancel = appointment.reason_cancel;
+
+    const currentTime = new Date();
+    const currentTimeInMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
+    const appointmentTimeInMinutes = timeToMinutes(appointment.doctor_schedule.start_time);
+    const twelveHoursInMinutes = 12 * 60;
+    if (currentTimeInMinutes - appointmentTimeInMinutes > twelveHoursInMinutes || appointment.status !== 'PENDING') {
+      this.canCancel = false;
+    } else {
+      this.canCancel = true;
+    }
   }
 }

@@ -197,6 +197,17 @@ const getDocBySearchPublic = async (data) => {
     data: data,
   });
 };
+
+const hanleCancelAppointment = async (id, data) => {
+  const token = localStorage.getItem("accessToken");
+  const url = `${backendURL}/api/appointments/${id}`;
+  return await axios.patch(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const getDocBySearchName = async (data) => {
   const url = `${backendURL}/api/getdocbysearchname`;
   return await axios({
@@ -289,4 +300,5 @@ export {
   hanldlePostFeedback,
   handleGetRefreshtoken,
   handleGetPrescription,
+  hanleCancelAppointment,
 };

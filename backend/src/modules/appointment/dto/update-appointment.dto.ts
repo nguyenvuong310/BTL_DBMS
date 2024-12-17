@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum } from 'class-validator';
+import { IsEnum, IsString } from 'class-validator';
 import { StatusType } from 'src/constants/action.enum';
 
 export class UpdateAppointmentDto {
@@ -8,5 +8,6 @@ export class UpdateAppointmentDto {
   status: StatusType;
 
   @ApiProperty()
+  @IsString()
   reason_cancel?: string;
 }

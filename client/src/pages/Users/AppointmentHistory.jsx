@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { getAppointmentHistory } from "../../service/userService";
 import {
   Card,
@@ -13,8 +13,12 @@ import {
 } from "@material-tailwind/react";
 import Header from "../../components/Header";
 import { useState, useEffect } from "react";
-import { getUserFromLocalStorage } from "../../service/userService";
+import {
+  getUserFromLocalStorage,
+  hanleCancelAppointment,
+} from "../../service/userService";
 import { ModalPrescriptionUser } from "../../components/modalPrescriptionUser";
+import { toast } from "react-toastify";
 
 const user = getUserFromLocalStorage();
 const TABLE_HEAD = [
@@ -30,10 +34,35 @@ const TABLE_HEAD = [
 
 export default function AppointmentHistory() {
   const [cureentPage, setCurrentPage] = useState(1);
-
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [reason, setReason] = useState("");
   const [appointments, setAppointments] = useState([]);
   const [isNext, setIsNext] = useState(false);
   const [isPrevious, setIsPrevious] = useState(false);
+  const [appointmentId, setAppointmentId] = useState("");
+
+  const handleClickCancel = (id) => {
+    setModalOpen(true);
+    setAppointmentId(id);
+  };
+
+  const handleCancel = async () => {
+    setModalOpen(true);
+    const isConfirmed = window.confirm("Bạn có chắc muốn hủy cuộc hẹn?");
+    if (isConfirmed) {
+      const data = {
+        status: "CANCELLED",
+        reason_cancel: reason,
+      };
+
+      const res = await hanleCancelAppointment(appointmentId, data);
+      console.log("Cancel appointment:", res);
+      if (res.status === 200) {
+        setModalOpen(false);
+        toast.success("Hủy cuộc hẹn thành công");
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchAppointmentHistory = async () => {
@@ -155,13 +184,23 @@ export default function AppointmentHistory() {
                           variant="ghost"
                           value={appoinment.status}
                           color={
-                            status === "Completed"
+                            appoinment.status === "DONE"
                               ? "green"
-                              : status === "Pending"
+                              : appoinment.status === "PENDING"
                                 ? "amber"
-                                : "red"
+                                : appoinment.status === "CANCELED"
+                                  ? "gray"
+                                  : appoinment.status === "CONFIRMED"
+                                    ? "blue" // You can use any color you prefer for canceled appointments
+                                    : "red"
                           }
                         />
+                        {appoinment.canCancel && (
+                          <TrashIcon
+                            className="h-5 w-5 cursor-pointer text-red-500"
+                            onClick={() => handleClickCancel(appoinment.id)}
+                          />
+                        )}
                       </div>
                     </td>
                     <td>
@@ -206,6 +245,46 @@ export default function AppointmentHistory() {
           </Button>
         </CardFooter>
       </Card>
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-6 shadow-lg">
+            <form className="mb-2 mt-8 w-80 max-w-screen-lg sm:w-96">
+              <div className="mb-1 flex flex-col gap-6">
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Lý do hủy hẹn
+                </Typography>
+
+                <Input
+                  size="lg"
+                  placeholder="Vui lòng nhập lý do khám"
+                  className="!h-20 !border-t-blue-gray-200 focus:!border-t-gray-900"
+                  labelProps={{
+                    className: "before:content-none after:content-none",
+                  }}
+                  value={reason} // Bind the input's value to the state
+                  onChange={(e) => setReason(e.target.value)}
+                />
+              </div>
+              <div className="mt-6 text-right">
+                <Button
+                  className="mt-6 bg-blue-500 text-white"
+                  onClick={handleCancel}
+                >
+                  Huỷ hẹn
+                </Button>
+                <Button
+                  className="ml-8 mt-6 bg-gray-200 text-gray-800"
+                  onClick={() => {
+                    setModalOpen(false);
+                  }}
+                >
+                  Đóng
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

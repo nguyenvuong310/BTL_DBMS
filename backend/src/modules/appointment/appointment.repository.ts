@@ -94,9 +94,21 @@ export class AppointmentRepository {
       relations: ['doctor_schedule', 'doctor_schedule.doctor'],
     });
   }
-
+  timeToMinutes = (time) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes; // Convert time to total minutes
+  };
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto, userId: string): Promise<Appointment> {
-    const appointment = await this.appointmentRepository.findOne({ where: { id } });
+    const appointment = await this.appointmentRepository.findOne({ where: { id }, relations: ['doctor_schedule'] });
+    const currentTime = new Date();
+    const currentTimeInMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();
+    const appointmentTimeInMinutes = this.timeToMinutes(appointment.doctor_schedule.start_time);
+    const twelveHoursInMinutes = 12 * 60;
+
+    if (currentTimeInMinutes - appointmentTimeInMinutes > twelveHoursInMinutes) {
+      throw new Error('You can only cancel an appointment 12 hours before the appointment time');
+    }
+
     appointment.status = updateAppointmentDto.status;
     appointment.reason_cancel = updateAppointmentDto.reason_cancel;
     appointment.updatedBy = userId;

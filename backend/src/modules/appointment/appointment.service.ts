@@ -46,15 +46,19 @@ export class AppointmentService {
   }
 
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto, user: UserDto) {
-    const appointment = await this.appointmentRepository.update(id, updateAppointmentDto, user?.id);
-    const infoAppointment = await this.appointmentRepository.getInfoAppointment(appointment.id);
-    const infoAppointmentDto = new InfoAppointmentDto(infoAppointment);
-    if (user.role === Role.PATIENT) {
-      this.mailService.noticeCancelByPatient(infoAppointmentDto, user);
+    try {
+      const appointment = await this.appointmentRepository.update(id, updateAppointmentDto, user?.id);
+      const infoAppointment = await this.appointmentRepository.getInfoAppointment(appointment.id);
+      const infoAppointmentDto = new InfoAppointmentDto(infoAppointment);
+      if (user.role === Role.PATIENT) {
+        this.mailService.noticeCancelByPatient(infoAppointmentDto, user);
+      }
+      if (user.role === Role.DOCTOR) {
+        this.mailService.noticeCancelByDoctor(infoAppointmentDto, user);
+      }
+      return infoAppointmentDto;
+    } catch (error) {
+      throw error;
     }
-    if (user.role === Role.DOCTOR) {
-      this.mailService.noticeCancelByDoctor(infoAppointmentDto, user);
-    }
-    return infoAppointmentDto;
   }
 }
