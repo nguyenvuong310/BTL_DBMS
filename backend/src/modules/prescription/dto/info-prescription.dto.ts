@@ -5,13 +5,13 @@ import { InfoPrescriptionItemsDto } from 'src/modules/prescription_items/dto/inf
 export class InfoPrescriptionDto {
   @Type(() => InfoPrescriptionItemsDto)
   @ValidateNested({ each: true })
-  morning: InfoPrescriptionItemsDto[];
+  morning: InfoPrescriptionItemsDto[] = [];
 
   @Type(() => InfoPrescriptionItemsDto)
   @ValidateNested({ each: true })
-  afternoon: InfoPrescriptionItemsDto[];
+  afternoon: InfoPrescriptionItemsDto[] = [];
 
   @Type(() => InfoPrescriptionItemsDto)
   @ValidateNested({ each: true })
-  evening: InfoPrescriptionItemsDto[];
+  evening: InfoPrescriptionItemsDto[] = [];
 }

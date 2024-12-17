@@ -45,7 +45,7 @@ export class AppointmentController {
     @Query('filter') filter: StatusType | null,
     @User() user: UserDto,
   ) {
-    return this.appointmentService.findAll(currentPage, limit, sort, filter, user.id);
+    return this.appointmentService.findAll(currentPage, limit, sort, filter, user);
   }
 
   // @Get(':id')

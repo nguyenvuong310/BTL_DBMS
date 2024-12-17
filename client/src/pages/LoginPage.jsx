@@ -163,8 +163,7 @@ const LoginPage = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
         if (response.data.data.user.role === "DOCTOR") {
-          console.log("doctor");
-          navigate("/doctor");
+          navigate("/doctors");
           return;
         }
         navigate("/user");

@@ -2,7 +2,8 @@ import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-const AuthUser = () => {
+
+const AuthDoctor = () => {
   const [role, setRole] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -33,7 +34,8 @@ const AuthUser = () => {
   if (isLoading) {
     return null;
   }
-  if (role === "PATIENT") {
+  console.log("Role:", role);
+  if (role === "DOCTOR") {
     return (
       <>
         <Outlet />
@@ -43,4 +45,4 @@ const AuthUser = () => {
     return <Navigate to="/login" />;
   }
 };
-export default AuthUser;
+export default AuthDoctor;

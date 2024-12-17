@@ -11,13 +11,6 @@ import { Doctor } from '../doctors/entities/doctor.entity';
 export class PrescriptionRepository {
   constructor(@InjectRepository(Prescription) private PrescriptionRepository: Repository<Prescription>) {}
 
-  async getPrescriptionsByAppointmentId(appointment_id: string): Promise<Prescription[]> {
-    return this.PrescriptionRepository.find({
-      where: { appointment: { id: appointment_id } },
-      relations: ['medicines', 'prescription_items'],
-    });
-  }
-
   async save(appointment_id: string, doctor_id: string, queryRunner: QueryRunner): Promise<Prescription> {
     const prescription = new Prescription();
     prescription.appointment = { id: appointment_id } as Appointment;
@@ -32,7 +25,7 @@ export class PrescriptionRepository {
   async findByAppointmentId(appointment_id: string): Promise<Prescription> {
     return this.PrescriptionRepository.findOne({
       where: { appointment: { id: appointment_id } },
-      relations: ['prescription_items.medicine', 'prescription_items'],
+      relations: ['prescription_items.medicine', 'prescription_items', 'appointment', 'appointment.patient'],
     });
   }
 }

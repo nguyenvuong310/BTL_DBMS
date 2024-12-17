@@ -24,18 +24,26 @@ export class PrescriptionItemsService {
     prescription: Prescription,
     queryRunner: QueryRunner,
   ): Promise<PrescriptionItem[]> {
-    const prescription_items: PrescriptionItem[] = await Promise.all(
+    const prescription_items: PrescriptionItem[][] = await Promise.all(
       createPrescriptionItemsDto.map(async (item) => {
-        const prescriptionItem = new PrescriptionItem();
+        const itemsForStatus = await Promise.all(
+          item.status.map(async (status) => {
+            const prescriptionItem = new PrescriptionItem();
 
-        prescriptionItem.prescription = prescription;
-        prescriptionItem.medicine = await this.medicineService.findById(item.medicineId);
-        prescriptionItem.dosage = item.dosage;
-        prescriptionItem.status = item.status;
+            prescriptionItem.prescription = prescription;
+            prescriptionItem.medicine = await this.medicineService.findById(item.medicineId);
+            prescriptionItem.dosage = item.dosage;
+            prescriptionItem.status = status;
 
-        return prescriptionItem;
+            return prescriptionItem;
+          }),
+        );
+
+        return itemsForStatus;
       }),
     );
-    return this.prescriptionItemsRepository.save(prescription_items, queryRunner);
+
+    const flattenedPrescriptionItems = prescription_items.flat();
+    return this.prescriptionItemsRepository.save(flattenedPrescriptionItems, queryRunner);
   }
 }

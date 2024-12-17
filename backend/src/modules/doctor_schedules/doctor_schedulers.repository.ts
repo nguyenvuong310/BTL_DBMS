@@ -22,7 +22,10 @@ export class DoctorSchedulerRepository {
   }
 
   async getDoctorScheduleByDoctorIdAndDay(doctorId: string, day: Date): Promise<DoctorSchedule[]> {
-    return this.doctorSchedulerRepository.find({ where: { doctor: { id: doctorId }, day } });
+    return this.doctorSchedulerRepository.find({
+      where: { doctor: { id: doctorId }, day },
+      order: { start_time: 'ASC' },
+    });
   }
 
   async update(id: string, doctorSchedule: CreateDoctorScheduleDto): Promise<DoctorSchedule> {

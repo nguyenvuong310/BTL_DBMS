@@ -31,16 +31,16 @@ export class AppointmentService {
     return infoAppointmentDto;
   }
 
-  async findAll(currentPage: string, limit: string, sort: string, filter: StatusType | null, userId: string) {
+  async findAll(currentPage: string, limit: string, sort: string, filter: StatusType | null, user: UserDto) {
     const appointmentSort = new AppointmentSortDto(sort);
     const appointmentPaging = await this.appointmentRepository.findAll(
       currentPage,
       limit,
       appointmentSort,
       filter,
-      userId,
+      user?.id,
     );
-    const totalItems = await this.appointmentRepository.countAppointments(userId);
+    const totalItems = await this.appointmentRepository.countAppointments(user);
     const infoAppointment = appointmentPaging.map((appointment) => new InfoAppointmentDto(appointment));
     return new AppointmentList(+limit, +currentPage, totalItems, infoAppointment);
   }

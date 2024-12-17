@@ -22,7 +22,7 @@ export class PrescriptionController {
 
   @Get(':appointmentId')
   @ApiOperation({ summary: 'Get prescription by appointment id' })
-  findOne(@Param('appointmentId') id: string) {
-    return this.prescriptionService.findPrescription(id);
+  findOne(@Param('appointmentId') id: string, @User() user: UserDto) {
+    return this.prescriptionService.findPrescription(id, user);
   }
 }

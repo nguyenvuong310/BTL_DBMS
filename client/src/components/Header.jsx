@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { FaHistory, FaSignOutAlt } from "react-icons/fa";
 import { logout } from "../service/userService";
 
-const Header = ({ role }) => {
+const Header = ({ role, type }) => {
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -54,10 +54,7 @@ const Header = ({ role }) => {
       label: "Quản lý bảo hiểm y tế",
       icon: HeartIcon,
     },
-    {
-      label: "Quản lý đơn thuốc",
-      icon: DocumentIcon,
-    },
+
     {
       label: "Đăng xuất",
       icon: FaSignOutAlt,
@@ -72,10 +69,6 @@ const Header = ({ role }) => {
     {
       label: "Lịch hẹn của tôi",
       icon: HeartIcon,
-    },
-    {
-      label: "Kê thuốc",
-      icon: DocumentIcon,
     },
     {
       label: "Đăng xuất",
@@ -105,24 +98,27 @@ const Header = ({ role }) => {
                 </Typography>
               </div>
             </div>
-            <div class="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
-              <div class="hidden sm:ml-6 sm:block">
-                <div class="flex space-x-[60px]">
-                  <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
-                    <div className="w-72">
-                      <Input
-                        label="Tìm kiếm"
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                          >
-                            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                          </svg>
-                        }
-                      />
+            <div className="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-[60px]">
+                  {type !== "search" && (
+                    <div className="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
+                      <div className="w-72">
+                        <Input
+                          label="Tìm kiếm"
+                          icon={
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 512 512"
+                            >
+                              <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                            </svg>
+                          }
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
+
                   <Button color="blue" onClick={handleNavLogin}>
                     Đăng nhập
                   </Button>
@@ -152,23 +148,29 @@ const Header = ({ role }) => {
                 </Typography>
               </div>
             </div>
-            <div class="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
-              <div class="hidden sm:ml-6 sm:block">
-                <div class="flex space-x-[60px]">
-                  <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
-                    <div className="w-72">
-                      <Input
-                        label="Tìm kiếm"
-                        icon={
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                          >
-                            <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                          </svg>
-                        }
-                      />
-                    </div>
+            <div className="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-[60px]">
+                  <div className="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
+                    {type !== "search" && (
+                      <div
+                        className="w-72 cursor-pointer"
+                        onClick={() => navigate("/search")}
+                      >
+                        <Input
+                          label="Tìm kiếm"
+                          className="cursor-pointer"
+                          icon={
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 512 512"
+                            >
+                              <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                            </svg>
+                          }
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-row items-center gap-4">
                     <Typography
@@ -274,7 +276,7 @@ const Header = ({ role }) => {
             <div class="mb-4 mr-[70px] mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-14">
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-[60px]">
-                  <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
+                  {/* <div class="flex-rol text-md flex items-center space-x-[50px] rounded-md px-3 font-semibold text-[#636363]">
                     <div className="w-72">
                       <Input
                         label="Tìm kiếm"
@@ -288,7 +290,7 @@ const Header = ({ role }) => {
                         }
                       />
                     </div>
-                  </div>
+                  </div> */}
                   <div className="flex flex-row items-center gap-4">
                     <Typography
                       variant="h1"
@@ -336,8 +338,8 @@ const Header = ({ role }) => {
                                   navigate(path.HOME);
                                   await logout();
                                 }
-                                if (label === "Lịch sử đặt hẹn") {
-                                  navigate(`/user/history`);
+                                if (label === "Lịch hẹn của tôi") {
+                                  navigate(`/doctors/my-appointment`);
                                 }
                               }}
                             >

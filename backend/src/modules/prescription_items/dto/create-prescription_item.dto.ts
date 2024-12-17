@@ -1,17 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsString } from 'class-validator';
+import { ArrayNotEmpty, IsArray, IsEnum, IsString } from 'class-validator';
 import { TimePeriod } from 'src/constants/action.enum';
 
 export class CreatePrescriptionItemDto {
   @IsString()
-  @ApiProperty({ example: '000aae48-9377-4e0d-b45b-69c2b7354178' })
+  @ApiProperty({ example: '08086fb0-4c3a-4908-9929-0e503ebf26fa' })
   medicineId: string;
 
   @IsString()
   @ApiProperty({ example: '1 vien' })
   dosage: string;
 
-  @IsEnum(TimePeriod)
-  @ApiProperty({ enum: TimePeriod })
-  status: TimePeriod;
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsEnum(TimePeriod, { each: true })
+  @ApiProperty({ enum: TimePeriod, isArray: true })
+  status: TimePeriod[];
 }

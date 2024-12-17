@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePrescriptionDto } from './dto/create-prescription.dto';
 
 import { PrescriptionRepository } from './prescription.repository';
@@ -8,6 +8,7 @@ import { InfoPrescriptionDto } from './dto/info-prescription.dto';
 import { TimePeriod } from '../../constants/action.enum';
 import { PrescriptionItem } from '../prescription_items/entities/prescription_item.entity';
 import { InfoPrescriptionItemsDto } from '../prescription_items/dto/info-prescription_items.dto';
+import { UserDto } from '../users/dto/user.dto';
 @Injectable()
 export class PrescriptionService {
   constructor(
@@ -58,12 +59,15 @@ export class PrescriptionService {
     return this.prescriptionRepository.save(appointment_id, doctor_id, queryRunner);
   }
 
-  async getPrescriptionsByAppointmentId(appointment_id: string) {
-    return this.prescriptionRepository.getPrescriptionsByAppointmentId(appointment_id);
-  }
-
-  async findPrescription(appointment_id: string) {
+  async findPrescription(appointment_id: string, user: UserDto) {
     const prescription = await this.prescriptionRepository.findByAppointmentId(appointment_id);
+
+    if (prescription && prescription.appointment && prescription?.appointment?.patient?.id !== user.id) {
+      throw new NotFoundException('Prescription not found');
+    }
+    if (!prescription) {
+      return new InfoPrescriptionDto();
+    }
 
     const groupedByStatus = this.groupPrescriptionItemsByStatus(prescription.prescription_items);
 

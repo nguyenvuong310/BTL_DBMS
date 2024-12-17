@@ -69,7 +69,6 @@ export class DoctorSchedulesService {
     const next7Days = new Date();
     next7Days.setDate(now.getDate() + 7);
     const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesNow(doctorId, now, next7Days);
-    console.log(schedules);
     return schedules.map((schedule) => new DayDto(schedule.schedule_day));
   }
 }

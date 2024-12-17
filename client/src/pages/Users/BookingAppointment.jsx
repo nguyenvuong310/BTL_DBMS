@@ -18,6 +18,7 @@ import { FaStar } from "react-icons/fa";
 import {
   getUserFromLocalStorage,
   hanleBookAppointment,
+  hanldlePostFeedback,
 } from "../../service/userService";
 const user = getUserFromLocalStorage();
 
@@ -109,9 +110,37 @@ const RatingModal = ({ isOpenModal, setIsOpenModal, handleSubmit }) => {
     </div>
   );
 };
+const AlertModal = ({ setModalOpen }) => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <div className="rounded-lg bg-white p-6 shadow-lg">
+        <Typography variant="h6" color="red" className="text-center">
+          Vui lòng đăng nhập để đặt lịch hẹn.
+        </Typography>
+        <div className="mt-4 text-center">
+          <Button
+            className="mt-6 bg-blue-500 text-white"
+            onClick={() => navigate("/login")} // Redirect to login page
+          >
+            Đăng nhập
+          </Button>
+          <Button
+            className="ml-8 mt-6 bg-gray-200 text-gray-800"
+            onClick={() => {
+              setModalOpen(false);
+            }}
+          >
+            Đóng
+          </Button>
+        </div>
+      </div>
+    </>
+  );
+};
 
 const DoctorProfile = () => {
-  const navigate = useNavigate();
   const { doctorId } = useParams();
   const [doctor, setDoctor] = useState({});
   const [doctorSchedules, setDoctorSchedule] = useState([]);
@@ -154,14 +183,17 @@ const DoctorProfile = () => {
         const doctor = await handleGetInforDoctor(doctorId);
         setDoctor(doctor.data.data);
         const options = await handleGetDoctorScheduleNow(doctorId);
-        setDateOptions(options.data.data);
-        setSelectedDate(options.data.data[0]);
-        const doctorSchedules = await handleGetDoctorSchedule(
-          doctorId,
-          options.data.data[0].value,
-        );
+        if (options.data.data.length > 0) {
+          setDateOptions(options.data.data);
+          setSelectedDate(options.data.data[0]);
+          const doctorSchedules = await handleGetDoctorSchedule(
+            doctorId,
+            options.data.data[0].value,
+          );
 
-        setDoctorSchedule(doctorSchedules.data.data);
+          setDoctorSchedule(doctorSchedules.data.data);
+        }
+
         const feedback = await handleGetFeedback(doctorId);
         setFeedback(feedback.data.data);
         const feedbackCount = [
@@ -181,13 +213,20 @@ const DoctorProfile = () => {
     fetchDoctorInfo();
   }, []);
 
-  // useEffect(() => {}, [doctorSchedules]);
-  if (!selectedDate || dateOptions.length === 0) {
-    return <div>Loading...</div>;
-  }
+  // // useEffect(() => {}, [doctorSchedules]);
+  // if (!selectedDate || dateOptions.length === 0) {
+  //   return <div>Loading...</div>;
+  // }
 
-  const handleSubmit = (rating, comment) => {
-    console.log("Rating:", rating, "Comment:", comment); // Handle the submitted values
+  const handleSubmit = async (rating, comment) => {
+    const data = {
+      rating: rating,
+      comment: comment,
+    };
+    const res = await hanldlePostFeedback(doctorId, data);
+    if (res.status === 201) {
+      toast.success("Cảm ơn bạn đã đánh giá");
+    }
   };
   return (
     <>
@@ -279,36 +318,23 @@ const DoctorProfile = () => {
                 </form>
               </div>
             ) : (
-              // Message if user is not logged in
-              <div className="rounded-lg bg-white p-6 shadow-lg">
-                <Typography variant="h6" color="red" className="text-center">
-                  Vui lòng đăng nhập để đặt lịch hẹn.
-                </Typography>
-                <div className="mt-4 text-center">
-                  <Button
-                    className="mt-6 bg-blue-500 text-white"
-                    onClick={() => navigate("/login")} // Redirect to login page
-                  >
-                    Đăng nhập
-                  </Button>
-                  <Button
-                    className="ml-8 mt-6 bg-gray-200 text-gray-800"
-                    onClick={() => {
-                      setModalOpen(false);
-                    }}
-                  >
-                    Đóng
-                  </Button>
-                </div>
-              </div>
+              <AlertModal setModalOpen={setModalOpen} />
             )}
           </div>
         )}
-        <RatingModal
-          isOpenModal={isOpenModalComment}
-          setIsOpenModal={setIsOpenModalComment}
-          handleSubmit={handleSubmit}
-        />
+        {isOpenModalComment && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            {user ? (
+              <RatingModal
+                isOpenModal={isOpenModalComment}
+                setIsOpenModal={setIsOpenModalComment}
+                handleSubmit={handleSubmit}
+              />
+            ) : (
+              <AlertModal setModalOpen={setIsOpenModalComment} />
+            )}
+          </div>
+        )}
 
         {/* Rating Section */}
         <div className="mt-8 rounded-lg bg-gray-100 p-4">

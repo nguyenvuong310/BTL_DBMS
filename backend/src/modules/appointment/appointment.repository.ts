@@ -7,8 +7,9 @@ import { Appointment } from './entities/appointment.entity';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { AppointmentSortDto } from './dto/appointment-sort.dto';
 
-import { StatusType } from 'src/constants/action.enum';
+import { Role, StatusType } from 'src/constants/action.enum';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { UserDto } from '../users/dto/user.dto';
 
 @Injectable()
 export class AppointmentRepository {
@@ -51,14 +52,15 @@ export class AppointmentRepository {
       .leftJoinAndSelect('doctor_schedule.doctor', 'doctor') // Join doctor related to doctor_schedule
       .leftJoinAndSelect('doctor.hospital', 'hospital') // Join the hospital related to the doctor
       .leftJoinAndSelect('doctor.specialty', 'specialty') // Join the specialty related to the doctor
-      // Apply filtering based on appointment status
-      .orderBy('doctor_schedule.day', 'DESC')
-      .orderBy('doctor_schedule.start_time', 'ASC')
-      .orderBy('appointment.createdAt', 'DESC')
-      .where('patient.id = :userId', { userId }) // Filter appointments by patient ID
-      // Pagination settings: take (limit) and skip (pagination)
-      .take(+limit) // Limit the number of results (based on the page size)
-      .skip((+currentPage - 1) * +limit); // Skip results based on the current page
+      .orderBy({
+        'doctor_schedule.day': 'DESC', // Sort by doctor_schedule day in descending order
+        'doctor_schedule.start_time': 'ASC', // Then by start_time in ascending order
+        'appointment.createdAt': 'DESC', // Then by appointment createdAt in descending order
+      })
+      .where('patient.id = :userId', { userId })
+      .orWhere('doctor.id = :userId', { userId })
+      .take(+limit)
+      .skip((+currentPage - 1) * +limit);
 
     if (filter) {
       queryBuilder.andWhere('appointment.status = :status', { status: filter });
@@ -83,8 +85,14 @@ export class AppointmentRepository {
     return await queryBuilder.getMany();
   }
 
-  async countAppointments(userId: string): Promise<number> {
-    return this.appointmentRepository.count({ where: { patient: { id: userId } } });
+  async countAppointments(user: UserDto): Promise<number> {
+    if (user.role === Role.PATIENT) {
+      return this.appointmentRepository.count({ where: { patient: { id: user?.id } } });
+    }
+    return this.appointmentRepository.count({
+      where: { doctor_schedule: { doctor: { id: user?.id } } },
+      relations: ['doctor_schedule', 'doctor_schedule.doctor'],
+    });
   }
 
   async update(id: string, updateAppointmentDto: UpdateAppointmentDto, userId: string): Promise<Appointment> {

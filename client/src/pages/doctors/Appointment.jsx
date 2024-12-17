@@ -1,5 +1,7 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { StarIcon, TrashIcon } from "@heroicons/react/24/solid";
+
 import { getAppointmentHistory } from "../../service/userService";
+
 import {
   Card,
   CardHeader,
@@ -9,31 +11,42 @@ import {
   Chip,
   CardFooter,
   IconButton,
-  Input,
+  Tooltip,
 } from "@material-tailwind/react";
 import Header from "../../components/Header";
+import { ModalPrescription } from "../../components/modalPrescription";
 import { useState, useEffect } from "react";
 import { getUserFromLocalStorage } from "../../service/userService";
-import { ModalPrescriptionUser } from "../../components/modalPrescriptionUser";
-
 const user = getUserFromLocalStorage();
 const TABLE_HEAD = [
   "Ngày hẹn",
   "Thời gian",
-  "Bác sĩ",
-  "Bệnh viện",
-  "Địa chỉ",
+  "Bệnh nhân",
   "Lý do khám",
   "Status",
   "",
 ];
 
-export default function AppointmentHistory() {
+export default function Appointment() {
   const [cureentPage, setCurrentPage] = useState(1);
 
   const [appointments, setAppointments] = useState([]);
   const [isNext, setIsNext] = useState(false);
   const [isPrevious, setIsPrevious] = useState(false);
+
+  // useEffect(() => {
+  //   const fetchAppointmentHistory = async () => {
+  //     try {
+  //       const response = await getAppointmentHistory(cureentPage);
+  //       setAppointments(response.data.data.items);
+  //       setMeta(response.data.data.meta);
+  //     } catch (error) {
+  //       console.error("Error fetching doctor information:", error);
+  //     }
+  //   };
+
+  //   fetchAppointmentHistory();
+  // }, []);
 
   useEffect(() => {
     const fetchAppointmentHistory = async () => {
@@ -41,6 +54,7 @@ export default function AppointmentHistory() {
         const response = await getAppointmentHistory(cureentPage); // Use the updated current page
         setAppointments(response.data.data.items);
         console.log("Appointment history:", response.data.data.items.length);
+
         setIsNext(response.data.data.meta.isNext);
         setIsPrevious(response.data.data.meta.isPrevious);
       } catch (error) {
@@ -53,7 +67,8 @@ export default function AppointmentHistory() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header role={user ? user?.role : "main"} />
+      <Header role={user ? user.role : "main"} />
+
       <Card className="flex-grow">
         <CardHeader floated={false} shadow={false} className="rounded-none">
           <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
@@ -65,6 +80,14 @@ export default function AppointmentHistory() {
                 These are details about the last transactions
               </Typography> */}
             </div>
+            {/* <div className="flex w-full shrink-0 gap-2 md:w-max">
+              <div className="w-full md:w-72">
+                <Input
+                  label="Tìm kiếm"
+                  icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+                />
+              </div>
+            </div> */}
           </div>
         </CardHeader>
 
@@ -89,7 +112,7 @@ export default function AppointmentHistory() {
               </tr>
             </thead>
             <tbody>
-              {appointments.map((appoinment, index) => {
+              {appointments.map((appointment, index) => {
                 return (
                   <tr key={index}>
                     <td>
@@ -99,7 +122,7 @@ export default function AppointmentHistory() {
                           color="blue-gray"
                           className="font-bold"
                         >
-                          {appoinment.date}
+                          {appointment.date}
                         </Typography>
                       </div>
                     </td>
@@ -109,7 +132,7 @@ export default function AppointmentHistory() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {appoinment.start_time} - {appoinment.end_time}
+                        {appointment.start_time} - {appointment.end_time}
                       </Typography>
                     </td>
                     <td>
@@ -118,34 +141,17 @@ export default function AppointmentHistory() {
                         color="blue-gray"
                         className="font-normal"
                       >
-                        {appoinment.doctorName}
+                        {appointment.patientName}
                       </Typography>
                     </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {appoinment.hospitalName}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal capitalize"
-                      >
-                        {appoinment.address}
-                      </Typography>
-                    </td>
+
                     <td>
                       <Typography
                         variant="small"
                         color="blue-gray"
                         className="font-normal opacity-70"
                       >
-                        {appoinment.reason}
+                        {appointment.reason}
                       </Typography>
                     </td>
                     <td>
@@ -153,7 +159,7 @@ export default function AppointmentHistory() {
                         <Chip
                           size="sm"
                           variant="ghost"
-                          value={appoinment.status}
+                          value={appointment.status}
                           color={
                             status === "Completed"
                               ? "green"
@@ -165,8 +171,24 @@ export default function AppointmentHistory() {
                       </div>
                     </td>
                     <td>
-                      {console.log("Appoinment:", appoinment.id)}
-                      <ModalPrescriptionUser appointmentId={appoinment.id} />
+                      <ModalPrescription appointmentId={appointment.id} />
+                    </td>
+                    <td>
+                      {status === "Completed" ? (
+                        <Tooltip content="Đánh giá ngay">
+                          <IconButton variant="text">
+                            <StarIcon className="h-4 w-4" color="yellow" />
+                          </IconButton>
+                        </Tooltip>
+                      ) : status === "Pending" ? (
+                        <Tooltip content="Hủy cuộc hẹn">
+                          <IconButton variant="text">
+                            <TrashIcon className="h-4 w-4" color="red" />
+                          </IconButton>
+                        </Tooltip>
+                      ) : (
+                        <></>
+                      )}
                     </td>
                   </tr>
                 );

@@ -60,6 +60,27 @@ const handleUpdateOrCreateHealthInsurance = async (data, isUpdate, id) => {
   });
 };
 
+const hanldlePostFeedback = async (doctor_id, data) => {
+  const token = localStorage.getItem("accessToken");
+  const url = `${backendURL}/api/feedbacks/${doctor_id}`;
+  return await axios.post(url, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+const handleGetPrescription = async (appointment_id) => {
+  const token = localStorage.getItem("accessToken");
+  const url = `${backendURL}/api/prescription/${appointment_id}`;
+  console.log("url", url);
+  return await axios.get(url, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const getUserFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
@@ -76,6 +97,15 @@ const logout = async () => {
 
 const getUserInfo = async () => {
   const url = `${backendURL}/api/getUserInfo`;
+  return await axios({
+    url: url,
+    method: "GET",
+    withCredentials: true,
+  });
+};
+
+const handleGetRefreshtoken = async () => {
+  const url = `${backendURL}/auth/refresh`;
   return await axios({
     url: url,
     method: "GET",
@@ -256,4 +286,7 @@ export {
   hanleBookAppointment,
   handleGetHealthInsurance,
   handleUpdateOrCreateHealthInsurance,
+  hanldlePostFeedback,
+  handleGetRefreshtoken,
+  handleGetPrescription,
 };

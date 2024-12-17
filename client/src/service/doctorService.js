@@ -41,6 +41,15 @@ const handleCreateSchedule = (data) => {
   });
 };
 
+const handlePrescription = (data) => {
+  const token = localStorage.getItem("accessToken");
+  return axios.post(`${backendURL}/api/prescription`, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export {
   handleGetInforDoctor,
   handleGetDoctorSchedule,
@@ -48,4 +57,5 @@ export {
   handleGetFeedback,
   getAllScheduleDoctor,
   handleCreateSchedule,
+  handlePrescription,
 };
