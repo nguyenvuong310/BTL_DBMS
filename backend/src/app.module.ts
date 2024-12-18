@@ -18,17 +18,17 @@ import { MedicineModule } from './modules/medicine/medicine.module';
 import { PrescriptionItemsModule } from './modules/prescription_items/prescription_items.module';
 import { PrescriptionModule } from './modules/prescription/prescription.module';
 import { MailModule } from './modules/mail/mail.module';
-import { RedisModule } from '@nestjs-modules/ioredis';
+// import { RedisModule } from '@nestjs-modules/ioredis';
 @Module({
   imports: [
     AuthModule,
     HospitalsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     ScheduleModule.forRoot(),
-    RedisModule.forRoot({
-      type: 'single',
-      url: 'redis://localhost:6379',
-    }),
+    // RedisModule.forRoot({
+    //   type: 'single',
+    //   url: 'redis://localhost:6379',
+    // }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
