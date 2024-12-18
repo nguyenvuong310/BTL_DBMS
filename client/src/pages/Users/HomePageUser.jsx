@@ -61,7 +61,6 @@ const MedicalSpecialty = () => {
                     key={subIndex}
                     className="flex flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
                     onClick={() => {
-                      console.log("click");
                       navigate(`/specialty/${item.id}`);
                       window.scrollTo(0, 0);
                     }}
@@ -88,6 +87,7 @@ const MedicalSpecialty = () => {
 
 const Hospitals = () => {
   const [hospitalLocations, setHospitalLocations] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     getHospitals().then((res) => {
       setHospitalLocations(res.data.data);
@@ -133,6 +133,10 @@ const Hospitals = () => {
                     <div
                       key={subIndex}
                       className="flex h-56 w-52 flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
+                      onClick={() => {
+                        navigate(`/hospital/${item.id}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       <img
                         src={item.logo}
