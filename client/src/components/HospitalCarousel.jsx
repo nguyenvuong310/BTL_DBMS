@@ -2,8 +2,9 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/20/solid";
 import { useState, useEffect } from "react";
 import { Carousel, Typography } from "@material-tailwind/react";
 import { getHospitals } from "../service/userService";
-
+import { useNavigate } from "react-router-dom";
 export const HospitalsCarousel = () => {
+  const nagivate = useNavigate();
   const [hospitalLocations, setHospitalLocations] = useState([]);
   useEffect(() => {
     getHospitals().then((res) => {
@@ -50,6 +51,7 @@ export const HospitalsCarousel = () => {
                     <div
                       key={subIndex}
                       className="flex h-56 w-52 flex-col items-center rounded-lg bg-white p-4 px-4 shadow-md transition-shadow duration-300 hover:scale-105 hover:shadow-lg"
+                      onClick={() => nagivate("/hospital/" + item.id)}
                     >
                       <img
                         src={item.logo}
