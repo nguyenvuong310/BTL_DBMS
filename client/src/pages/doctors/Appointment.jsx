@@ -161,11 +161,15 @@ export default function Appointment() {
                           variant="ghost"
                           value={appointment.status}
                           color={
-                            status === "Completed"
+                            appointment.status === "DONE"
                               ? "green"
-                              : status === "Pending"
+                              : appointment.status === "PENDING"
                                 ? "amber"
-                                : "red"
+                                : appointment.status === "CANCELED"
+                                  ? "gray"
+                                  : appointment.status === "CONFIRMED"
+                                    ? "blue" // You can use any color you prefer for canceled appointments
+                                    : "red"
                           }
                         />
                       </div>

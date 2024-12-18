@@ -42,11 +42,15 @@ services:
       - backend
 
   redis_insight:
-    image: redislabs/redisinsight:1.14.0
+    image: redislabs/redisinsight
     container_name: redis_insight
     restart: always
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOSTS=local:redis:6379
     ports:
-      - 8001:8001
+      - 5540:5540
     volumes:
       - redis:/db
     networks:

@@ -51,7 +51,7 @@ export const CreateSchedule = () => {
     try {
       const response = await handleCreateSchedule(data);
 
-      if (response.statusCode === 201) {
+      if (response.status === 201) {
         setSchedules([...schedules, response.data.data]);
         toast.success("Tạo lịch thành công");
       }
