@@ -20,6 +20,9 @@ export class HealthInsurance extends AbstractEntity {
   @Column()
   timeEnd: string;
 
+  @Column()
+  birthDate: string;
+
   @OneToOne(() => Patient, (patient) => patient.health_insurance)
   @JoinColumn({ name: 'onwer_id' })
   owner: Patient;

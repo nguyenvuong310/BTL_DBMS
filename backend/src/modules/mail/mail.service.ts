@@ -36,7 +36,6 @@ export class MailService {
         doctorName: infoMail.doctorName,
         date: infoMail.date,
         time: infoMail.start_time + ' - ' + infoMail.end_time,
-        reason: infoMail.reason,
         hospitalName: infoMail.hospitalName,
         address: infoMail.address,
         reason_cancel: infoMail.reason_cancel,

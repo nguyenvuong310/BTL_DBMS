@@ -24,11 +24,16 @@ export class CreateHealthInsuranceDto {
   @ApiProperty({ example: '2025-11-15' })
   timeEnd?: string;
 
+  @IsString()
+  @ApiProperty({ example: '2003-11-15' })
+  birthDate?: string;
+
   constructor(healthInsurance: HealthInsurance) {
     this.gender = healthInsurance?.gender;
     this.insuranceNumber = healthInsurance?.insuranceNumber;
     this.placeOfRegistration = healthInsurance?.placeOfRegistration;
     this.timeStart = healthInsurance?.timeStart;
     this.timeEnd = healthInsurance?.timeEnd;
+    this.birthDate = healthInsurance?.birthDate;
   }
 }

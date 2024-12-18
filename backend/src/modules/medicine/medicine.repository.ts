@@ -13,6 +13,9 @@ export class MedicineRepository {
       where: {
         id: Not(In(exceptListId)),
       },
+      order: {
+        name: 'ASC',
+      },
     });
   }
 

@@ -45,7 +45,7 @@ const HealthInsurance = () => {
       hasHealthInsurance,
       healthInsurance.id,
     );
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
       setHealthInsurance(response.data.data);
       setIsEdit(false);
       toast.success("Cập nhật thông tin bảo hiểm thành công");
@@ -157,7 +157,7 @@ const HealthInsurance = () => {
 
           <Input
             size="lg"
-            value={gender && gender === "male" ? "Nam" : "Nữ"}
+            value={gender}
             onChange={(e) => setGender(e.target.value)}
             placeholder="Vui lòng nhập giới tính"
             disabled={!isEdit}
