@@ -27,6 +27,16 @@ export class DoctorSchedulerRepository {
       order: { start_time: 'ASC' },
     });
   }
+  async getDoctorSchedulesNow(doctorId: string, today: Date, next7Days: Date): Promise<any> {
+    return this.doctorSchedulerRepository
+      .createQueryBuilder('schedule')
+      .select(['schedule.day'])
+      .where('schedule.doctorId = :doctorId', { doctorId })
+      .andWhere('schedule.day BETWEEN :today AND :next7Days', { today, next7Days })
+      .groupBy('schedule.day')
+      .orderBy('schedule.day', 'ASC')
+      .getRawMany();
+  }
 
   async update(id: string, doctorSchedule: CreateDoctorScheduleDto): Promise<DoctorSchedule> {
     return this.doctorSchedulerRepository.save({ ...doctorSchedule, id });
@@ -50,16 +60,5 @@ export class DoctorSchedulerRepository {
       .getMany();
 
     return overlappingSchedules.length === 0;
-  }
-
-  async getDoctorSchedulesNow(doctorId: string, today: Date, next7Days: Date): Promise<any> {
-    return this.doctorSchedulerRepository
-      .createQueryBuilder('schedule')
-      .select(['schedule.day'])
-      .where('schedule.doctorId = :doctorId', { doctorId })
-      .andWhere('schedule.day BETWEEN :today AND :next7Days', { today, next7Days })
-      .groupBy('schedule.day')
-      .orderBy('schedule.day', 'ASC')
-      .getRawMany();
   }
 }

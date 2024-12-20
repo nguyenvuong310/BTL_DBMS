@@ -4,7 +4,8 @@ import Header from "./Header";
 import { handleGetInforHospital } from "../service/hospitalService";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { getUserFromLocalStorage } from "../service/userService";
+const user = getUserFromLocalStorage();
 const HospitalDetail = () => {
   const { hospitalId } = useParams();
   const [hospital, setHospital] = useState({});
@@ -23,7 +24,7 @@ const HospitalDetail = () => {
 
   return (
     <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
-      <Header role="user" />
+      <Header role={user ? user?.role : "main"} />
       <div className="container mx-auto p-4">
         {/* Header Section */}
         <header className="my-8 text-center">

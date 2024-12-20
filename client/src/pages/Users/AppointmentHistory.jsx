@@ -256,7 +256,7 @@ export default function AppointmentHistory() {
 
                 <Input
                   size="lg"
-                  placeholder="Vui lòng nhập lý do khám"
+                  placeholder="Vui lòng nhập lý do huỷ"
                   className="!h-20 !border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
