@@ -5,6 +5,7 @@ import { DoctorSchedulerRepository } from './doctor_schedulers.repository';
 import { InfoDoctorScheduleDto } from './dto/info-doctor_schedule.dto';
 import { DayDto } from './dto/day.dto';
 import { ScheduleInfo } from './dto/schedule_infor.dto';
+import { DoctorSchedule } from './entities/doctor_schedule.entity';
 
 @Injectable()
 export class DoctorSchedulesService {
@@ -51,6 +52,9 @@ export class DoctorSchedulesService {
   // remove(id: number) {
   //   return `This action removes a #${id} doctorSchedule`;
   // }
+  async findById(id: string): Promise<DoctorSchedule> {
+    return this.doctorSchedulesRepository.findById(id);
+  }
 
   async getDoctorSchedulesByDoctorId(doctor_id: string): Promise<ScheduleInfo[]> {
     const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesByDoctorId(doctor_id);

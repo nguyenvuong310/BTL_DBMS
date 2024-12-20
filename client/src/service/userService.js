@@ -21,10 +21,10 @@ const hanleBookAppointment = async (data) => {
     },
   });
 };
-const getAppointmentHistory = async (current) => {
+const getAppointmentHistory = async (current, limit) => {
   const token = localStorage.getItem("accessToken"); // Retrieve the token from localStorage
 
-  const url = `${backendURL}/api/appointments?current=${current}&pageSize=10`;
+  const url = `${backendURL}/api/appointments?current=${current}&pageSize=${limit}`;
   console.log(url);
   return await axios.get(url, {
     headers: {

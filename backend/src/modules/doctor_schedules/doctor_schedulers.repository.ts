@@ -61,4 +61,10 @@ export class DoctorSchedulerRepository {
 
     return overlappingSchedules.length === 0;
   }
+
+  async findById(id: string): Promise<DoctorSchedule> {
+    return this.doctorSchedulerRepository.findOne({
+      where: { id },
+    });
+  }
 }

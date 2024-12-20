@@ -1,6 +1,5 @@
 export enum StatusType {
   PENDING = 'PENDING',
-  CONFIRMED = 'CONFIRMED',
   CANCELLED = 'CANCELLED',
   DONE = 'DONE',
 }

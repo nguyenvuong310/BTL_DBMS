@@ -23,6 +23,10 @@ export class AppointmentRepository {
     });
   }
 
+  async findAllAppointmentByPatientId(patientId: string): Promise<Appointment[]> {
+    return this.appointmentRepository.find({ where: { patient: { id: patientId } }, relations: ['doctor_schedule'] });
+  }
+
   async getInfoAppointment(id: string): Promise<Appointment> {
     return this.appointmentRepository.findOne({
       where: { id },

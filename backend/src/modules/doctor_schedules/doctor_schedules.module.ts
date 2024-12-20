@@ -9,5 +9,6 @@ import { DoctorSchedulerRepository } from './doctor_schedulers.repository';
   imports: [TypeOrmModule.forFeature([DoctorSchedule])],
   controllers: [DoctorSchedulesController],
   providers: [DoctorSchedulesService, DoctorSchedulerRepository],
+  exports: [DoctorSchedulesService],
 })
 export class DoctorSchedulesModule {}

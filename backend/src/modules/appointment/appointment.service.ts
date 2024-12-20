@@ -12,7 +12,8 @@ import { AppointmentList } from './dto/appointment-list.dto';
 import { MailService } from '../mail/mail.service';
 import { UserDto } from '../users/dto/user.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
-
+import { DoctorSchedulesService } from '../doctor_schedules/doctor_schedules.service';
+import { isTimeOverlap } from '../../utils/TimeToMinutes';
 @Injectable()
 export class AppointmentService {
   constructor(
@@ -22,8 +23,33 @@ export class AppointmentService {
     private appointmentRepository: AppointmentRepository,
     @Inject(MailService)
     private mailService: MailService,
+    @Inject(DoctorSchedulesService)
+    private doctorSchedulesService: DoctorSchedulesService,
   ) {}
   async create(createAppointmentDto: CreateAppointmentDto, user: UserDto) {
+    const doctorSchedule = await this.doctorSchedulesService.findById(createAppointmentDto.scheduleId);
+    if (!doctorSchedule) {
+      throw new Error('Doctor schedule not found');
+    }
+    const existingAppointments = await this.appointmentRepository.findAllAppointmentByPatientId(user?.id);
+    let hasOverlap = false;
+    for (const existingAppointment of existingAppointments) {
+      if (
+        isTimeOverlap(
+          existingAppointment.doctor_schedule.start_time,
+          existingAppointment.doctor_schedule.end_time,
+          doctorSchedule.start_time,
+          doctorSchedule.end_time,
+        )
+      ) {
+        hasOverlap = true;
+        break;
+      }
+    }
+
+    if (hasOverlap) {
+      throw new Error('This appointment overlaps with an existing one. Please choose a different time.');
+    }
     const appointment = await this.appointmentRepository.save(createAppointmentDto, user?.id);
     const infoAppointment = await this.appointmentRepository.getInfoAppointment(appointment.id);
     const infoAppointmentDto = new InfoAppointmentDto(infoAppointment);

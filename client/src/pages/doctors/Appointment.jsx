@@ -1,48 +1,24 @@
-import { StarIcon, TrashIcon } from "@heroicons/react/24/solid";
-
 import { getAppointmentHistory } from "../../service/userService";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import {
-  Card,
-  CardHeader,
-  Typography,
-  Button,
-  CardBody,
-  Chip,
-  CardFooter,
-  IconButton,
-  Tooltip,
-} from "@material-tailwind/react";
+import { Chip } from "@material-tailwind/react";
 import Header from "../../components/Header";
 import { ModalPrescription } from "../../components/modalPrescription";
 import { useState, useEffect } from "react";
 import { getUserFromLocalStorage } from "../../service/userService";
 const user = getUserFromLocalStorage();
-const TABLE_HEAD = [
-  "Ngày hẹn",
-  "Thời gian",
-  "Bệnh nhân",
-  "Lý do khám",
-  "Status",
-  "",
-];
 
 export default function Appointment() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const [appointments, setAppointments] = useState([]);
-  const [isNext, setIsNext] = useState(false);
-  const [isPrevious, setIsPrevious] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchAppointmentHistory = async () => {
       try {
-        const response = await getAppointmentHistory(currentPage); // Use the updated current page
+        const response = await getAppointmentHistory(currentPage, itemsPerPage); // Use the updated current page
         setAppointments(response.data.data.items);
-        console.log("Appointment history:", response.data.data.items.length);
-
-        setIsNext(response.data.data.meta.isNext);
-        setIsPrevious(response.data.data.meta.isPrevious);
+        setTotalPages(response.data.data.meta.totalPages);
       } catch (error) {
         console.error("Error fetching appointment history:", error);
       }
@@ -51,15 +27,7 @@ export default function Appointment() {
     fetchAppointmentHistory();
   }, [currentPage]);
 
-  const getPaginatedData = (data) => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return data.slice(startIndex, endIndex);
-  };
-
-  const totalPages = (data) => Math.ceil(data.length / itemsPerPage);
-
-  const renderPagination = (data) => (
+  const renderPagination = () => (
     <div className="mt-4 flex items-center justify-end space-x-2">
       <button
         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
@@ -69,13 +37,11 @@ export default function Appointment() {
         <ChevronLeftIcon className="h-5 w-5 cursor-pointer " />
       </button>
       <span className="text-sm text-gray-500">
-        Page {currentPage} of {totalPages(data)}
+        Page {currentPage} of {totalPages}
       </span>
       <button
-        onClick={() =>
-          setCurrentPage((prev) => Math.min(prev + 1, totalPages(data)))
-        }
-        disabled={currentPage === totalPages(data)}
+        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+        disabled={currentPage === totalPages}
         className="rounded-md p-2 hover:bg-gray-100 disabled:opacity-50"
       >
         <ChevronRightIcon className="h-5 w-5 cursor-pointer " />
@@ -113,7 +79,7 @@ export default function Appointment() {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {getPaginatedData(appointments).map((appoinment, index) => (
+              {appointments.map((appoinment, index) => (
                 <tr key={index} className="hover:bg-gray-50">
                   <td className="whitespace-normal break-words px-6 py-4">
                     <div className="flex items-center">

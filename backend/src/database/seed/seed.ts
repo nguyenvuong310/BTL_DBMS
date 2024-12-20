@@ -8,6 +8,7 @@ import { DoctorSchedule } from '../../modules/doctor_schedules/entities/doctor_s
 import { Feedback } from '../../modules/feedbacks/entities/feedback.entity';
 import { StatusType } from '../../constants/action.enum';
 import { Appointment } from '../../modules/appointment/entities/appointment.entity';
+import { isTimeOverlap } from '../../utils/TimeToMinutes';
 
 function createDoctorSchedules(doctors: Doctor[]) {
   const times = [
@@ -137,30 +138,63 @@ function random(...args: StatusType[]): StatusType {
   return args[randomIndex];
 }
 
-function createAppointments(patients: Patient[], doctorSchedules: DoctorSchedule[]) {
-  return patients.flatMap((patient) =>
-    doctorSchedules.map((doctorSchedule) => {
-      const status =
-        doctorSchedule.day < new Date()
-          ? random(StatusType.DONE, StatusType.CANCELLED)
-          : random(StatusType.PENDING, StatusType.CONFIRMED);
+async function createAppointments(patients: Patient[], doctorSchedules: DoctorSchedule[]) {
+  const appointmentRepository = dataSource.getRepository(Appointment);
 
-      const appointment = {
-        patient: patient,
-        doctor_schedule: doctorSchedule,
-        reason: 'Không khoẻ trong người',
-        status: status,
-      };
+  for (const patient of patients) {
+    for (const doctorSchedule of doctorSchedules) {
+      const { start_time, end_time, day } = doctorSchedule;
 
-      // If the status is CANCELLED, add the reason_cancel field with a random cancellation reason
-      if (status === StatusType.CANCELLED) {
-        const cancelReasons = ['Trễ hẹn', 'Bận công việc đột xuất', 'Đổi lịch'];
-        appointment['reason_cancel'] = cancelReasons[Math.floor(Math.random() * cancelReasons.length)];
+      // Check for overlap: We check if the patient already has an appointment with the doctor on the same day
+      const existingAppointments = await appointmentRepository.find({
+        where: {
+          patient: { id: patient.id },
+        },
+        relations: ['doctor_schedule'],
+      });
+
+      let hasOverlap = false;
+
+      for (const appointment of existingAppointments) {
+        if (
+          isTimeOverlap(
+            appointment.doctor_schedule.start_time,
+            appointment.doctor_schedule.end_time,
+            start_time,
+            end_time,
+          )
+        ) {
+          hasOverlap = true;
+          break;
+        }
       }
 
-      return appointment;
-    }),
-  );
+      // If no overlap, create the appointment for the patient
+      if (!hasOverlap) {
+        const status =
+          doctorSchedule.day < new Date() ? random(StatusType.DONE, StatusType.CANCELLED) : random(StatusType.PENDING);
+
+        const appointment = {
+          patient: patient,
+          doctor_schedule: doctorSchedule,
+          reason: 'Không khoẻ trong người',
+          status: status,
+        };
+
+        // If the status is CANCELLED, add the reason_cancel field with a random cancellation reason
+        if (status === StatusType.CANCELLED) {
+          const cancelReasons = ['Trễ hẹn', 'Bận công việc đột xuất', 'Đổi lịch'];
+          appointment['reason_cancel'] = cancelReasons[Math.floor(Math.random() * cancelReasons.length)];
+        }
+
+        appointmentRepository.save(appointment);
+
+        console.log(`Appointment scheduled for patient ${patient.name} with doctor  on ${day}`);
+      } else {
+        console.log(`Appointment for patient ${patient.name} overlaps with an existing one, skipping...`);
+      }
+    }
+  }
 }
 
 async function runSeed() {
@@ -175,7 +209,6 @@ async function runSeed() {
   const patientRepository = dataSource.getRepository(Patient);
   const doctorScheduleRepository = dataSource.getRepository(DoctorSchedule);
   const feedbackRepository = dataSource.getRepository(Feedback);
-  const appointmentRepository = dataSource.getRepository(Appointment);
 
   const patients = [
     {
@@ -4101,10 +4134,9 @@ async function runSeed() {
     const doctorSchedules = createDoctorSchedules(doctorSaveds);
     await doctorScheduleRepository.save(doctorSchedules);
 
-    const doctorScheduleSaved = await doctorScheduleRepository.find({ take: 100 });
+    const doctorScheduleSaved = await doctorScheduleRepository.find({ take: 2000 });
     if (doctorScheduleSaved.length > 0 && patientSaved.length > 0) {
-      const appointments = createAppointments(patientSaved, doctorScheduleSaved);
-      await appointmentRepository.save(appointments);
+      await createAppointments(patientSaved, doctorScheduleSaved);
     }
 
     if (patientSaved.length > 0) {
