@@ -62,7 +62,7 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
         {/* Select Medicine */}
         <h2 className="mb-4 text-xl font-bold">Đơn thuốc</h2>
         <div className=" ">
-          <h2 className="font-bold">Sáng</h2>
+          <h2 className="mb-2 font-bold">Sáng 🌄</h2>
           {isExisting &&
             prescriptionMornings.map((prescription, index) => (
               <div className="mb-4 flex flex-wrap gap-4" key={index}>
@@ -85,14 +85,17 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
                     type="text"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     disabled
-                    value={prescription.dosage} // Bind to prescription dosage
+                    value={prescription.dosage}
                   />
                 </div>
               </div>
             ))}
+          {prescriptionMornings.length === 0 && (
+            <div className="text-sm text-gray-400">Không có dữ liệu</div>
+          )}
         </div>
         <div className=" ">
-          <h2 className="font-bold">Trưa</h2>
+          <h2 className="mb-2 font-bold">Trưa ☀️</h2>
           {isExisting &&
             prescriptionAfternoons.map((prescription, index) => (
               <div className="mb-4 flex flex-wrap gap-4" key={index}>
@@ -120,9 +123,12 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
                 </div>
               </div>
             ))}
+          {prescriptionAfternoons.length === 0 && (
+            <div className="text-sm text-gray-400">Không có dữ liệu</div>
+          )}
         </div>
         <div className=" ">
-          <h2 className="font-bold">Chiều</h2>
+          <h2 className="mb-2 font-bold">Chiều 🌙</h2>
           {isExisting &&
             prescriptionEvenings.map((prescription, index) => (
               <div className="mb-4 flex flex-wrap gap-4" key={index}>
@@ -150,6 +156,9 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
                 </div>
               </div>
             ))}
+          {prescriptionEvenings.length === 0 && (
+            <div className="text-sm text-gray-400">Không có dữ liệu</div>
+          )}
         </div>
         {/* Buttons */}
 
@@ -168,21 +177,28 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
 
 export const ModalPrescriptionUser = ({ appointmentId }) => {
   const [openPopup, setOpenPopup] = useState(false);
-
   const handleOpenPopup = () => setOpenPopup(true);
   const handleClosePopup = () => setOpenPopup(false);
-  console.log(appointmentId, "hi");
   return (
     <>
-      <div onClick={() => handleOpenPopup()}>
-        <DocumentIcon className="h-4 w-4" />
-        {/* Popup Modals */}
+      <div className="cursor-pointer">
+        <div className="group relative">
+          <DocumentIcon
+            className={"h-4 w-4 text-gray-400"}
+            onClick={() => handleOpenPopup()}
+          />
+          <div className="absolute left-1/2 mt-1 hidden -translate-x-1/2 rounded bg-gray-700 px-2 py-1 text-xs text-white group-hover:block">
+            Đơn thuốc
+          </div>
+        </div>
+        {openPopup && (
+          <TimePopup
+            isOpen={openPopup}
+            onClose={handleClosePopup}
+            appointmentId={appointmentId}
+          />
+        )}
       </div>
-      <TimePopup
-        isOpen={openPopup}
-        onClose={handleClosePopup}
-        appointmentId={appointmentId}
-      />
     </>
   );
 };

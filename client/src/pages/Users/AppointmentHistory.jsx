@@ -1,4 +1,9 @@
-import { MagnifyingGlassIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  MagnifyingGlassIcon,
+  TrashIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/24/outline";
 import { getAppointmentHistory } from "../../service/userService";
 import {
   Card,
@@ -33,13 +38,14 @@ const TABLE_HEAD = [
 ];
 
 export default function AppointmentHistory() {
-  const [cureentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setModalOpen] = useState(false);
   const [reason, setReason] = useState("");
   const [appointments, setAppointments] = useState([]);
   const [isNext, setIsNext] = useState(false);
   const [isPrevious, setIsPrevious] = useState(false);
   const [appointmentId, setAppointmentId] = useState("");
+  const itemsPerPage = 4;
 
   const handleClickCancel = (id) => {
     setModalOpen(true);
@@ -67,7 +73,7 @@ export default function AppointmentHistory() {
   useEffect(() => {
     const fetchAppointmentHistory = async () => {
       try {
-        const response = await getAppointmentHistory(cureentPage); // Use the updated current page
+        const response = await getAppointmentHistory(currentPage); // Use the updated current page
         setAppointments(response.data.data.items);
         console.log("Appointment history:", response.data.data.items.length);
         setIsNext(response.data.data.meta.isNext);
@@ -78,173 +84,154 @@ export default function AppointmentHistory() {
     };
 
     fetchAppointmentHistory();
-  }, [cureentPage]);
+  }, [currentPage]);
+
+  const getPaginatedData = (data) => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const totalPages = (data) => Math.ceil(data.length / itemsPerPage);
+
+  const renderPagination = (data) => (
+    <div className="mt-4 flex items-center justify-end space-x-2">
+      <button
+        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+        disabled={currentPage === 1}
+        className="rounded-md p-2 hover:bg-gray-100 disabled:opacity-50"
+      >
+        <ChevronLeftIcon className="h-5 w-5 cursor-pointer " />
+      </button>
+      <span className="text-sm text-gray-500">
+        Page {currentPage} of {totalPages(data)}
+      </span>
+      <button
+        onClick={() =>
+          setCurrentPage((prev) => Math.min(prev + 1, totalPages(data)))
+        }
+        disabled={currentPage === totalPages(data)}
+        className="rounded-md p-2 hover:bg-gray-100 disabled:opacity-50"
+      >
+        <ChevronRightIcon className="h-5 w-5 cursor-pointer " />
+        {/* {" >"} */}
+      </button>
+    </div>
+  );
 
   return (
     <div className="flex min-h-screen flex-col">
       <Header role={user ? user?.role : "main"} />
-      <Card className="flex-grow">
-        <CardHeader floated={false} shadow={false} className="rounded-none">
-          <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-            <div>
-              <Typography variant="h5" color="blue-gray">
-                Cuộc hẹn gần đây
-              </Typography>
-              {/* <Typography color="gray" className="mt-1 font-normal">
-                These are details about the last transactions
-              </Typography> */}
-            </div>
-          </div>
-        </CardHeader>
 
-        <CardBody className=" px-0">
-          <table className="w-full min-w-max table-auto text-left">
-            <thead>
+      <div className="container mx-auto p-6">
+        <div className="overflow-x-auto rounded-lg bg-white shadow">
+          <table className="min-w-full table-auto divide-y divide-gray-200">
+            <thead className="bg-gray-50">
               <tr>
-                {TABLE_HEAD.map((head) => (
-                  <th
-                    key={head}
-                    className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4"
-                  >
-                    <Typography
-                      variant="small"
-                      color="blue-gray"
-                      className="font-normal leading-none opacity-70"
-                    >
-                      {head}
-                    </Typography>
-                  </th>
-                ))}
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Ngày hẹn
+                </th>
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Thời gian
+                </th>
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Bác sĩ
+                </th>
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Bệnh viện
+                </th>
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Địa chỉ
+                </th>
+                <th className="w-32 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Lý do khám
+                </th>
+                <th className="w-24 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Status
+                </th>
+                <th className="w-5 px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"></th>
               </tr>
             </thead>
-            <tbody>
-              {appointments.map((appoinment, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      <div className="flex items-center gap-3">
-                        <Typography
-                          variant="small"
-                          color="blue-gray"
-                          className="font-bold"
-                        >
+            <tbody className="divide-y divide-gray-200 bg-white">
+              {getPaginatedData(appointments).map((appoinment, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="flex items-center">
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">
                           {appoinment.date}
-                        </Typography>
+                        </div>
                       </div>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {appoinment.start_time} - {appoinment.end_time}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {appoinment.doctorName}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal"
-                      >
-                        {appoinment.hospitalName}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal capitalize"
-                      >
-                        {appoinment.address}
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography
-                        variant="small"
-                        color="blue-gray"
-                        className="font-normal opacity-70"
-                      >
-                        {appoinment.reason}
-                      </Typography>
-                    </td>
-                    <td>
-                      <div className="w-max">
-                        <Chip
-                          size="sm"
-                          variant="ghost"
-                          value={appoinment.status}
-                          color={
-                            appoinment.status === "DONE"
-                              ? "green"
-                              : appoinment.status === "PENDING"
-                                ? "amber"
-                                : appoinment.status === "CANCELED"
-                                  ? "gray"
-                                  : appoinment.status === "CONFIRMED"
-                                    ? "blue" // You can use any color you prefer for canceled appointments
-                                    : "red"
-                          }
-                        />
-                        {appoinment.canCancel && (
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {appoinment.start_time} - {appoinment.end_time}
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {appoinment.doctorName}
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {appoinment.hospitalName}
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {appoinment.address}
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="text-sm text-gray-900">
+                      {appoinment.reason}
+                    </div>
+                  </td>
+                  <td className="whitespace-normal break-words px-6 py-4">
+                    <div className="flex w-max items-center gap-3">
+                      <Chip
+                        size="sm"
+                        variant="ghost"
+                        value={appoinment.status}
+                        color={
+                          appoinment.status === "DONE"
+                            ? "green"
+                            : appoinment.status === "PENDING"
+                              ? "amber"
+                              : appoinment.status === "CANCELED"
+                                ? "gray"
+                                : appoinment.status === "CONFIRMED"
+                                  ? "blue" // You can use any color you prefer for canceled appointments
+                                  : "red"
+                        }
+                      />
+                      {appoinment.canCancel && (
+                        <div className="group relative">
                           <TrashIcon
                             className="h-5 w-5 cursor-pointer text-red-500"
                             onClick={() => handleClickCancel(appoinment.id)}
                           />
-                        )}
-                      </div>
-                    </td>
-                    <td>
-                      {console.log("Appoinment:", appoinment.id)}
-                      <ModalPrescriptionUser appointmentId={appoinment.id} />
-                    </td>
-                  </tr>
-                );
-              })}
+                          <div className="absolute left-1/2 mt-1 hidden -translate-x-1/2 rounded bg-gray-700 px-2 py-1 text-xs text-white group-hover:block">
+                            Huỷ hẹn
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </td>
+
+                  <td className="whitespace-normal break-words py-4">
+                    <ModalPrescriptionUser appointmentId={appoinment.id} />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
-        </CardBody>
-        <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-          <Button
-            variant={isPrevious ? "filled" : "outlined"}
-            color={isPrevious ? "blue" : "gray"}
-            size="sm"
-            onClick={() => {
-              if (isPrevious) {
-                setCurrentPage((prev) => prev - 1);
-              }
-            }}
-          >
-            Previous
-          </Button>
-          <div className="flex items-center gap-2">
-            <IconButton variant="outlined" size="sm">
-              {cureentPage}
-            </IconButton>
-          </div>
-          <Button
-            variant={isNext ? "filled" : "outlined"}
-            color={isNext ? "blue" : "gray"}
-            size="sm"
-            onClick={() => {
-              if (isNext) {
-                setCurrentPage((prev) => prev + 1);
-              }
-            }}
-          >
-            Next
-          </Button>
-        </CardFooter>
-      </Card>
+          {renderPagination(appointments)}
+        </div>
+      </div>
+
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="rounded-lg bg-white p-6 shadow-lg">
