@@ -58,6 +58,7 @@ const LoginPage = () => {
         localStorage.setItem("accessToken", accessToken);
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
         navigate("/user");
+        window.location.reload();
       } catch (error) {
         console.error("Login failed", error);
       }
@@ -164,9 +165,11 @@ const LoginPage = () => {
         localStorage.setItem("user", JSON.stringify(response.data.data.user));
         if (response.data.data.user.role === "DOCTOR") {
           navigate("/doctors");
+          window.location.reload();
           return;
         }
         navigate("/user");
+        window.location.reload();
       } catch (error) {
         console.error("Login failed", error);
       }

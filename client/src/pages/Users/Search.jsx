@@ -66,10 +66,16 @@ const SearchPage = () => {
     return () => clearTimeout(debounceTimeout);
   }, [search, selectedType]);
 
-  const SearchHospital = ({ hospitals }) => {
+  const SearchHospital = ({ hospitals, className }) => {
     const navigate = useNavigate();
     return (
-      <div className="mx-auto mt-4  w-[900px] rounded-lg bg-white p-4 shadow-lg">
+      <div
+        className={
+          className
+            ? className
+            : "mx-auto  w-[900px] rounded-lg bg-white p-4 shadow-lg"
+        }
+      >
         {/* Header */}
         <div className="mb-4 border-b border-gray-300 pb-2">
           <h2 className="text-lg font-bold text-gray-800">Bệnh viện</h2>
@@ -103,10 +109,16 @@ const SearchPage = () => {
     );
   };
 
-  const SearchSpecialty = ({ specialties }) => {
+  const SearchSpecialty = ({ specialties, className }) => {
     const navigate = useNavigate();
     return (
-      <div className="mx-auto mt-4  w-[900px] rounded-lg bg-white p-4 shadow-lg">
+      <div
+        className={
+          className
+            ? className
+            : "mx-auto  w-[900px] rounded-lg bg-white p-4 shadow-lg"
+        }
+      >
         {/* Header */}
         <div className="mb-4 border-b border-gray-300 pb-2">
           <h2 className="text-lg font-bold text-gray-800">Chuyên khoa</h2>
@@ -140,10 +152,16 @@ const SearchPage = () => {
     );
   };
 
-  const SearchDoctor = ({ doctors }) => {
+  const SearchDoctor = ({ doctors, className }) => {
     const navigate = useNavigate();
     return (
-      <div className="mx-auto mt-4  w-[900px] rounded-lg bg-white p-4 shadow-lg">
+      <div
+        className={
+          className
+            ? className
+            : "mx-auto  w-[900px] rounded-lg bg-white p-4 shadow-lg"
+        }
+      >
         {/* Header */}
         <div className="mb-4 border-b border-gray-300 pb-2">
           <h2 className="text-lg font-bold text-gray-800">Bác sĩ</h2>
@@ -179,12 +197,12 @@ const SearchPage = () => {
 
   return (
     <>
-      <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
+      <div className="h-screen bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
         <Header role={user ? user?.role : "main"} type="search" />
-        <div className="flex  w-full flex-col items-center gap-12 p-8">
-          <div className="flex w-[900px] gap-4 rounded-lg border border-gray-300 bg-gray-200 p-2">
+        <div className="mt-8 flex w-full flex-col items-center gap-12">
+          <div className="flex w-[900px] gap-4 rounded-lg border border-gray-300 bg-gray-100 p-2">
             {/* Regular Input Field */}
-            <div className="flex  w-4 items-center justify-center ">
+            <div className="ml-2 flex w-4 items-center justify-center rounded-l-md">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
               </svg>
@@ -193,7 +211,7 @@ const SearchPage = () => {
             <div className="w-[700px] border-r-2 border-black">
               <input
                 type="text"
-                className=" w-full rounded-md border border-none bg-gray-200 p-2  outline-none focus:border-none focus:outline-none focus:ring-0"
+                className=" w-full rounded-md border border-none bg-gray-100 p-2  outline-none focus:border-none focus:outline-none focus:ring-0"
                 placeholder="Tìm kiếm"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -201,7 +219,7 @@ const SearchPage = () => {
             </div>
 
             <select
-              className="w-36 rounded-md border border-none bg-gray-200 p-2  outline-none focus:border-none focus:outline-none focus:ring-0"
+              className="w-36 rounded-md border border-none bg-gray-100 p-2  outline-none focus:border-none focus:outline-none focus:ring-0"
               value={selectedType} // Set the selected value based on state
               onChange={(e) => setSelectedType(e.target.value)} // Update the state when the value changes
             >
@@ -234,7 +252,7 @@ const SearchPage = () => {
             </div>
           )}
           {search !== "" && dontMatch && (
-            <div className="flex  w-96 items-center justify-center rounded-lg  bg-transparent dark:border-gray-700 ">
+            <div className="flex h-screen w-96  justify-center rounded-lg  bg-transparent dark:border-gray-700 ">
               Xin lỗi, không tìm thấy kết quả phù hợp!
             </div>
           )}
@@ -248,11 +266,20 @@ const SearchPage = () => {
                 <SearchSpecialty specialties={specialties} />
               )}
               {selectedType === "ALL" && (
-                <>
-                  <SearchDoctor doctors={doctors} />
-                  <SearchHospital hospitals={hospitals} />
-                  <SearchSpecialty specialties={specialties} />
-                </>
+                <div className="mx-5 grid grid-cols-3 gap-8">
+                  <SearchDoctor
+                    doctors={doctors}
+                    className={"w-full bg-white p-4 shadow-lg"}
+                  />
+                  <SearchHospital
+                    hospitals={hospitals}
+                    className={"w-full bg-white p-4 shadow-lg"}
+                  />
+                  <SearchSpecialty
+                    specialties={specialties}
+                    className={"w-full bg-white p-4 shadow-lg"}
+                  />
+                </div>
               )}
             </div>
           )}
