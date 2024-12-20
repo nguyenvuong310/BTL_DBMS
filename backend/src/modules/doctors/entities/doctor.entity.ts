@@ -4,9 +4,10 @@ import { DoctorSchedule } from '../../../modules/doctor_schedules/entities/docto
 import { Feedback } from '../../../modules/feedbacks/entities/feedback.entity';
 import { Hospital } from '../../../modules/hospitals/entities/hospital.entity';
 import { Specialty } from '../../../modules/specialty/entities/specialty.entity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, Unique } from 'typeorm';
 
 @Entity('doctors')
+@Unique(['email'])
 export class Doctor extends AbstractEntity {
   @Column()
   name: string;

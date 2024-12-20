@@ -89,7 +89,7 @@ const logout = async () => {
   localStorage.removeItem("accessToken");
   // window.open(`${backendURL}/auth/logout`, "_self");
   return await axios.post(
-    `${backendURL}/auth/logout`,
+    `${backendURL}/api/auth/logout`,
     {},
     { withCredentials: true },
   );
