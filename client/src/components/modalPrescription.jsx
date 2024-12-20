@@ -117,82 +117,85 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="max-h-[75vh] w-11/12 max-w-3xl overflow-y-auto rounded bg-white p-6">
+      <div className="max-h-[75vh] w-11/12 max-w-4xl overflow-y-auto rounded bg-white p-6">
         {/* Select Medicine */}
         <h2 className="mb-4 text-xl font-bold">Kê thuốc</h2>
-
         <div className=" ">
           {formEntries.map((entry, index) => (
-            <div className="mb-4 flex flex-wrap gap-4" key={index}>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Chọn thuốc
-                </label>
-                <select
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  value={entry.medicine}
-                  onChange={(e) =>
-                    handleInputChange(index, "medicine", e.target.value)
-                  }
-                >
-                  <option value="">-- Chọn thuốc --</option>
-                  {medicines.map((medicine) => {
-                    return (
-                      <option key={medicine.id} value={medicine.id}>
-                        {medicine.name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Số lượng
-                </label>
-                <input
-                  type="text"
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Nhập số lượng"
-                  value={entry.quantity}
-                  onChange={(e) =>
-                    handleInputChange(index, "quantity", e.target.value)
-                  }
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Liều lượng
-                </label>
-                <select
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  value={entry.dosage}
-                  onChange={(e) =>
-                    handleInputChange(index, "dosage", e.target.value)
-                  }
-                >
-                  <option value="">-- Chọn liều lượng --</option>
-                  <option value="Viên">Viên</option>
-                  <option value="Gói">Gói</option>
-                  <option value="mg">mg</option>
-                </select>
-              </div>
-              {["morning", "afternoon", "evening"].map((time) => (
-                <div key={time}>
+            <div key={index}>
+              <div className="mb-4 flex flex-wrap gap-4">
+                <div>
                   <label className="block text-sm font-medium text-gray-700">
-                    {time === "morning"
-                      ? "Sáng"
-                      : time === "afternoon"
-                        ? "Trưa"
-                        : "Chiều"}
+                    Chọn thuốc
+                  </label>
+                  <select
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    value={entry.medicine}
+                    onChange={(e) =>
+                      handleInputChange(index, "medicine", e.target.value)
+                    }
+                  >
+                    <option value="">-- Chọn thuốc --</option>
+                    {medicines.map((medicine) => {
+                      return (
+                        <option key={medicine.id} value={medicine.id}>
+                          {medicine.name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Số lượng
                   </label>
                   <input
-                    type="checkbox"
-                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                    checked={entry.times[time]}
-                    onChange={() => handleCheckboxChange(index, time)}
+                    type="text"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Nhập số lượng"
+                    value={entry.quantity}
+                    onChange={(e) =>
+                      handleInputChange(index, "quantity", e.target.value)
+                    }
                   />
                 </div>
-              ))}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Liều lượng
+                  </label>
+                  <select
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    value={entry.dosage}
+                    onChange={(e) =>
+                      handleInputChange(index, "dosage", e.target.value)
+                    }
+                  >
+                    <option value="">-- Chọn liều lượng --</option>
+                    <option value="Viên">Viên</option>
+                    <option value="Gói">Gói</option>
+                    <option value="mg">mg</option>
+                  </select>
+                </div>
+                <div className="flex justify-start gap-6">
+                  {["morning", "afternoon", "evening"].map((time) => (
+                    <div key={time}>
+                      <label className="block text-sm font-medium text-gray-700">
+                        {time === "morning"
+                          ? "Sáng"
+                          : time === "afternoon"
+                            ? "Trưa"
+                            : "Chiều"}
+                      </label>
+                      <input
+                        type="checkbox"
+                        className="mt-3 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        checked={entry.times[time]}
+                        onChange={() => handleCheckboxChange(index, time)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -224,23 +227,52 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
   );
 };
 
-export const ModalPrescription = ({ appointmentId }) => {
+export const ModalPrescription = ({ appointmentId, hasPrescription }) => {
   const [openPopup, setOpenPopup] = useState(false);
 
   const handleOpenPopup = () => setOpenPopup(true);
   const handleClosePopup = () => setOpenPopup(false);
-  console.log(appointmentId, "hi");
   return (
     <>
-      <div onClick={() => handleOpenPopup()}>
+      <div className="cursor-pointer" onClick={() => handleOpenPopup()}>
         <DocumentIcon className="h-4 w-4" />
-        {/* Popup Modals */}
       </div>
       <TimePopup
         isOpen={openPopup}
         onClose={handleClosePopup}
         appointmentId={appointmentId}
       />
+      {/* <div className="cursor-pointer">
+        <div className="group relative">
+          {hasPrescription ? (
+            <DocumentIcon
+              className={
+                hasPrescription
+                  ? "h-4 w-4 text-green-500"
+                  : "h-4 w-4 text-gray-400"
+              }
+              fill={hasPrescription ? "green" : undefined}
+              onClick={() => handleOpenPopup()}
+            />
+          ) : (
+            <DocumentIcon
+              className={"h-4 w-4 text-gray-400"}
+              // fill={hasPrescription ? "green" : undefined}
+              onClick={() => handleOpenPopup()}
+            />
+          )}
+          <div className="absolute left-1/2 mt-1 hidden -translate-x-1/2 rounded bg-gray-700 px-2 py-1 text-xs text-white group-hover:block">
+            Đơn thuốc
+          </div>
+        </div>
+        {openPopup && (
+          <TimePopup
+            isOpen={openPopup}
+            onClose={handleClosePopup}
+            appointmentId={appointmentId}
+          />
+        )}
+      </div> */}
     </>
   );
 };

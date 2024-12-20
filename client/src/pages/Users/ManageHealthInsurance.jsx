@@ -8,7 +8,6 @@ import {
   Input,
 } from "@material-tailwind/react";
 
-import { useNavigate } from "react-router-dom";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -77,20 +76,25 @@ const HealthInsurance = () => {
   }, []);
 
   return (
-    <div className="rounded-lg bg-white p-6 shadow-lg">
-      <form className="mb-2 mt-8 w-80 max-w-screen-lg sm:w-[30rem] lg:w-[40rem]">
-        <div className="flex">
-          <PencilIcon
-            className="ml-auto h-5 w-5 cursor-pointer text-amber-500"
-            onClick={() => setIsEdit(!isEdit)}
-          />
-        </div>
-
-        <div className="mb-1 flex flex-col gap-6">
-          <Typography variant="h6" color="blue-gray" className="-mb-3">
+    <div className=" rounded-lg bg-white p-6 shadow-lg">
+      <form className="mb-4 mt-2 w-80 max-w-screen-lg sm:w-[30rem] lg:w-[40rem]">
+        <div className="mb-6 flex items-center justify-between">
+          <Typography variant="h5" color="blue-gray" className="-mb-3">
             Thời hạn có giá trị{" "}
           </Typography>
-          <div className="flex justify-between">
+
+          <div className="group relative">
+            <PencilIcon
+              className="ml-auto h-5 w-5 cursor-pointer text-amber-500"
+              onClick={() => setIsEdit(!isEdit)}
+            />
+            <div className="absolute left-1/2 mt-1 hidden -translate-x-1/2 rounded bg-gray-700 px-2 py-1 text-xs text-white group-hover:block">
+              Chỉnh sửa
+            </div>
+          </div>
+        </div>
+        <div className="mb-1 flex flex-col gap-6">
+          <div className="grid grid-cols-2 gap-6 ">
             <div className="mb-1 flex flex-col gap-6">
               <Typography variant="h6" color="blue-gray" className="-mb-3">
                 Thời gian bắt đầu
@@ -129,7 +133,7 @@ const HealthInsurance = () => {
         </div>
         <div className="px-4">
           <hr
-            className="mx-auto my-4 rounded border-0 md:my-10"
+            className="mx-auto my-4 rounded border-0 "
             style={{ backgroundColor: "#b0bec5", height: "1px" }}
           />
         </div>
@@ -225,9 +229,9 @@ const HealthInsurance = () => {
 const PageHealthInsurance = () => {
   return (
     <>
-      <div className="h-screen bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
+      <div className="h-full bg-gradient-to-r from-blue-50 via-blue-100 to-blue-200">
         <Header role={user ? user.role : "main"} />
-        <div className="flex w-full flex-col items-center justify-center gap-12 p-8">
+        <div className="flex h-screen w-full flex-col items-center justify-center gap-12 p-8">
           <HealthInsurance />
         </div>
       </div>

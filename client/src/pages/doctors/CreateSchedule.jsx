@@ -166,6 +166,8 @@ export const CreateSchedule = () => {
             }}
             events={schedules}
             contentHeight="auto" // This ensures FullCalendar adjusts its height automatically
+            slotMinTime="07:00:00" // Start time for the displayed range
+            slotMaxTime="22:00:00" // End time for the displayed range
           />
         </div>
       </div>

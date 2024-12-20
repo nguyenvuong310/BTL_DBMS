@@ -175,7 +175,7 @@ const TimePopup = ({ isOpen, onClose, appointmentId }) => {
   );
 };
 
-export const ModalPrescriptionUser = ({ appointmentId }) => {
+export const ModalPrescriptionUser = ({ appointmentId, hasPrescription }) => {
   const [openPopup, setOpenPopup] = useState(false);
   const handleOpenPopup = () => setOpenPopup(true);
   const handleClosePopup = () => setOpenPopup(false);
@@ -183,10 +183,23 @@ export const ModalPrescriptionUser = ({ appointmentId }) => {
     <>
       <div className="cursor-pointer">
         <div className="group relative">
-          <DocumentIcon
-            className={"h-4 w-4 text-gray-400"}
-            onClick={() => handleOpenPopup()}
-          />
+          {hasPrescription ? (
+            <DocumentIcon
+              className={
+                hasPrescription
+                  ? "h-4 w-4 text-green-500"
+                  : "h-4 w-4 text-gray-400"
+              }
+              fill={hasPrescription ? "green" : undefined}
+              onClick={() => handleOpenPopup()}
+            />
+          ) : (
+            <DocumentIcon
+              className={"h-4 w-4 text-gray-400"}
+              // fill={hasPrescription ? "green" : undefined}
+              onClick={() => handleOpenPopup()}
+            />
+          )}
           <div className="absolute left-1/2 mt-1 hidden -translate-x-1/2 rounded bg-gray-700 px-2 py-1 text-xs text-white group-hover:block">
             Đơn thuốc
           </div>

@@ -222,7 +222,10 @@ export default function AppointmentHistory() {
                   </td>
 
                   <td className="whitespace-normal break-words py-4">
-                    <ModalPrescriptionUser appointmentId={appoinment.id} />
+                    <ModalPrescriptionUser
+                      appointmentId={appoinment.id}
+                      hasPrescription={appoinment.hasPrescription}
+                    />
                   </td>
                 </tr>
               ))}
