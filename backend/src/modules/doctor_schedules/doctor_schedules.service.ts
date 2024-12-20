@@ -40,17 +40,17 @@ export class DoctorSchedulesService {
     return schedules.map((schedule) => new InfoDoctorScheduleDto(schedule));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} doctorSchedule`;
-  }
+  // findOne(id: number) {
+  //   return `This action returns a #${id} doctorSchedule`;
+  // }
 
-  update(id: number, updateDoctorScheduleDto: UpdateDoctorScheduleDto) {
-    return `This action updates a #${id} doctorSchedule`;
-  }
+  // update(id: number, updateDoctorScheduleDto: UpdateDoctorScheduleDto) {
+  //   return `This action updates a #${id} doctorSchedule`;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} doctorSchedule`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} doctorSchedule`;
+  // }
 
   async getDoctorSchedulesByDoctorId(doctor_id: string): Promise<ScheduleInfo[]> {
     const schedules = await this.doctorSchedulesRepository.getDoctorSchedulesByDoctorId(doctor_id);

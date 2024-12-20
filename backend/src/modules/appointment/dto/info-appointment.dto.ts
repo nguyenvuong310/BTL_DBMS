@@ -32,6 +32,9 @@ export class InfoAppointmentDto {
   @ApiProperty({ example: 'false' })
   canCancel: boolean;
 
+  @ApiProperty({ example: 'false' })
+  hasPrescription: boolean;
+
   constructor(appointment: Appointment) {
     this.id = appointment.id;
     this.patientName = appointment.patient.name;
@@ -50,6 +53,7 @@ export class InfoAppointmentDto {
     this.createdAt = appointment.createdAt.toISOString();
     this.status = appointment.status;
     this.reason_cancel = appointment.reason_cancel;
+    this.hasPrescription = !!appointment.prescription;
 
     const currentTime = new Date();
     const currentTimeInMinutes = currentTime.getHours() * 60 + currentTime.getMinutes();

@@ -44,18 +44,16 @@ export class AppointmentRepository {
     userId: string,
   ): Promise<Appointment[]> {
     const queryBuilder = this.appointmentRepository.createQueryBuilder('appointment');
-    console.log('userId', userId);
     queryBuilder
-      // Join with doctor_schedule relation
-      .leftJoinAndSelect('appointment.doctor_schedule', 'doctor_schedule') // LEFT JOIN doctor_schedule table
-      .leftJoinAndSelect('appointment.patient', 'patient') // LEFT JOIN patient table
-      .leftJoinAndSelect('doctor_schedule.doctor', 'doctor') // Join doctor related to doctor_schedule
-      .leftJoinAndSelect('doctor.hospital', 'hospital') // Join the hospital related to the doctor
-      .leftJoinAndSelect('doctor.specialty', 'specialty') // Join the specialty related to the doctor
+      .leftJoinAndSelect('appointment.doctor_schedule', 'doctor_schedule')
+      .leftJoinAndSelect('appointment.patient', 'patient')
+      .leftJoinAndSelect('doctor_schedule.doctor', 'doctor')
+      .leftJoinAndSelect('doctor.hospital', 'hospital')
+      .leftJoinAndSelect('appointment.prescription', 'prescription')
       .orderBy({
-        'doctor_schedule.day': 'DESC', // Sort by doctor_schedule day in descending order
-        'doctor_schedule.start_time': 'ASC', // Then by start_time in ascending order
-        'appointment.createdAt': 'DESC', // Then by appointment createdAt in descending order
+        'doctor_schedule.day': 'DESC',
+        'doctor_schedule.start_time': 'ASC',
+        'appointment.createdAt': 'DESC',
       })
       .where('patient.id = :userId', { userId })
       .orWhere('doctor.id = :userId', { userId })
