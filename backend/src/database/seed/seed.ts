@@ -4087,6 +4087,11 @@ async function runSeed() {
         password: '123456',
       },
     ];
+    let i = 0;
+    for (const doctor of doctors) {
+      doctor.email = 'doctor' + i + '@gmail.com';
+      i++;
+    }
     if ((await doctorRepository.count()) === 0) {
       await doctorRepository.save(doctors);
     }

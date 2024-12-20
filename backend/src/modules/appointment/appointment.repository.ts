@@ -44,7 +44,7 @@ export class AppointmentRepository {
     userId: string,
   ): Promise<Appointment[]> {
     const queryBuilder = this.appointmentRepository.createQueryBuilder('appointment');
-
+    console.log('userId', userId);
     queryBuilder
       // Join with doctor_schedule relation
       .leftJoinAndSelect('appointment.doctor_schedule', 'doctor_schedule') // LEFT JOIN doctor_schedule table
